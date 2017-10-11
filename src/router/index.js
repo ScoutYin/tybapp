@@ -6,8 +6,28 @@ Vue.use(Router)
 let routes = [
   {
     path: '/',
-    component: resolve => require(['@/views/index.vue'], resolve),
-    name: 'Index'
+    component: resolve => require(['views/index'], resolve),
+    name: 'Index',
+    redirect: '/home',
+    children: [
+      {
+        path: '/home',
+        component: resolve => require(['views/index/home'], resolve),
+        name: 'Home'
+      }, {
+        path: '/store',
+        component: resolve => require(['views/index/store'], resolve),
+        name: 'Store'
+      }, {
+        path: '/message',
+        component: resolve => require(['views/index/message'], resolve),
+        name: 'Message'
+      }, {
+        path: '/mine',
+        component: resolve => require(['views/index/mine'], resolve),
+        name: 'Mine'
+      }
+    ]
   }
 ]
 
