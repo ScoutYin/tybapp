@@ -8,6 +8,7 @@ import IndexMessage from 'views/index/message'
 import IndexMine from 'views/index/mine'
 import RecruitmentRecruiting from 'views/recruitment/recruiting'
 import RecruitmentJobHunting from 'views/recruitment/jobHunting'
+import Search from 'views/search'
 
 Vue.use(Router)
 
@@ -36,6 +37,10 @@ let routes = [
         name: 'Mine'
       }
     ]
+  }, {
+    path: '/search',
+    component: Search,
+    name: 'Search'
   }, {
     path: '/recruitment/recruiting',
     component: RecruitmentRecruiting,

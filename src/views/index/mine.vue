@@ -44,7 +44,7 @@ export default {
 .mine-container {
   .head-wrapper {
     position: relative;
-    height: 200px;
+    height: 25vh;
     width: 100%;
     overflow: hidden;
     .back {
