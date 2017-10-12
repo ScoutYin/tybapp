@@ -1,12 +1,16 @@
 <template>
-  <div class="">
-
-  </div>
+  <main-layout class="">
+    商城
+  </main-layout>
 </template>
 
 <script>
+import MainLayout from 'components/layout/mainLayout'
 export default {
-  name: ''
+  name: '',
+  components: {
+    MainLayout
+  }
 }
 </script>
 

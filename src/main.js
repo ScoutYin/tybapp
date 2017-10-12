@@ -5,25 +5,36 @@ import App from './App'
 import router from './router'
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import 'common/style/normalize.css'
+import './assets/iconfont/iconfont.css'
 
 Vue.use(Mint)
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: { App }
-})
+// new Vue({
+//   el: '#app',
+//   router,
+//   template: '<App/>',
+//   components: { App }
+// })
 
-// document.addEventListener('deviceready', function () {
-//   new Vue({
-//     el: '#app',
-//     router,
-//     template: '<App/>',
-//     components: { App }
-//   })
-//   window.navigator.splashscreen.hide()
-// }, false)
+if ('ontouchstart' in window) {
+  window.document.addEventListener('deviceready', function () {
+    new Vue({
+      el: '#app',
+      router,
+      template: '<App/>',
+      components: { App }
+    })
+    window.navigator.splashscreen.hide()
+  }, false)
+} else {
+  new Vue({
+    el: '#app',
+    router,
+    template: '<App/>',
+    components: { App }
+  })
+}

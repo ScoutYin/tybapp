@@ -1,33 +1,49 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import Index from 'views/index'
+import IndexHome from 'views/index/home'
+import IndexStore from 'views/index/store'
+import IndexMessage from 'views/index/message'
+import IndexMine from 'views/index/mine'
+import RecruitmentRecruiting from 'views/recruitment/recruiting'
+import RecruitmentJobHunting from 'views/recruitment/jobHunting'
+
 Vue.use(Router)
 
 let routes = [
   {
     path: '/',
-    component: resolve => require(['views/index'], resolve),
+    component: Index,
     name: 'Index',
     redirect: '/home',
     children: [
       {
         path: '/home',
-        component: resolve => require(['views/index/home'], resolve),
+        component: IndexHome,
         name: 'Home'
       }, {
         path: '/store',
-        component: resolve => require(['views/index/store'], resolve),
+        component: IndexStore,
         name: 'Store'
       }, {
         path: '/message',
-        component: resolve => require(['views/index/message'], resolve),
+        component: IndexMessage,
         name: 'Message'
       }, {
         path: '/mine',
-        component: resolve => require(['views/index/mine'], resolve),
+        component: IndexMine,
         name: 'Mine'
       }
     ]
+  }, {
+    path: '/recruitment/recruiting',
+    component: RecruitmentRecruiting,
+    name: 'Recruiting'
+  }, {
+    path: '/recruitment/jobHunting',
+    component: RecruitmentJobHunting,
+    name: 'JobHunting'
   }
 ]
 

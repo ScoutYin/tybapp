@@ -1,15 +1,71 @@
 <template>
-  <div class="">
+  <main-layout class="mine-container">
+    <div class="head-wrapper">
+      <div class="back"></div>
+      <div class="mask">
 
-  </div>
+      </div>
+    </div>
+    <div class="list">
+      <mt-cell :title="item.title"
+        :icon="item.icon"
+        :value="item.value"
+        v-for="item in list"
+        @click.nativa="toPath(item.path)">
+      </mt-cell>
+    </div>
+  </main-layout>
 </template>
 
 <script>
+import MainLayout from 'components/layout/mainLayout'
 export default {
-  name: ''
+  name: '',
+  components: {
+    MainLayout
+  },
+  data () {
+    return {
+      list: [
+        { title: '我的收藏', icon: '', path: '' },
+        { title: '设置', icon: '', path: '' }
+      ]
+    }
+  },
+  methods: {
+    toPath (path) {
+      this.$router.push({ path: path })
+    }
+  }
 }
 </script>
 
 <style lang="scss">
+.mine-container {
+  .head-wrapper {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    .back {
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; left: 0; bottom: 0;
+        background: url('/static/timg.jpg') 0 / cover;
+        filter: blur(10px);
+      }
+    }
+    .mask {
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; left: 0; bottom: 0;
+        background: rgba(119,103,137,.43);
+        z-index: 10;
+      }
+    }
+  }
 
+}
 </style>

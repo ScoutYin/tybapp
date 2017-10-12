@@ -1,21 +1,52 @@
 <template>
-  <div class="">
-    <p>首页</p>
-    <p>首页</p>
-    <p>首页</p>
-    <p>首页</p>
-    <p>首页</p>
-    <p>首页</p>
-    <p>首页</p>
-  </div>
+  <main-layout class="home-container" title="淘鱼宝">
+    <div class="grid-layout">
+      <div class="grid-item" v-for="item in gridDatas" @click="toPath(item.path)">
+        <img slot="icon" :src="item.src" v-if="item.src">
+        {{ item.title }}
+      </div>
+    </div>
+  </main-layout>
 </template>
 
 <script>
+import MainLayout from 'components/layout/mainLayout'
 export default {
-  name: ''
+  name: '',
+  components: {
+    MainLayout
+  },
+  data () {
+    return {
+      gridDatas: [
+        { title: '我要买船', src: '/', path: '' },
+        { title: '我要卖船', src: '/', path: '' },
+        { title: '我要招人', src: '/', path: '/recruitment/recruiting' },
+        { title: '我要求职', src: '/', path: '/recruitment/jobHunting' },
+        { title: '我要买货', src: '/', path: '' },
+        { title: '我要卖货', src: '/', path: '' }
+      ]
+    }
+  },
+  methods: {
+    toPath (path) {
+      if (path) {
+        this.$router.push({ path: path })
+      }
+    }
+  }
 }
 </script>
 
 <style lang="scss">
-
+.home-container {
+  .grid-layout {
+    display: flex;
+    flex-wrap: wrap;
+    .grid-item {
+      min-width: 30%;
+      margin: 1%;
+    }
+  }
+}
 </style>
