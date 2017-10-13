@@ -33,7 +33,7 @@ export default {
       tabs: [
         { id: 0, title: '首页', icon: 'icon-shouye', path: '/home' },
         { id: 1, title: '商城', icon: 'icon-dianpu', path: '/store' },
-        { id: 2, title: '发布', src: '/static/++.png' },
+        { id: 2, title: '发布' },
         { id: 3, title: '消息', icon: 'icon-xinxi', path: '/message' },
         { id: 4, title: '我', icon: 'icon-wode', path: '/mine' }
       ],
@@ -75,6 +75,7 @@ export default {
     height: calc(100vh - 55px);
     top: 0;
     left: 0;
+    margin-bottom: 20px;
   }
 
   .mint-tab-item-label {
@@ -112,7 +113,7 @@ export default {
     bottom: 24px;
     border-radius: 50%;
     background: #1296db;
-    font-size: 42px;
+    font-size: 43px;
     color: white;
   }
   .common-font {

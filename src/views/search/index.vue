@@ -1,16 +1,18 @@
 <template>
-  <mt-search v-model="value" class="search-container" autofocus :result="filterResult">
-    <!-- <mt-cell
-      v-for="item in result"
-      :title="item.title"
-      :value="item.value">
-    </mt-cell> -->
-  </mt-search>
+  <l-search v-model="value" class="search-container" autofocus :result="filterResult">
+    <div slot="left" @click="back">
+      <i class="iconfont icon-left"></i>
+    </div>
+  </l-search>
 </template>
 
 <script>
+import LSearch from 'components/search'
 export default {
-  name: '',
+  name: 'Search',
+  components: {
+    LSearch
+  },
   data () {
     return {
       value: '',
@@ -27,10 +29,20 @@ export default {
         { title: 'fourth', value: '456' }
       ]
     }
+  },
+  methods: {
+    back () {
+      this.$router.back()
+    }
   }
 }
 </script>
 
 <style lang="scss">
-
+.search-container {
+  .icon-left {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+}
 </style>
