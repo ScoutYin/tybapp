@@ -77,6 +77,12 @@ export default {
     },
     loadTop () {
       this.$emit('load-top', this.$refs.loadmore)
+    },
+    setScrollTop (value) {
+      this.$refs.loadmore.$el.scrollTop = value
+    },
+    getScrollTop () {
+      return this.$refs.loadmore.$el.scrollTop
     }
   }
 }

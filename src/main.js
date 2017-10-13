@@ -7,6 +7,7 @@ import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import 'common/style/normalize.css'
 import './assets/iconfont/iconfont.css'
+import store from '@/store'
 
 Vue.use(Mint)
 
@@ -16,6 +17,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
@@ -25,6 +27,7 @@ new Vue({
 //     new Vue({
 //       el: '#app',
 //       router,
+//       store,
 //       template: '<App/>',
 //       components: { App }
 //     })
@@ -34,6 +37,7 @@ new Vue({
 //   new Vue({
 //     el: '#app',
 //     router,
+//     store,
 //     template: '<App/>',
 //     components: { App }
 //   })
