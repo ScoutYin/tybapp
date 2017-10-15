@@ -4,9 +4,6 @@
       search
       loadmore
       @load-top="loadTop"
-      v-infinite-scroll="loadMore"
-      infinite-scroll-disabled="loading"
-      infinite-scroll-distance="10"
       ref="main">
       <div slot="title">123</div>
 
@@ -27,7 +24,10 @@
         <tab-item  @on-item-click="onItemClick">渔船</tab-item>
       </tab>
 
-      <div class="store-list" ref="list">
+      <div class="store-list" ref="list"
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="loading"
+        infinite-scroll-distance="10">
         <div v-for="item in lists[tabIndex]">{{ item }} {{ tabIndex }}</div>
       </div>
 
@@ -113,14 +113,18 @@ export default {
   },
   methods: {
     createLists () {
-      this.lists[this.tabIndex] = []
-      for (let i = 0; i < 50; ++i) {
-        this.lists[this.tabIndex].push({id: i, title: `title ${i}`})
+      for (let i = 0; i < this.lists.length; ++i) {
+        this.lists[i] = []
+        for (let j = 0; j < 50; ++j) {
+          this.lists[i].push({id: j, title: `title ${j}`})
+        }
       }
+      this.lists = Object.assign({}, this.lists)
     },
     addLists () {
+      let length = this.lists[this.tabIndex].length
       for (let i = 0; i < 10; ++i) {
-        let id = this.lists[this.tabIndex].length + i
+        let id = length + i
         this.lists[this.tabIndex].push({id: id, title: `title ${id}`})
       }
     },
@@ -135,7 +139,7 @@ export default {
       setTimeout(() => {
         this.addLists()
         this.loading = false
-      }, 1000)
+      }, 2000)
     },
     onItemClick (index) {
 
