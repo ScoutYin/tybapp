@@ -3,7 +3,8 @@
     <div class="list">
       <mt-cell :title="item.title"
         :value="item.value"
-        v-for="item in list"
+        v-for="(item, index) in list"
+        :key="index"
         @click.nativa="toPath(item.path)"
         class="message-cell">
         <i slot="icon" :class="['iconfont', item.icon]"></i>

@@ -10,7 +10,8 @@
       <mt-cell :title="item.title"
         :icon="item.icon"
         :value="item.value"
-        v-for="item in list"
+        v-for="(item, index) in list"
+        :key="index"
         @click.nativa="toPath(item.path)">
       </mt-cell>
     </div>

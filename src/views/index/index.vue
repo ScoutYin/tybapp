@@ -1,8 +1,11 @@
 <template>
   <div class="index-container">
-    <router-view class="tab-views"></router-view>
+    <keep-alive>
+      <router-view class="tab-views"></router-view>
+    </keep-alive>
+
     <mt-tabbar v-model="selected" fixed>
-      <mt-tab-item v-for="item in tabs" :id="item.id" @click.native="toPath(item.path)">
+      <mt-tab-item v-for="(item, index) in tabs" :key="index" :id="item.id" @click.native="toPath(item.path)">
         <!-- <img slot="icon" :src="item.src" v-if="item.src" :class="item.id === 2 ? 'big-img' : ''"> -->
         <i slot="icon" :class="['iconfont', item.icon, item.id === 2 ? 'icon-fabu big-font' : 'common-font']"></i>
         {{ item.title }}
@@ -15,7 +18,7 @@
       class="popup-wrapper">
       <!-- 暂时套用tabbar的样式 -->
       <mt-tabbar>
-        <mt-tab-item v-for="item in popupItems" :id="item.id" @click.native="toPath(item.path)">
+        <mt-tab-item v-for="(item, index) in popupItems" :key="index" :id="item.id" @click.native="toPath(item.path)">
           <i slot="icon" :class="['iconfont', item.icon, 'common-font']"></i>
           {{ item.title }}
         </mt-tab-item>
@@ -26,8 +29,23 @@
 
 <script>
 // let imgSrc = '/static/timg.jpg'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Index',
+  computed: {
+    ...mapGetters([
+      'isLogin',
+      'loginVisible'
+    ]),
+    loginVisible: {
+      get: function () {
+        return this.$store.state['Login'].loginVisible
+      },
+      set: function (newValue) {
+        this.$store.state['Login'].loginVisible = newValue
+      }
+    }
+  },
   data () {
     return {
       tabs: [
@@ -47,12 +65,31 @@ export default {
       popupVisible: false
     }
   },
+  mounted () {
+    console.log(this.$route)
+    // 刷新页面的情况下， 或者URL方式输入的情况下，需要重新计算table的默认selected
+    this.initTabs()
+  },
   methods: {
+    initTabs () {
+      for (let i = 0; i < this.tabs.length; ++i) {
+        if (this.$route.path === this.tabs[i].path) {
+          this.selected = i
+        }
+      }
+    },
     toPath (path) {
       if (path) {
         this.$router.push({ path: path })
       } else {
+        this.publish()
+      }
+    },
+    publish () {
+      if (this.isLogin) {
         this.popupVisible = true
+      } else {
+        this.loginVisible = true
       }
     }
   },

@@ -26,7 +26,8 @@ let routes = [
       }, {
         path: '/store',
         component: IndexStore,
-        name: 'Store'
+        name: 'Store',
+        saveScrollPosition: true
       }, {
         path: '/message',
         component: IndexMessage,
@@ -53,5 +54,6 @@ let routes = [
 ]
 
 export default new Router({
+  mode: 'history',
   routes: routes
 })

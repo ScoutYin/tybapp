@@ -8,7 +8,7 @@
       <div slot="title">123</div>
 
       <mt-swipe :auto="0" :show-indicators="true" ref="swipe" class="swipe">
-        <mt-swipe-item v-for="item in items">
+        <mt-swipe-item v-for="(item, index) in items" :key="index">
           <img :src="item.imgSrc" alt="" style="width: 100%;">
         </mt-swipe-item>
       </mt-swipe>
@@ -41,9 +41,16 @@
 </template>
 
 <script>
+/**
+ * 该页面未处理的Bug
+ * 1. Tab切换的时候仍然会出现一些问题，具体的逻辑还需要稍作修改才能正常切换。
+ */
 import MainLayout from 'components/layout/mainLayout'
 import { Tab, TabItem } from 'vux'
 import { mapGetters } from 'vuex'
+
+const TAB_NUM = 2
+
 export default {
   name: '',
   components: {
@@ -70,7 +77,7 @@ export default {
           imgSrc: 'http://tyb.allship.cn/Uploads/Picture/2017-09-08/59b237f4a1620.jpg'
         }
       ],
-      lists: [[], []],
+      lists: [],
       hotItems: [
         { id: 1 },
         { id: 1 },
@@ -87,31 +94,38 @@ export default {
       tabTop: 0
     }
   },
-  mounted () {
-    this.createLists()
+  created () {
 
-    console.log(this)
-    let refTab = this.$refs.tab
-    this.tabTop = refTab.$el.offsetTop + refTab.$el.offsetParent.offsetTop
-    this.$refs.tab.$parent.$el.onscroll = () => {
-      let scrollTop = refTab.$parent.$el.scrollTop
-      // 计算 tab 在当前文本流的Y轴坐标值
-      if (scrollTop >= this.tabTop) {
-        this.isTabTop = true
-      } else {
-        this.isTabTop = false
-      }
-    }
+  },
+  mounted () {
+    this.calcTabTop()
 
     if (this.indexStoreTab.length === 0) {
       // 这里的tab有两个，所以push两个值
-      for (let i = 0; i < this.lists.length; ++i) {
-        this.indexStoreTab.push(this.tabTop)
-      }
+      this.resetIndexStoreTab(this.tabTop)
     }
-    console.log('lists: ', this.lists)
+
+    // 根据Tab的个数来确定List数组的长度，方便后续遍历
+    while (this.lists.length < TAB_NUM) {
+      this.lists.push([])
+    }
+
+    this.createLists()
   },
   methods: {
+    calcTabTop () {
+      let refTab = this.$refs.tab
+      this.tabTop = refTab.$el.offsetTop + refTab.$el.offsetParent.offsetTop
+      this.$refs.tab.$parent.$el.onscroll = () => {
+        let scrollTop = refTab.$parent.$el.scrollTop
+        // 计算 tab 在当前文本流的Y轴坐标值
+        if (scrollTop >= this.tabTop) {
+          this.isTabTop = true
+        } else {
+          this.isTabTop = false
+        }
+      }
+    },
     createLists () {
       for (let i = 0; i < this.lists.length; ++i) {
         this.lists[i] = []
@@ -123,9 +137,15 @@ export default {
     },
     addLists () {
       let length = this.lists[this.tabIndex].length
+      console.log('tabIndex', this.tabIndex)
       for (let i = 0; i < 10; ++i) {
         let id = length + i
         this.lists[this.tabIndex].push({id: id, title: `title ${id}`})
+      }
+    },
+    resetIndexStoreTab (tabTop) {
+      for (let i = 0; i < TAB_NUM; ++i) {
+        this.indexStoreTab.push('tabTop', this.tabTop)
       }
     },
     loadTop (loadmore) {
@@ -149,11 +169,15 @@ export default {
     'tabIndex' (newValue, oldValue) {
       let curScrollTop = this.$refs.main.getScrollTop()
 
+      this.indexStoreTab[oldValue] = curScrollTop
       if (this.tabTop < curScrollTop) {
-        this.indexStoreTab[oldValue] = curScrollTop
         this.$refs.main.setScrollTop(this.indexStoreTab[newValue])
-      } else {
-
+      }
+    },
+    'isTabTop' (newValue, oldValue) {
+      console.log(this.isTabTop)
+      if (!newValue) {
+        this.resetIndexStoreTab(this.tabTop)
       }
     }
   }
