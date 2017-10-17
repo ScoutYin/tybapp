@@ -9,6 +9,7 @@ import IndexMine from 'views/index/mine'
 import RecruitmentRecruiting from 'views/recruitment/recruiting'
 import RecruitmentJobHunting from 'views/recruitment/jobHunting'
 import Search from 'views/search'
+import Settings from 'views/mine/settings'
 
 Vue.use(Router)
 
@@ -50,10 +51,13 @@ let routes = [
     path: '/recruitment/jobHunting',
     component: RecruitmentJobHunting,
     name: 'JobHunting'
+  }, {
+    path: '/mine/settings',
+    component: Settings,
+    name: 'Settings'
   }
 ]
 
 export default new Router({
-  mode: 'history',
   routes: routes
 })

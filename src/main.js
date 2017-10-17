@@ -8,38 +8,29 @@ import 'mint-ui/lib/style.css'
 import 'common/style/normalize.css'
 import './assets/iconfont/iconfont.css'
 import 'common/style/common.css'
-import store from '@/store'
+import store from './store'
 
 Vue.use(Mint)
+// Vue.use(store)
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App/>',
-  components: { App }
-})
+// new Vue({
+//   el: '#app',
+//   router,
+//   store,
+//   template: '<App/>',
+//   components: { App }
+// })
 
-// if ('ontouchstart' in window) {
-//   window.document.addEventListener('deviceready', function () {
-//     new Vue({
-//       el: '#app',
-//       router,
-//       store,
-//       template: '<App/>',
-//       components: { App }
-//     })
-//     window.navigator.splashscreen.hide()
-//   }, false)
-// } else {
-//   new Vue({
-//     el: '#app',
-//     router,
-//     store,
-//     template: '<App/>',
-//     components: { App }
-//   })
-// }
+window.document.addEventListener('deviceready', function () {
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    template: '<App/>',
+    components: { App }
+  })
+  // window.navigator.splashscreen.hide()
+}, false)

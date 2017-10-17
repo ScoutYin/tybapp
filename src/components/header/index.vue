@@ -1,6 +1,6 @@
 <template>
   <header
-    class="mint-header"
+    class="mint-header l-header"
     :class="{ 'is-fixed': fixed }">
     <div class="mint-header-button is-left">
       <slot name="left"></slot>
@@ -23,5 +23,13 @@ export default {
 </script>
 
 <style lang="scss">
-
+.l-header {
+  .mint-header-button {
+    .mint-button {
+      .mint-button-text {
+        vertical-align: middle;
+      }
+    }
+  }
+}
 </style>

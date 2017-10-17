@@ -1,6 +1,6 @@
 <template>
   <div class="store-container">
-    <main-layout class=""
+    <l-main-layout class=""
       search
       loadmore
       @load-top="loadTop"
@@ -31,7 +31,7 @@
         <div v-for="item in lists[tabIndex]">{{ item }} {{ tabIndex }}</div>
       </div>
 
-    </main-layout>
+    </l-main-layout>
     <tab class="tabs-top" :line-width="2" custom-bar-width="60px" v-show="isTabTop" v-model="tabIndex">
       <tab-item @on-item-click="onItemClick">渔货</tab-item>
       <tab-item @on-item-click="onItemClick">渔船</tab-item>
@@ -45,7 +45,7 @@
  * 该页面未处理的Bug
  * 1. Tab切换的时候仍然会出现一些问题，具体的逻辑还需要稍作修改才能正常切换。
  */
-import MainLayout from 'components/layout/mainLayout'
+import LMainLayout from 'components/layout/mainLayout'
 import { Tab, TabItem } from 'vux'
 import { mapGetters } from 'vuex'
 
@@ -54,7 +54,7 @@ const TAB_NUM = 2
 export default {
   name: '',
   components: {
-    MainLayout,
+    LMainLayout,
     Tab,
     TabItem
   },

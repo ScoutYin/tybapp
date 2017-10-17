@@ -1,5 +1,5 @@
 <template>
-  <main-layout class="mine-container">
+  <l-main-layout class="mine-container">
     <div class="head-wrapper">
       <div class="back"></div>
       <div class="mask">
@@ -12,24 +12,24 @@
         :value="item.value"
         v-for="(item, index) in list"
         :key="index"
-        @click.nativa="toPath(item.path)">
+        @click.native="toPath(item.path)">
       </mt-cell>
     </div>
-  </main-layout>
+  </l-main-layout>
 </template>
 
 <script>
-import MainLayout from 'components/layout/mainLayout'
+import LMainLayout from 'components/layout/mainLayout'
 export default {
-  name: '',
+  name: 'Mine',
   components: {
-    MainLayout
+    LMainLayout
   },
   data () {
     return {
       list: [
         { title: '我的收藏', icon: '', path: '' },
-        { title: '设置', icon: '', path: '' }
+        { title: '设置', icon: '', path: '/mine/settings' }
       ]
     }
   },

@@ -1,5 +1,5 @@
 <template>
-  <main-layout class="message-container">
+  <l-main-layout class="message-container">
     <div class="list">
       <mt-cell :title="item.title"
         :value="item.value"
@@ -10,15 +10,15 @@
         <i slot="icon" :class="['iconfont', item.icon]"></i>
       </mt-cell>
     </div>
-  </main-layout>
+  </l-main-layout>
 </template>
 
 <script>
-import MainLayout from 'components/layout/mainLayout'
+import LMainLayout from 'components/layout/mainLayout'
 export default {
-  name: '',
+  name: 'Message',
   components: {
-    MainLayout
+    LMainLayout
   },
   data () {
     return {

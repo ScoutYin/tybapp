@@ -26,7 +26,7 @@
 <script>
 import LMintHeader from 'components/header'
 export default {
-  name: 'MainLayout',
+  name: 'LMainLayout',
   components: {
     LMintHeader
   },

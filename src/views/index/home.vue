@@ -1,20 +1,20 @@
 <template>
-  <main-layout class="home-container" title="淘鱼宝">
+  <l-main-layout class="home-container" title="淘鱼宝">
     <div class="grid-layout">
       <div class="grid-item" v-for="item in gridDatas" @click="toPath(item.path)">
         <img slot="icon" :src="item.src" v-if="item.src">
         {{ item.title }}
       </div>
     </div>
-  </main-layout>
+  </l-main-layout>
 </template>
 
 <script>
-import MainLayout from 'components/layout/mainLayout'
+import LMainLayout from 'components/layout/mainLayout'
 export default {
   name: '',
   components: {
-    MainLayout
+    LMainLayout
   },
   data () {
     return {

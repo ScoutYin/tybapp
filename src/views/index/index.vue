@@ -36,15 +36,7 @@ export default {
     ...mapGetters([
       'isLogin',
       'loginVisible'
-    ]),
-    loginVisible: {
-      get: function () {
-        return this.$store.state['Login'].loginVisible
-      },
-      set: function (newValue) {
-        this.$store.state['Login'].loginVisible = newValue
-      }
-    }
+    ])
   },
   data () {
     return {
@@ -89,7 +81,7 @@ export default {
       if (this.isLogin) {
         this.popupVisible = true
       } else {
-        this.loginVisible = true
+        this.$store.dispatch('showLogin')
       }
     }
   },

@@ -7,7 +7,7 @@
       <h1 slot="center" class="mint-header-title" v-text="headerTitle"></h1>
     </l-mint-header>
     <div class="main">
-      <l-login-panel></l-login-panel>
+      <l-login-panel @commit="login"></l-login-panel>
     </div>
   </div>
 </template>
@@ -28,18 +28,13 @@ export default {
     }
   },
   computed: {
-    loginVisible: {
-      get: function () {
-        return this.$store.state['Login'].loginVisible
-      },
-      set: function (newValue) {
-        this.$store.state['Login'].loginVisible = newValue
-      }
-    }
   },
   methods: {
     close () {
-      this.loginVisible = false
+      this.$store.dispatch('hideLogin')
+    },
+    async login (params) {
+      this.$store.dispatch('userLogin', params)
     }
   }
 }
