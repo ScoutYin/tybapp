@@ -16,21 +16,21 @@ Vue.use(Mint)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-// new Vue({
-//   el: '#app',
-//   router,
-//   store,
-//   template: '<App/>',
-//   components: { App }
-// })
+new Vue({
+  el: '#app',
+  router,
+  store,
+  template: '<App/>',
+  components: { App }
+})
 
-window.document.addEventListener('deviceready', function () {
-  new Vue({
-    el: '#app',
-    router,
-    store,
-    template: '<App/>',
-    components: { App }
-  })
-  // window.navigator.splashscreen.hide()
-}, false)
+// window.document.addEventListener('deviceready', function () {
+//   new Vue({
+//     el: '#app',
+//     router,
+//     store,
+//     template: '<App/>',
+//     components: { App }
+//   })
+//   // window.navigator.splashscreen.hide()
+// }, false)

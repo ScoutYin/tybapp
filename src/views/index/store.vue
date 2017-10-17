@@ -20,8 +20,8 @@
       </div>
 
       <tab class="tabs" :line-width="2" custom-bar-width="60px" ref="tab" v-model="tabIndex">
-        <tab-item  @on-item-click="onItemClick">渔货</tab-item>
         <tab-item  @on-item-click="onItemClick">渔船</tab-item>
+        <tab-item  @on-item-click="onItemClick">鱼货</tab-item>
       </tab>
 
       <div class="store-list" ref="list"
@@ -32,10 +32,10 @@
       </div>
 
     </l-main-layout>
-    <tab class="tabs-top" :line-width="2" custom-bar-width="60px" v-show="isTabTop" v-model="tabIndex">
-      <tab-item @on-item-click="onItemClick">渔货</tab-item>
+    <!-- <tab class="tabs-top" :line-width="2" custom-bar-width="60px" v-show="isTabTop" v-model="tabIndex">
       <tab-item @on-item-click="onItemClick">渔船</tab-item>
-    </tab>
+      <tab-item @on-item-click="onItemClick">渔货</tab-item>
+    </tab> -->
   </div>
 
 </template>
@@ -48,6 +48,7 @@
 import LMainLayout from 'components/layout/mainLayout'
 import { Tab, TabItem } from 'vux'
 import { mapGetters } from 'vuex'
+import { getGoodsList } from 'api'
 
 const TAB_NUM = 2
 
@@ -110,21 +111,32 @@ export default {
       this.lists.push([])
     }
 
-    this.createLists()
+    getGoodsList({ type: 0 }).then((res) => {
+      console.log('getShipList: ', res)
+      this.lists[0] = res.data
+      this.lists = Object.assign({}, this.lists)
+    })
+    getGoodsList({ type: 1 }).then((res) => {
+      console.log('getFishList: ', res)
+      this.lists[1] = res.data
+      this.lists = Object.assign({}, this.lists)
+    })
+
+    // this.createLists()
   },
   methods: {
     calcTabTop () {
       let refTab = this.$refs.tab
       this.tabTop = refTab.$el.offsetTop + refTab.$el.offsetParent.offsetTop
-      this.$refs.tab.$parent.$el.onscroll = () => {
-        let scrollTop = refTab.$parent.$el.scrollTop
-        // 计算 tab 在当前文本流的Y轴坐标值
-        if (scrollTop >= this.tabTop) {
-          this.isTabTop = true
-        } else {
-          this.isTabTop = false
-        }
-      }
+      // this.$refs.tab.$parent.$el.onscroll = () => {
+      //   let scrollTop = refTab.$parent.$el.scrollTop
+      //   // 计算 tab 在当前文本流的Y轴坐标值
+      //   if (scrollTop >= this.tabTop) {
+      //     this.isTabTop = true
+      //   } else {
+      //     this.isTabTop = false
+      //   }
+      // }
     },
     createLists () {
       for (let i = 0; i < this.lists.length; ++i) {
@@ -136,12 +148,9 @@ export default {
       this.lists = Object.assign({}, this.lists)
     },
     addLists () {
-      let length = this.lists[this.tabIndex].length
-      console.log('tabIndex', this.tabIndex)
-      for (let i = 0; i < 10; ++i) {
-        let id = length + i
-        this.lists[this.tabIndex].push({id: id, title: `title ${id}`})
-      }
+      getGoodsList({type: this.tabIndex}).then((res) => {
+        this.lists[this.tabIndex] = this.lists[this.tabIndex].concat(res.data)
+      })
     },
     resetIndexStoreTab (tabTop) {
       for (let i = 0; i < TAB_NUM; ++i) {
@@ -173,12 +182,6 @@ export default {
       if (this.tabTop < curScrollTop) {
         this.$refs.main.setScrollTop(this.indexStoreTab[newValue])
       }
-    },
-    'isTabTop' (newValue, oldValue) {
-      console.log(this.isTabTop)
-      if (!newValue) {
-        this.resetIndexStoreTab(this.tabTop)
-      }
     }
   }
 }
@@ -200,6 +203,15 @@ export default {
       flex: 1 44%;
       margin: 3%;
     }
+  }
+
+  /**
+   * 使用position: sticky的方式可以完成tabs标签固定的效果
+   * 兼容性欠佳，但是性能很优秀，比兼容onscroll的性能好很多
+   */
+  .tabs {
+    position: sticky;
+    top: -1px;
   }
   .store-list {
     // overflow: scroll;
