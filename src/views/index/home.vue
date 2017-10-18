@@ -1,7 +1,7 @@
 <template>
   <l-main-layout class="home-container" title="淘鱼宝">
     <div class="grid-layout">
-      <div class="grid-item" v-for="item in gridDatas" @click="toPath(item.path)">
+      <div class="grid-item" v-for="(item, index) in gridDatas" :key="index" @click="toPath(item.path)">
         <img slot="icon" :src="item.src" v-if="item.src">
         {{ item.title }}
       </div>

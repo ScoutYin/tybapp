@@ -10,6 +10,7 @@ import RecruitmentRecruiting from 'views/recruitment/recruiting'
 import RecruitmentJobHunting from 'views/recruitment/jobHunting'
 import Search from 'views/search'
 import Settings from 'views/mine/settings'
+import StoreDetail from 'views/store/detail'
 
 Vue.use(Router)
 
@@ -55,6 +56,10 @@ let routes = [
     path: '/mine/settings',
     component: Settings,
     name: 'Settings'
+  }, {
+    path: '/store/detail',
+    component: StoreDetail,
+    name: 'StoreDetail'
   }
 ]
 

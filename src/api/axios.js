@@ -22,7 +22,6 @@ var instance = axios.create({
 })
 
 instance.interceptors.request.use((conf) => {
-  console.log('conf: ', conf)
   return conf
 }, (error) => {
   return Promise.reject(error)
@@ -52,10 +51,22 @@ instance.interceptors.response.use((response) => {
     }
   }
 }, (error) => {
-  return Promise.reject(error)
+  console.log(error)
+  Vue.$vux.alert.show({
+    title: '网络错误',
+    content: new Error(error),
+    onShow () {
+      console.log('Plugin: I\'m showing')
+      return Promise.reject(error)
+    },
+    onHide () {
+      console.log('Plugin: I\'m hiding')
+      return Promise.reject(error)
+    }
+  })
 })
 
-export default (url = '', data = {}, type = 'GET') => {
+export default async (url = '', data = {}, type = 'GET') => {
   type = type.toUpperCase()
   url = baseUrl + url
 

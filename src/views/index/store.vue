@@ -14,7 +14,7 @@
       </mt-swipe>
 
       <div class="hot">
-        <div v-for="item in hotItems" class="hot-item">
+        <div v-for="(item, index) in hotItems" :key="index" class="hot-item">
           {{ item }}
         </div>
       </div>
@@ -28,16 +28,23 @@
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="loading"
         infinite-scroll-distance="10">
-        <div v-for="item in lists[tabIndex]">{{ item }} {{ tabIndex }}</div>
+        <l-goods-item
+          :data="item"
+          v-for="(item, index) in lists[tabIndex]"
+          :key="index"
+          class="goods-item"
+          @click.native="toGoodsDetail(item.id)">
+        </l-goods-item>
       </div>
-
     </l-main-layout>
-    <!-- <tab class="tabs-top" :line-width="2" custom-bar-width="60px" v-show="isTabTop" v-model="tabIndex">
+    <tab class="tabs-top" :line-width="2" custom-bar-width="60px" v-show="isTabTop" v-model="tabIndex">
       <tab-item @on-item-click="onItemClick">渔船</tab-item>
       <tab-item @on-item-click="onItemClick">渔货</tab-item>
-    </tab> -->
+    </tab>
+    <div class="to-top" v-show="isTabTop" @click="toTop">
+      <i class="iconfont icon-dingbu"></i>
+    </div>
   </div>
-
 </template>
 
 <script>
@@ -49,6 +56,7 @@ import LMainLayout from 'components/layout/mainLayout'
 import { Tab, TabItem } from 'vux'
 import { mapGetters } from 'vuex'
 import { getGoodsList } from 'api'
+import LGoodsItem from 'components/lists/goodsItem'
 
 const TAB_NUM = 2
 
@@ -57,7 +65,8 @@ export default {
   components: {
     LMainLayout,
     Tab,
-    TabItem
+    TabItem,
+    LGoodsItem
   },
   computed: {
     ...mapGetters([
@@ -91,8 +100,10 @@ export default {
       ],
       loading: false,
       isTabTop: false,
+      showTotop: false,
       tabIndex: 0,
-      tabTop: 0
+      tabTop: 0,
+      scrollTop: 0
     }
   },
   created () {
@@ -111,67 +122,78 @@ export default {
       this.lists.push([])
     }
 
-    getGoodsList({ type: 0 }).then((res) => {
-      console.log('getShipList: ', res)
-      this.lists[0] = res.data
-      this.lists = Object.assign({}, this.lists)
-    })
-    getGoodsList({ type: 1 }).then((res) => {
-      console.log('getFishList: ', res)
-      this.lists[1] = res.data
-      this.lists = Object.assign({}, this.lists)
-    })
-
-    // this.createLists()
+    this.refreshLists()
   },
   methods: {
     calcTabTop () {
       let refTab = this.$refs.tab
       this.tabTop = refTab.$el.offsetTop + refTab.$el.offsetParent.offsetTop
-      // this.$refs.tab.$parent.$el.onscroll = () => {
-      //   let scrollTop = refTab.$parent.$el.scrollTop
-      //   // 计算 tab 在当前文本流的Y轴坐标值
-      //   if (scrollTop >= this.tabTop) {
-      //     this.isTabTop = true
-      //   } else {
-      //     this.isTabTop = false
-      //   }
-      // }
-    },
-    createLists () {
-      for (let i = 0; i < this.lists.length; ++i) {
-        this.lists[i] = []
-        for (let j = 0; j < 50; ++j) {
-          this.lists[i].push({id: j, title: `title ${j}`})
+      this.$refs.tab.$parent.$el.onscroll = () => {
+        let scrollTop = refTab.$parent.$el.scrollTop
+        // 计算 tab 在当前文本流的Y轴坐标值
+        if (scrollTop >= this.tabTop) {
+          this.isTabTop = true
+        } else {
+          this.isTabTop = false
         }
       }
-      this.lists = Object.assign({}, this.lists)
     },
-    addLists () {
-      getGoodsList({type: this.tabIndex}).then((res) => {
-        this.lists[this.tabIndex] = this.lists[this.tabIndex].concat(res.data)
-      })
+    async refreshLists () {
+      try {
+        await getGoodsList({ type: 0 }).then((res) => {
+          console.log('getShipList: ', res)
+          this.lists[0] = res.data
+          this.lists = Object.assign({}, this.lists)
+        })
+      } catch (err) {
+        console.log('error: ', err)
+      }
+
+      try {
+        await getGoodsList({ type: 1 }).then((res) => {
+          console.log('getFishList: ', res)
+          this.lists[1] = res.data
+          this.lists = Object.assign({}, this.lists)
+        })
+      } catch (err) {
+
+      }
+    },
+    async addLists () {
+      this.loading = true
+      try {
+        await getGoodsList({type: this.tabIndex}).then((res) => {
+          this.lists[this.tabIndex] = this.lists[this.tabIndex].concat(res.data)
+          this.loading = false
+        })
+      } catch (err) {
+
+      }
     },
     resetIndexStoreTab (tabTop) {
       for (let i = 0; i < TAB_NUM; ++i) {
         this.indexStoreTab.push('tabTop', this.tabTop)
       }
     },
-    loadTop (loadmore) {
-      setTimeout(() => {
-        this.createLists()
-        loadmore.onTopLoaded()
-      }, 1000)
+    async loadTop (loadmore) {
+      await this.refreshLists()
+      loadmore.onTopLoaded()
     },
     loadMore () {
-      this.loading = true
-      setTimeout(() => {
-        this.addLists()
-        this.loading = false
-      }, 2000)
+      this.addLists()
     },
     onItemClick (index) {
-
+    },
+    toGoodsDetail (id) {
+      this.$router.push({ path: `/store/detail?type=${this.tabIndex}&id=${id}` })
+    },
+    toTop () {
+      this.scrollTop = this.$refs.main.getScrollTop()
+      if (this.scrollTop < 1) {
+        return
+      }
+      this.$refs.main.setScrollTop(this.scrollTop / 1.3)
+      requestAnimationFrame(this.toTop)
     }
   },
   watch: {
@@ -191,8 +213,6 @@ export default {
 .store-container {
   .mint-swipe {
     height: 17.5vh;
-    .mint-swipe-item {
-    }
   }
   .hot {
     background: white;
@@ -214,15 +234,36 @@ export default {
     top: -1px;
   }
   .store-list {
-    // overflow: scroll;
     width: 100%;
     background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    .goods-item {
+      width: 41%;
+      flex: 1 41%;
+      margin: 2%;
+      padding: 2%;
+    }
   }
   .tabs-top {
     position: fixed;
     top: 40px;
     width: 100%;
     z-index: 10;
+  }
+
+  .to-top {
+    position: fixed;
+    z-index: 100;
+    right: 20px;
+    bottom: 70px;
+    background-color: rgba(240, 255, 255, .7);
+    border: 2px solid #1296db;
+    border-radius: 50%;
+    padding: 6px 7.2px;
+    .icon-dingbu {
+      font-size: 20px;
+    }
   }
 }
 </style>

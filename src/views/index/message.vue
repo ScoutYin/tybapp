@@ -5,7 +5,7 @@
         :value="item.value"
         v-for="(item, index) in list"
         :key="index"
-        @click.nativa="toPath(item.path)"
+        @click.native="toPath(item.path)"
         class="message-cell">
         <i slot="icon" :class="['iconfont', item.icon]"></i>
       </mt-cell>
