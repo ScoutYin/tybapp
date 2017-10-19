@@ -3,14 +3,15 @@ import Router from 'vue-router'
 
 import Index from 'views/index'
 import IndexHome from 'views/index/home'
-import IndexStore from 'views/index/store'
-import IndexMessage from 'views/index/message'
-import IndexMine from 'views/index/mine'
+import IndexStore from 'views/store'
+import IndexMessage from 'views/message'
+import IndexMine from 'views/mine'
 import RecruitmentRecruiting from 'views/recruitment/recruiting'
 import RecruitmentJobHunting from 'views/recruitment/jobHunting'
 import Search from 'views/search'
 import Settings from 'views/mine/settings'
 import StoreDetail from 'views/store/detail'
+import StoreCart from 'views/store/cart'
 
 Vue.use(Router)
 
@@ -20,24 +21,28 @@ let routes = [
     component: Index,
     name: 'Index',
     redirect: '/home',
+    meta: { keepAlive: true },
     children: [
       {
         path: '/home',
         component: IndexHome,
-        name: 'Home'
+        name: 'Home',
+        meta: { keepAlive: true }
       }, {
         path: '/store',
         component: IndexStore,
         name: 'Store',
-        saveScrollPosition: true
+        meta: { keepAlive: true }
       }, {
         path: '/message',
         component: IndexMessage,
-        name: 'Message'
+        name: 'Message',
+        meta: { keepAlive: true }
       }, {
         path: '/mine',
         component: IndexMine,
-        name: 'Mine'
+        name: 'Mine',
+        meta: { keepAlive: true }
       }
     ]
   }, {
@@ -60,9 +65,15 @@ let routes = [
     path: '/store/detail',
     component: StoreDetail,
     name: 'StoreDetail'
+  }, {
+    path: '/store/cart',
+    component: StoreCart,
+    name: 'StoreCart'
   }
 ]
 
 export default new Router({
+  // mode history 需要后端服务器作支持，否则可能会白屏
+  // mode: 'history',
   routes: routes
 })

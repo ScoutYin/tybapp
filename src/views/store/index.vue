@@ -141,7 +141,6 @@ export default {
     async refreshLists () {
       try {
         await getGoodsList({ type: 0 }).then((res) => {
-          console.log('getShipList: ', res)
           this.lists[0] = res.data
           this.lists = Object.assign({}, this.lists)
         })
@@ -151,7 +150,6 @@ export default {
 
       try {
         await getGoodsList({ type: 1 }).then((res) => {
-          console.log('getFishList: ', res)
           this.lists[1] = res.data
           this.lists = Object.assign({}, this.lists)
         })
@@ -210,6 +208,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../common/style/var.scss';
 .store-container {
   .mint-swipe {
     height: 17.5vh;
@@ -258,7 +257,7 @@ export default {
     right: 20px;
     bottom: 70px;
     background-color: rgba(240, 255, 255, .7);
-    border: 2px solid #1296db;
+    border: 2px solid $default-color;
     border-radius: 50%;
     padding: 6px 7.2px;
     .icon-dingbu {

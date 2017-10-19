@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view  v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
+
     <mt-popup
       v-model="loginVisible"
       position="bottom"
@@ -37,6 +41,11 @@ export default {
     }
   },
   mounted () {
+  },
+  watch: {
+    '$route' (newValue) {
+
+    }
   }
 }
 </script>

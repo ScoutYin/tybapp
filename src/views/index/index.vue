@@ -97,6 +97,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../common/style/var.scss';
 .index-container {
   .tab-views {
     position: absolute;
@@ -114,18 +115,19 @@ export default {
   .popup-wrapper {
     width: 100%;
     height: 100px;
-    background-color: #fafafa;
+    background-color: $backgroud-color;
     .mint-tabbar {
-      top: 15px;
+      padding-top: 15px;
       background-image: none;
+      height: 100%;
       .common-font {
         font-size: 28px;
-        color: #56a2ff;
+        color: $default-color;
       }
       .mint-tab-item-label {
         font-size: 16px;
         line-height: 2em;
-        color: #56a2ff;
+        color: $default-color;
       }
     }
   }
@@ -141,7 +143,7 @@ export default {
     left: calc(50% - 24px);
     bottom: 24px;
     border-radius: 50%;
-    background: #1296db;
+    background: $default-color;
     font-size: 43px;
     color: white;
   }

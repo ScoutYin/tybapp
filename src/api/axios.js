@@ -8,11 +8,9 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
 // const env = process.env.NODE_ENV
-const port = process.env.PORT || config.dev.port
+// const port = process.env.PORT || config.dev.port
 
 const baseUrl = config.dev.baseUrl
-
-console.log(`PORT: ${port}, BaseUrl: ${baseUrl}`)
 
 var instance = axios.create({
   headers: {'X-Requested-With': 'XMLHttpRequest'},

@@ -89,6 +89,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .main-layout-container {
   height: 100%;
   .main {
