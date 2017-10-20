@@ -29,7 +29,7 @@
 
 <script>
 import LMainLayout from 'components/layout/mainLayout'
-import { getGoodsDetail } from 'api'
+import { getGoodsDetail, getStoreShop } from 'api'
 export default {
   name: 'StoreDetail',
   components: {
@@ -38,11 +38,12 @@ export default {
   data () {
     return {
       params: this.$route.query,
-      goodsData: {}
+      goodsData: {},
+      shopData: {}
     }
   },
   mounted () {
-    console.log(this.params)
+
   },
   created () {
     this.fetchData()
@@ -50,13 +51,23 @@ export default {
   methods: {
     async fetchData () {
       try {
+        console.log('params: ', this.params)
         await getGoodsDetail(this.params).then((res) => {
           this.goodsData = res.data
+        })
+        console.log('shopid: ', this.goodsData.shopid)
+        await getStoreShop({ shopid: this.goodsData.shopid }).then((res) => {
+          this.shopData = res.data
         })
       } catch (err) {}
     },
     addGoods () {
-      this.$store.dispatch('addGoods', this.goodsData)
+      let goodInfo = {
+        type: this.params.type,
+        goods: this.goodsData,
+        shop: this.shopData
+      }
+      this.$store.dispatch('addGoods', goodInfo)
     },
     toCart () {
       this.$router.push({ path: '/store/cart' })

@@ -56,8 +56,10 @@ export default {
   },
   created () {
     if (this.title) {
+      // this.headerTitle = this.$t(this.title)
       this.headerTitle = this.title
     }
+    // this.headerTitle = this.$t(this.headerTitle)
 
     if (this.search) {
       this.hideTitle = true

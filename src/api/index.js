@@ -15,7 +15,7 @@ export const logout = () => axios('/admin/logout')
  * params.type = 0 获取渔船列表接口
  * params.type = 1 获取鱼获列表接口
  */
-export const getGoodsList = (params) => axios('/goods', params)
+export const getGoodsList = (params) => axios('/store/goods', params)
 
 /**
  * 获取商品详情接口
@@ -23,4 +23,10 @@ export const getGoodsList = (params) => axios('/goods', params)
  * params.type = 1 获取鱼获列表接口
  * params.id 商品的id
  */
-export const getGoodsDetail = (params) => axios('/goods/detail', params)
+export const getGoodsDetail = (params) => axios('/store/goods/detail', params)
+
+/**
+ * 获取商铺信息
+ * params.shopid为商铺id
+ */
+export const getStoreShop = (params) => axios('/store/shop', params)

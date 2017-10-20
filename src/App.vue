@@ -41,6 +41,7 @@ export default {
     }
   },
   mounted () {
+    console.log('t:', this)
   },
   watch: {
     '$route' (newValue) {

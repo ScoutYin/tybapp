@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="l-goods-item">
     <div class="thumb">
-      <img :src="data.image" alt="">
+      <img :src="data.picture" alt="">
     </div>
     <div class="center">
       <div class="title">{{ data.title }}</div>
@@ -11,7 +11,7 @@
         <!-- span换行的话则会有一个标签之间的空隙存在 -->
         <span v-if="dPrice != 0" style="color: red; font-size: 12px;">￥</span><span style="color: red;">{{ dPrice }}</span>
       </div>
-      <div class="sales-volume">销量：{{ data.salesVolume }}</div>
+      <div class="sales-volume">销量：{{ data.sales }}</div>
     </div>
   </div>
 </template>

@@ -3,12 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueI18n from './i18n'
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import 'common/style/normalize.css'
 import './assets/iconfont/iconfont.css'
 import 'common/style/common.css'
 import store from './store'
+
+console.log('i18n: ', VueI18n)
 
 Vue.use(Mint)
 // Vue.use(store)
@@ -20,6 +23,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  VueI18n,
   template: '<App/>',
   components: { App }
 })
