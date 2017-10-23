@@ -33,20 +33,20 @@
         <div class="title">店铺</div>
       </div>
       <div class="line"></div>
-      <l-permission-button class="item-fav item-common" @click="addFav">
+      <div class="item-fav item-common" v-permission-click="addFav">
         <i class="iconfont icon-biaoxing"></i>
         <div class="title">收藏</div>
-      </l-permission-button>
+      </div>
       <div class="line"></div>
-      <l-permission-button class="item-cart" @click="addGoods">
+      <div class="item-cart" v-permission-click="addGoods">
         <i class="iconfont icon-gouwuche"></i>
         <span class="title">加入购物车</span>
-      </l-permission-button>
+      </div>
     </div>
 
-    <l-permission-button class="cart" @click="toCart" v-permission-click>
+    <div class="cart" v-permission-click="toCart">
       <i class="iconfont icon-gouwuche"></i>
-    </l-permission-button>
+    </div>
   </div>
 </template>
 
