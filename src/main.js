@@ -10,6 +10,7 @@ import 'common/style/normalize.css'
 import './assets/iconfont/iconfont.css'
 import 'common/style/common.css'
 import store from './store'
+import directives from './directives'
 
 console.log('i18n: ', VueI18n)
 
@@ -24,6 +25,7 @@ new Vue({
   router,
   store,
   VueI18n,
+  directives,
   template: '<App/>',
   components: { App }
 })

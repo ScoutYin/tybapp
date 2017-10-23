@@ -34,7 +34,14 @@ export default {
       this.$store.dispatch('hideLogin')
     },
     async login (params) {
-      this.$store.dispatch('userLogin', params)
+      try {
+        await this.$store.dispatch('userLogin', params).then(() => {
+          // 如果登陆成功，登陆标志置为true，储存token，回调函数if need
+          this.$store.dispatch('loginSuccess')
+        })
+      } catch (err) {
+
+      }
     }
   }
 }

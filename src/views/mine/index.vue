@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       list: [
-        { title: '我的收藏', icon: '', path: '' },
+        { title: '我的收藏', icon: '', path: '/mine/myfav' },
         { title: '设置', icon: '', path: '/mine/settings' }
       ]
     }

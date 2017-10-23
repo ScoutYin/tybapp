@@ -1,6 +1,6 @@
 <template>
   <div class="main-layout-container">
-    <l-mint-header fixed>
+    <l-mint-header :fixed="fixed">
       <mt-button icon="back" slot="left" @click.native="goBack" v-if="back">返回</mt-button>
       <!-- <mt-button icon="more" slot="right"></mt-button> -->
       <div slot="center" v-if="search" @click="toSearch">
@@ -46,6 +46,10 @@ export default {
     loadmore: {
       type: Boolean,
       default: false
+    },
+    fixed: {
+      type: Boolean,
+      default: true
     }
   },
   data () {

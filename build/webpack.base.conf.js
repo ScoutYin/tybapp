@@ -27,7 +27,8 @@ const originalConfig = {
       'components': resolve('src/components'),
       'views': resolve('src/views'),
       'common': resolve('src/common'),
-      'api': resolve('src/api')
+      'api': resolve('src/api'),
+      'directives': resolve('src/directives')
     }
   },
   module: {

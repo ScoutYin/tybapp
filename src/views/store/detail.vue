@@ -1,7 +1,30 @@
 <template>
   <div class="store-detail-container">
-    <l-main-layout class="" back>
-      这是商品详情页面
+    <l-main-layout class="main" back>
+      <div class="header-wrapper">
+        <swiper :show-dots="false">
+          <swiper-item>
+            <img :src="goodsData.picture" width="100%" height="100%">
+          </swiper-item>
+        </swiper>
+        <div class="header-text">
+          <div class="title">
+            <span>{{ goodsData.title }}</span>
+          </div>
+          <div class="price">
+            ￥<span class="price-num">{{ goodsData.price || '面议' }}</span>
+          </div>
+          <div class="bottom">
+            <span class="sales">销量：
+              <span class="sales-num">{{ goodsData.sales }}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-wrapper">
+        这是我的描述
+      </div>
     </l-main-layout>
 
     <div class="bottom-bar">
@@ -10,30 +33,36 @@
         <div class="title">店铺</div>
       </div>
       <div class="line"></div>
-      <div class="item-fav item-common">
+      <l-permission-button class="item-fav item-common" @click="addFav">
         <i class="iconfont icon-biaoxing"></i>
         <div class="title">收藏</div>
-      </div>
+      </l-permission-button>
       <div class="line"></div>
-      <div class="item-cart" @click="addGoods">
+      <l-permission-button class="item-cart" @click="addGoods">
         <i class="iconfont icon-gouwuche"></i>
         <span class="title">加入购物车</span>
-      </div>
+      </l-permission-button>
     </div>
 
-    <div class="cart" @click="toCart">
+    <l-permission-button class="cart" @click="toCart" v-permission-click>
       <i class="iconfont icon-gouwuche"></i>
-    </div>
+    </l-permission-button>
   </div>
 </template>
 
 <script>
 import LMainLayout from 'components/layout/mainLayout'
+import LPermissionButton from 'components/permission/button'
 import { getGoodsDetail, getStoreShop } from 'api'
+import { Swiper, SwiperItem } from 'vux'
+
 export default {
   name: 'StoreDetail',
   components: {
-    LMainLayout
+    LMainLayout,
+    LPermissionButton,
+    Swiper,
+    SwiperItem
   },
   data () {
     return {
@@ -69,6 +98,9 @@ export default {
       }
       this.$store.dispatch('addGoods', goodInfo)
     },
+    addFav () {
+
+    },
     toCart () {
       this.$router.push({ path: '/store/cart' })
     }
@@ -79,6 +111,43 @@ export default {
 <style lang="scss">
 @import '../../common/style/var.scss';
 .store-detail-container {
+  .main {
+    .header-wrapper {
+      background: white;
+      width: 100%;
+      margin-bottom: 10px;
+      .swipe {
+        width: 100%;
+      }
+      .header-text {
+        padding: 5px 10px;
+        .title {
+          margin-bottom: 8px;
+        }
+        .price {
+          margin-bottom: 8px;
+          color: red;
+          font-size: 12px;
+          .price-num {
+            font-size: 20px;
+          }
+        }
+        .bottom {
+          display: flex;
+          justify-content: space-between;
+          .sales {
+            font-size: 13px;
+            .sales-num {
+            }
+          }
+        }
+      }
+    }
+    .content-wrapper {
+      background: white;
+      padding: 5px 10px;
+    }
+  }
   .bottom-bar {
     position: fixed;
     bottom: 0; left: 0; right: 0;

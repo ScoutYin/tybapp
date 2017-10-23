@@ -5,7 +5,8 @@ Vue.use(ToastPlugin)
 
 const state = {
   loginVisible: false,
-  isLogin: false
+  isLogin: false,
+  loginNextCb: () => {}
 }
 
 const getters = {
@@ -14,8 +15,11 @@ const getters = {
 }
 
 const actions = {
-  showLogin: ({ commit }) => {
-    commit('SHOW_LOGIN')
+  loginSuccess: ({ commit }) => {
+    commit('LOGIN_SUCCESS')
+  },
+  showLogin: ({ commit }, cb) => {
+    commit('SHOW_LOGIN', cb)
   },
   hideLogin: ({ commit }) => {
     commit('HIDE_LOGIN')
@@ -40,8 +44,13 @@ const actions = {
 }
 
 const mutations = {
-  SHOW_LOGIN: (state) => {
+  LOGIN_SUCCESS: (state) => {
+    // 登陆成功则执行之前的回调函数
+    state.loginNextCb()
+  },
+  SHOW_LOGIN: (state, cb) => {
     state.loginVisible = true
+    state.loginNextCb = cb
   },
   HIDE_LOGIN: (state) => {
     state.loginVisible = false

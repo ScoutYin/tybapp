@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store'
 
 import Index from 'views/index'
 import IndexHome from 'views/index/home'
@@ -10,6 +11,7 @@ import RecruitmentRecruiting from 'views/recruitment/recruiting'
 import RecruitmentJobHunting from 'views/recruitment/jobHunting'
 import Search from 'views/search'
 import Settings from 'views/mine/settings'
+import MineMyfav from 'views/mine/myfav'
 import StoreDetail from 'views/store/detail'
 import StoreCart from 'views/store/cart'
 
@@ -69,11 +71,31 @@ let routes = [
     path: '/store/cart',
     component: StoreCart,
     name: 'StoreCart'
+  }, {
+    path: '/mine/myfav',
+    component: MineMyfav,
+    name: 'MineMyfav',
+    meta: {
+      needLogin: true
+    }
   }
 ]
 
-export default new Router({
+let router = new Router({
   // mode history 需要后端服务器作支持，否则可能会白屏
   // mode: 'history',
   routes: routes
 })
+
+router.beforeEach(async (to, from, next) => {
+  if (to.meta.needLogin && !store.getters.isLogin) {
+    // 登陆成功才会进行路由跳转，否则停滞在当前路由页面
+    store.dispatch('showLogin', () => {
+      next()
+    })
+  } else {
+    next()
+  }
+})
+
+export default router

@@ -1,10 +1,18 @@
 /**
  * my Custom
  */
+* {
+
+}
+
 h1 {
   line-height: 2em;
 }
 
 .iconfont {
   font-size: 20px;
+}
+
+@media (min-device-pixel-ratio: 2) {
+
 }

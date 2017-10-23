@@ -1,17 +1,22 @@
 <template>
   <div class="store-container">
-    <l-main-layout class=""
+    <l-main-layout class="main"
       search
       loadmore
       @load-top="loadTop"
       ref="main">
       <div slot="title">123</div>
 
-      <mt-swipe :auto="0" :show-indicators="true" ref="swipe" class="swipe">
+      <!-- <mt-swipe :auto="0" :show-indicators="true" ref="swipe" class="swipe">
         <mt-swipe-item v-for="(item, index) in items" :key="index">
           <img :src="item.imgSrc" alt="" style="width: 100%;">
         </mt-swipe-item>
-      </mt-swipe>
+      </mt-swipe> -->
+      <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">
+        <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in items" :key="index">
+          <img :src="item.imgSrc" width="100%" height="100%">
+        </swiper-item>
+      </swiper>
 
       <div class="hot">
         <div v-for="(item, index) in hotItems" :key="index" class="hot-item">
@@ -36,11 +41,12 @@
           @click.native="toGoodsDetail(item.id)">
         </l-goods-item>
       </div>
+      <l-list-bottom :loading="canLoadmore"></l-list-bottom>
     </l-main-layout>
-    <tab class="tabs-top" :line-width="2" custom-bar-width="60px" v-show="isTabTop" v-model="tabIndex">
+    <!-- <tab class="tabs-top" :line-width="2" custom-bar-width="60px" v-show="isTabTop" v-model="tabIndex">
       <tab-item @on-item-click="onItemClick">渔船</tab-item>
       <tab-item @on-item-click="onItemClick">渔货</tab-item>
-    </tab>
+    </tab> -->
     <div class="to-top" v-show="isTabTop" @click="toTop">
       <i class="iconfont icon-dingbu"></i>
     </div>
@@ -53,10 +59,11 @@
  * 1. Tab切换的时候仍然会出现一些问题，具体的逻辑还需要稍作修改才能正常切换。
  */
 import LMainLayout from 'components/layout/mainLayout'
-import { Tab, TabItem } from 'vux'
+import { Tab, TabItem, Swiper, SwiperItem } from 'vux'
 import { mapGetters } from 'vuex'
 import { getGoodsList } from 'api'
 import LGoodsItem from 'components/lists/goodsItem'
+import LListBottom from 'components/bottom/listBottom'
 
 const TAB_NUM = 2
 
@@ -66,7 +73,10 @@ export default {
     LMainLayout,
     Tab,
     TabItem,
-    LGoodsItem
+    Swiper,
+    SwiperItem,
+    LGoodsItem,
+    LListBottom
   },
   computed: {
     ...mapGetters([
@@ -99,6 +109,7 @@ export default {
         { id: 1 }
       ],
       loading: false,
+      canLoadmore: false,
       isTabTop: false,
       showTotop: false,
       tabIndex: 0,
@@ -107,11 +118,12 @@ export default {
     }
   },
   created () {
-
+    this.$nextTick(() => {
+      this.calcTabTop()
+    })
   },
   mounted () {
-    this.calcTabTop()
-
+    console.log('swipe:', this.$refs.swipe)
     if (this.indexStoreTab.length === 0) {
       // 这里的tab有两个，所以push两个值
       this.resetIndexStoreTab(this.tabTop)
@@ -159,13 +171,18 @@ export default {
     },
     async addLists () {
       this.loading = true
+      this.canLoadmore = true
       try {
         await getGoodsList({type: this.tabIndex}).then((res) => {
-          this.lists[this.tabIndex] = this.lists[this.tabIndex].concat(res.data)
-          this.loading = false
+          if (res.data.length === 0) {
+            this.canLoadmore = false
+          } else {
+            this.lists[this.tabIndex] = this.lists[this.tabIndex].concat(res.data)
+            this.loading = false
+          }
         })
       } catch (err) {
-
+        this.canLoadmore = false
       }
     },
     resetIndexStoreTab (tabTop) {
@@ -210,40 +227,53 @@ export default {
 <style lang="scss">
 @import '../../common/style/var.scss';
 .store-container {
-  .mint-swipe {
-    height: 17.5vh;
-  }
-  .hot {
-    background: white;
-    margin-bottom: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    .hot-item {
-      flex: 1 44%;
-      margin: 3%;
+  .main {
+    // .mint-swipe {
+    //   height: 17.5vh;
+    // }
+    .hot {
+      background: white;
+      margin-bottom: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      .hot-item {
+        flex: 1 44%;
+        margin: 3%;
+      }
     }
-  }
 
-  /**
-   * 使用position: sticky的方式可以完成tabs标签固定的效果
-   * 兼容性欠佳，但是性能很优秀，比兼容onscroll的性能好很多
-   */
-  .tabs {
-    position: sticky;
-    top: -1px;
-  }
-  .store-list {
-    width: 100%;
-    background-color: white;
-    display: flex;
-    flex-wrap: wrap;
-    .goods-item {
-      width: 41%;
-      flex: 1 41%;
-      margin: 2%;
-      padding: 2%;
+    /**
+    * 使用position: sticky的方式可以完成tabs标签固定的效果
+    * 兼容性欠佳，但是性能很优秀，比兼容onscroll的性能好很多
+    */
+    .tabs {
+      position: sticky;
+      top: -1px;
+    }
+    .store-list {
+      width: 100%;
+      background-color: white;
+      display: flex;
+      flex-wrap: wrap;
+      .goods-item {
+        width: 41%;
+        flex: 1 41%;
+        margin: 2%;
+        padding: 2%;
+      }
+    }
+
+    .bottom {
+      width: 100%;
+      height: 50px;
+      .loadmore-text {
+        display: inline;
+        text-align: center;
+        line-height: 40px;
+      }
     }
   }
+  
   .tabs-top {
     position: fixed;
     top: 40px;

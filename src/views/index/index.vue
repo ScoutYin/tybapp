@@ -29,14 +29,10 @@
 
 <script>
 // let imgSrc = '/static/timg.jpg'
-import { mapGetters } from 'vuex'
+
 export default {
   name: 'Index',
   computed: {
-    ...mapGetters([
-      'isLogin',
-      'loginVisible'
-    ])
   },
   data () {
     return {
@@ -78,7 +74,7 @@ export default {
       }
     },
     publish () {
-      if (this.isLogin) {
+      if (this.$store.getters.isLogin) {
         this.popupVisible = true
       } else {
         this.$store.dispatch('showLogin')

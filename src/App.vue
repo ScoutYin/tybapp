@@ -45,7 +45,10 @@ export default {
   },
   watch: {
     '$route' (newValue) {
-
+      // if (newValue.meta.needLogin) {
+      //   console.log('this page needLogin.')
+      //   this.loginVisible = true
+      // }
     }
   }
 }
@@ -56,6 +59,9 @@ export default {
   position: relative;
   height: 100vh;
   background: #efefef;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   .popup-container {
     width: 100%;
     height: 100vh;
