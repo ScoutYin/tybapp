@@ -6,7 +6,6 @@ const directive = Vue.directive('permission-click', {
   bind: (el, binding, vnode) => {
     el.addEventListener('click', (e) => {
       if (!store.getters.isLogin) {
-        e.preventDefault()
         store.dispatch('showLogin')
       } else {
         typeof binding.value === 'function' && binding.value()

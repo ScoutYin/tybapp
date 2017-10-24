@@ -1,28 +1,27 @@
 <template>
-  <div class="l-list-bottom">
-    <div class="loadmore-text" v-if="loading"><span>加载更多</span></div>
-    <div class="loadmore-text" v-else><span>没有更多了</span></div>
+  <div class="l-part-line">
+    <div class="text">
+      <span v-text="text">
+        <slot></slot>
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'LListBottom',
+  name: 'LPartLine',
   props: {
-    loading: {
-      type: Boolean,
-      default: false
+    text: {
+      type: String
     }
   }
 }
 </script>
 
 <style lang="scss">
-.l-list-bottom {
-  position: relative;
-  height: 28px;
-  margin: 10px;
-  .loadmore-text {
+.l-part-line {
+  .text {
     text-align: center;
     font-size: 13px;
     display: flex;

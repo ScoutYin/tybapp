@@ -41,7 +41,10 @@
           @click.native="toGoodsDetail(item.id)">
         </l-goods-item>
       </div>
-      <l-list-bottom :loading="canLoadmore"></l-list-bottom>
+      <div class="loadmore-bottom-text">
+        <l-part-line :text="canLoadmore ? '加载更多' : '没有可加载的'"></l-part-line>
+      </div>
+
     </l-main-layout>
     <!-- <tab class="tabs-top" :line-width="2" custom-bar-width="60px" v-show="isTabTop" v-model="tabIndex">
       <tab-item @on-item-click="onItemClick">渔船</tab-item>
@@ -59,11 +62,11 @@
  * 1. Tab切换的时候仍然会出现一些问题，具体的逻辑还需要稍作修改才能正常切换。
  */
 import LMainLayout from 'components/layout/mainLayout'
+import LPartLine from 'components/common/partLine'
 import { Tab, TabItem, Swiper, SwiperItem } from 'vux'
 import { mapGetters } from 'vuex'
 import { getGoodsList } from 'api'
 import LGoodsItem from 'components/lists/goodsItem'
-import LListBottom from 'components/bottom/listBottom'
 
 const TAB_NUM = 2
 
@@ -71,12 +74,12 @@ export default {
   name: '',
   components: {
     LMainLayout,
+    LPartLine,
     Tab,
     TabItem,
     Swiper,
     SwiperItem,
-    LGoodsItem,
-    LListBottom
+    LGoodsItem
   },
   computed: {
     ...mapGetters([
@@ -263,14 +266,8 @@ export default {
       }
     }
 
-    .bottom {
-      width: 100%;
-      height: 50px;
-      .loadmore-text {
-        display: inline;
-        text-align: center;
-        line-height: 40px;
-      }
+    .loadmore-bottom-text {
+      margin: 10px 10px 20px 10px;
     }
   }
   

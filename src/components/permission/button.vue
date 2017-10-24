@@ -10,7 +10,7 @@
 
 export default {
   /**
-   * 判断用户是否登陆，从而控制其跳转权限
+   * 判断用户是否登陆，从而控制其跳转权限，已经实现自定义指令版本的，该组件可废弃
    */
   name: 'LPermissionButton',
   props: {

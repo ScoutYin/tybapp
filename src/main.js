@@ -35,6 +35,8 @@ new Vue({
 //     el: '#app',
 //     router,
 //     store,
+//     VueI18n,
+//     directives,
 //     template: '<App/>',
 //     components: { App }
 //   })
