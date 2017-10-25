@@ -1,5 +1,7 @@
 <template>
-  
+  <form class="l-form">
+    <slot></slot>
+  </form>
 </template>
 
 <script>
@@ -43,5 +45,7 @@ export default {
 </script>
 
 <style class="scss">
+.l-form {
 
+}
 </style>

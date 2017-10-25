@@ -1,8 +1,9 @@
 <template>
   <div class="l-part-line">
     <div class="text">
-      <span v-text="text">
-        <slot></slot>
+      <span v-text="text" v-if="text"></span>
+      <span v-if="$slots.middle">
+        <slot name="middle"></slot>
       </span>
     </div>
   </div>
@@ -11,6 +12,7 @@
 <script>
 export default {
   name: 'LPartLine',
+  componentName: 'LPartLine',
   props: {
     text: {
       type: String

@@ -42,7 +42,7 @@
         </l-goods-item>
       </div>
       <div class="loadmore-bottom-text">
-        <l-part-line :text="canLoadmore ? '加载更多' : '没有可加载的'"></l-part-line>
+        <l-part-line :text="canLoadmore ? '加载更多' : '没有可加载的'"><div slot="middle">123</div></l-part-line>
       </div>
 
     </l-main-layout>

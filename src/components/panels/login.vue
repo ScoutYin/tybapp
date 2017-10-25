@@ -12,17 +12,25 @@
     </fieldset>
     <slot></slot>
   </div> -->
-  <form>
-    <slot></slot>
-  </form>
+  <l-form>
+    <l-form-item label="123">
+      <input></input>
+    </l-form-item>
+  </l-form>
 </template>
 
 <script>
+import LForm from 'components/form/form'
+import LFormItem from 'components/form/formItem'
 export default {
   props: {
     data: {
       type: Object
     }
+  },
+  components: {
+    LForm,
+    LFormItem
   },
   data () {
     return {

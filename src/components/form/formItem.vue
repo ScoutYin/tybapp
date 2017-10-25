@@ -20,7 +20,8 @@ export default {
   componentName: 'LFormItem',
   mixins: [emitter],
   props: {
-    prop: String
+    prop: String,
+    label: String
   },
   computed: {
     form () {
@@ -29,7 +30,7 @@ export default {
     }
   },
   data () {
-
+    return {}
   },
   methods: {
     resetField () {
@@ -52,7 +53,7 @@ export default {
       })
     }
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.dispatch('LForm', 'lform.removeField', [this])
   }
 }
