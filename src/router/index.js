@@ -89,7 +89,7 @@ let router = new Router({
 
 router.beforeEach(async (to, from, next) => {
   if (to.meta.needLogin && !store.getters.isLogin) {
-    // 登陆成功才会进行路由跳转，否则停滞在当前路由页面
+    // 登陆成功执行callback func并进行路由跳转，否则停滞在当前路由页面
     store.dispatch('showLogin', () => {
       next()
     })

@@ -1,12 +1,15 @@
 <template>
-  <div class="">
-    我收藏的x
+  <div>
+    <p>这是注册页面</p>
+    
+    <slot></slot>
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'MineMayfav'
+
 }
 </script>
 
