@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="l-form-item">
     <label :for="prop" v-if="label || $slots.label">
       <slot name="label">{{ label + form.labelSuffix }}</slot>
     </label>
-    <div class="">
+    <div class="l-form-item-content">
       <slot></slot>
       <!-- V 验证提示信息 V -->
       <!-- <transition>
@@ -60,5 +60,12 @@ export default {
 </script>
 
 <style lang="scss">
-
+.l-form-item {
+  .l-form-item-content {
+    &>input {
+      border: none;
+      border-bottom: 1px solid #aaa;
+    }
+  }
+}
 </style>

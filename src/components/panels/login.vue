@@ -12,11 +12,17 @@
     </fieldset>
     <slot></slot>
   </div> -->
-  <l-form>
-    <l-form-item label="123">
-      <input></input>
-    </l-form-item>
-  </l-form>
+  <div class="login-panel">
+    <l-form>
+      <l-form-item label="用户名">
+        <input v-model="data.username">
+      </l-form-item>
+      <l-form-item label="密码">
+        <input v-model="data.password">
+      </l-form-item>
+    </l-form>
+    <button @click="onLogin">登 录</button>
+  </div>
 </template>
 
 <script>
@@ -40,7 +46,7 @@ export default {
   },
   methods: {
     onLogin () {
-      this.$emit('commit', {username: this.username, password: this.password})
+      this.$emit('commit', this.data)
     },
     resetFields () {
 
@@ -48,6 +54,7 @@ export default {
   },
   created () {
     console.log('login form: ', this)
+    console.log(this)
     this.$on('el.form.addField', (field) => {
       console.log(field)
     })
