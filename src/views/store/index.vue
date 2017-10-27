@@ -42,9 +42,11 @@
         </l-goods-item>
       </div>
       <div class="loadmore-bottom-text">
-        <l-part-line :text="canLoadmore ? '加载更多' : '没有可加载的'"><div slot="middle">123</div></l-part-line>
+        <l-part-line :text="canLoadmore ? '加载更多' : '没有可加载的'">
+          <inline-loading slot="left" v-if="canLoadmore" class="inline-loading"></inline-loading>
+        </l-part-line>
       </div>
-
+      
     </l-main-layout>
     <!-- <tab class="tabs-top" :line-width="2" custom-bar-width="60px" v-show="isTabTop" v-model="tabIndex">
       <tab-item @on-item-click="onItemClick">渔船</tab-item>
@@ -63,7 +65,7 @@
  */
 import LMainLayout from 'components/layout/mainLayout'
 import LPartLine from 'components/common/partLine'
-import { Tab, TabItem, Swiper, SwiperItem } from 'vux'
+import { Tab, TabItem, Swiper, SwiperItem, InlineLoading } from 'vux'
 import { mapGetters } from 'vuex'
 import { getGoodsList } from 'api'
 import LGoodsItem from 'components/lists/goodsItem'
@@ -79,7 +81,8 @@ export default {
     TabItem,
     Swiper,
     SwiperItem,
-    LGoodsItem
+    LGoodsItem,
+    InlineLoading
   },
   computed: {
     ...mapGetters([
@@ -268,6 +271,10 @@ export default {
 
     .loadmore-bottom-text {
       margin: 10px 10px 20px 10px;
+      .inline-loading {
+        width: 15px;
+        height: 15px;
+      }
     }
   }
   

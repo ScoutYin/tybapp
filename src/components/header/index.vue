@@ -1,12 +1,15 @@
 <template>
   <header
-    class="mint-header l-header"
+    class="l-header"
     :class="{ 'is-fixed': fixed }">
-    <div class="mint-header-button is-left">
+    <div class="l-header-button is-left">
       <slot name="left"></slot>
     </div>
-    <slot name="center"></slot>
-    <div class="mint-header-button is-right">
+    <div class="is-center">
+      <h1 class="l-header-title" v-text="title" v-if="title"></h1>
+      <slot name="center"></slot>
+    </div>
+    <div class="l-header-button is-right">
       <slot name="right"></slot>
     </div>
   </header>
@@ -23,13 +26,20 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../common/style/var.scss';
+
 .l-header {
-  .mint-header-button {
-    .mint-button {
-      .mint-button-text {
-        vertical-align: middle;
-      }
-    }
-  }
+  align-items: center;
+  background-color: $header-color;
+  box-sizing: border-box;
+  color: $default-font-color;
+  display: flex;
+  font-size: 14px;
+  height: $header-height;
+  line-height: 1;
+  padding: 0 10px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
 }
 </style>
