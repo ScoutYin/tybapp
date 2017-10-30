@@ -16,8 +16,13 @@
 </template>
 
 <script>
+import LButton from '../common/button'
+
 export default {
   name: 'LMintHeader',
+  components: {
+    LButton
+  },
   props: {
     fixed: Boolean,
     title: String
@@ -41,5 +46,44 @@ export default {
   position: relative;
   text-align: center;
   white-space: nowrap;
+
+  .l-header-button {
+    flex: .5;
+
+    &>:first-child {
+      background-color: transparent;
+      border: 0;
+      box-shadow: none;
+      color: inherit;
+      display: inline-block;
+      padding: 0;
+      font-size: inherit;
+      &::after {
+        content: none;
+      }
+    }
+  }
+
+  .is-left {
+    text-align: left;
+  }
+
+  .is-right {
+    text-align: right;
+  }
+
+  .is-center {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    font-size: inherit;
+    font-weight: normal;
+  }
+
+  .is-fixed {
+    position: fixed 0 0 * 0;
+    z-index: 2001;
+  }
 }
 </style>

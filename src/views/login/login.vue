@@ -84,9 +84,10 @@ export default {
   height: 100vh;
   .main {
     position: absolute;
-    top: 40px;
+    top: 44px;
     width: 100%;
     height: 100%;
+    padding: 10px;
   }
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
   <div class="main-layout-container">
-    <l-mint-header :fixed="fixed">
-      <mt-button icon="back" slot="left" @click.native="goBack" v-if="back">返回</mt-button>
+    <l-header :fixed="fixed">
+      <l-button icon="left" slot="left" @click.native="goBack" v-if="back">返回</l-button>
       <!-- <mt-button icon="more" slot="right"></mt-button> -->
       <div slot="center" v-if="search" @click="toSearch">
         点我搜索
       </div>
       <h1 slot="center" class="mint-header-title" v-text="headerTitle" v-if="!hideTitle"></h1>
-    </l-mint-header>
+    </l-header>
     <mt-loadmore
       :top-method="loadTop"
       @top-status-change="handleTopChange"
@@ -24,11 +24,14 @@
 </template>
 
 <script>
-import LMintHeader from 'components/header'
+import LHeader from 'components/header'
+import LButton from 'components/common/button'
+
 export default {
   name: 'LMainLayout',
   components: {
-    LMintHeader
+    LHeader,
+    LButton
   },
   props: {
     back: {
@@ -101,7 +104,6 @@ export default {
   .main {
     position: relative;
     background-color: inherit;
-    top: 40px;
     height: calc(100% - 40px);
     width: 100%;
     overflow-y: scroll;

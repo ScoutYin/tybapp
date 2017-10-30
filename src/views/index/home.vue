@@ -6,24 +6,18 @@
         {{ item.title }}
       </div>
     </div>
-    <l-button>123</l-button>
-    <l-button size="large">123</l-button>
-    <l-button size="small">123</l-button>
-    <l-button type="primary">123</l-button>
-    <l-button type="danger">123</l-button>
-    <l-button disabled>123</l-button>
-    <l-button plain>123</l-button>
+    <l-loadmore :customTopText="['1', '2', '3', '4']"></l-loadmore>
   </l-main-layout>
 </template>
 
 <script>
 import LMainLayout from 'components/layout/mainLayout'
-import LButton from 'components/common/button'
+import LLoadmore from 'components/loadmore'
 export default {
   name: '',
   components: {
     LMainLayout,
-    LButton
+    LLoadmore
   },
   data () {
     return {
