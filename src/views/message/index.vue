@@ -7,7 +7,9 @@
         :key="index"
         @click.native="toPath(item.path)"
         class="message-cell">
-        <i slot="icon" :class="['iconfont', item.icon]"></i>
+        <svg slot="icon" class="icon" aria-hidden="true">
+          <use :xlink:href="`#${item.icon}`"></use>
+        </svg>
       </mt-cell>
     </div>
   </l-main-layout>

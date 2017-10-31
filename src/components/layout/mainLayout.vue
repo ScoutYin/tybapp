@@ -2,11 +2,10 @@
   <div class="main-layout-container">
     <l-header :fixed="fixed">
       <l-button icon="left" slot="left" @click.native="goBack" v-if="back">返回</l-button>
-      <!-- <mt-button icon="more" slot="right"></mt-button> -->
       <div slot="center" v-if="search" @click="toSearch">
         点我搜索
       </div>
-      <h1 slot="center" class="mint-header-title" v-text="headerTitle" v-if="!hideTitle"></h1>
+      <h1 slot="center" class="l-header-title" v-text="headerTitle" v-if="!hideTitle"></h1>
     </l-header>
     <mt-loadmore
       :top-method="loadTop"

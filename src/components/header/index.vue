@@ -79,6 +79,16 @@ export default {
     flex: 1;
     font-size: inherit;
     font-weight: normal;
+    .l-header-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: inherit;
+      font-weight: 400;
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+    }
   }
 
   .is-fixed {

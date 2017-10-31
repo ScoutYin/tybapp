@@ -1,11 +1,8 @@
 <template lang="html">
   <div class="login-container">
-    <l-mint-header fixed>
-      <mt-button slot="left" @click.native="close">
-        <i class="iconfont icon-guanbi2"></i>
-      </mt-button>
-      <h1 slot="center" class="mint-header-title" v-text="headerTitle"></h1>
-    </l-mint-header>
+    <l-header fixed :title="headerTitle">
+      <l-button slot="left" icon="guanbi1" @click.native="close"></l-button>
+    </l-header>
     <div class="main">
       <l-login-panel @commit="login" v-if="isLogin" ref="login" :data="loginFormData">
         <div @click="toRegister">注册</div>
@@ -18,15 +15,17 @@
 </template>
 
 <script>
-import LMintHeader from 'components/header'
+import LHeader from 'components/header'
+import LButton from 'components/common/button'
 import LLoginPanel from 'components/panels/login'
 import LRegisterPanel from 'components/panels/register'
 export default {
   name: 'LoginView',
   components: {
-    LMintHeader,
+    LHeader,
     LLoginPanel,
-    LRegisterPanel
+    LRegisterPanel,
+    LButton
   },
   props: {
     headerTitle: {

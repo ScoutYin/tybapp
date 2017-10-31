@@ -10,7 +10,10 @@
     :disabled="disabled">
     <span class="l-button-icon" v-if="icon || $slots.icon">
       <slot name="icon">
-        <i v-if="icon" class="iconfont" :class="'icon-' + icon"></i>
+        <svg class="icon" aria-hidden="true">
+          <use :xlink:href="`#icon-${icon}`"></use>
+        </svg>
+        <!-- <i v-if="icon" class="iconfont" :class="'icon-' + icon"></i> -->
       </slot>
     </span>
     <label class="l-button-text"><slot></slot></label>

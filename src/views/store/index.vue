@@ -53,7 +53,9 @@
       <tab-item @on-item-click="onItemClick">渔货</tab-item>
     </tab> -->
     <div class="to-top" v-show="isTabTop" @click="toTop">
-      <i class="iconfont icon-dingbu"></i>
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-dingbu"></use>
+      </svg>
     </div>
   </div>
 </template>
@@ -293,9 +295,10 @@ export default {
     background-color: rgba(240, 255, 255, .7);
     border: 2px solid $default-color;
     border-radius: 50%;
-    padding: 6px 7.2px;
-    .icon-dingbu {
-      font-size: 20px;
+    padding: 6px 7.6px;
+    .icon {
+      color: $default-color;
+      // font-size: 20px;
     }
   }
 }

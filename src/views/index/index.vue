@@ -7,8 +7,11 @@
     <mt-tabbar v-model="selected" fixed>
       <mt-tab-item v-for="(item, index) in tabs" :key="index" :id="item.id" @click.native="toPath(item.path)">
         <!-- <img slot="icon" :src="item.src" v-if="item.src" :class="item.id === 2 ? 'big-img' : ''"> -->
-        <i slot="icon" :class="['iconfont', item.icon, item.id === 2 ? 'icon-fabu big-font' : 'common-font']"></i>
-        {{ item.title }}
+        <!-- <i slot="icon" :class="['iconfont', item.icon, item.id === 2 ? 'icon-fabu big-font' : 'common-font']"></i> -->
+        <svg slot="icon" :class="['icon', item.id === 2 ? 'big-font' : 'common-font']" aria-hidden="true">
+          <use :xlink:href="`#${item.icon}`"></use>
+        </svg>
+        <div class="">{{ item.title }}</div>
       </mt-tab-item>
     </mt-tabbar>
     <mt-popup
@@ -19,8 +22,11 @@
       <!-- 暂时套用tabbar的样式 -->
       <mt-tabbar>
         <mt-tab-item v-for="(item, index) in popupItems" :key="index" :id="item.id" @click.native="toPath(item.path)">
-          <i slot="icon" :class="['iconfont', item.icon, 'common-font']"></i>
-          {{ item.title }}
+          <!-- <i slot="icon" :class="['iconfont', item.icon, 'common-font']"></i> -->
+          <svg :class="['icon', item.id === 2 ? 'big-font' : 'common-font']" aria-hidden="true">
+            <use :xlink:href="`#${item.icon}`"></use>
+          </svg>
+          <div>{{ item.title }}</div>
         </mt-tab-item>
       </mt-tabbar>
     </mt-popup>
@@ -39,7 +45,7 @@ export default {
       tabs: [
         { id: 0, title: '首页', icon: 'icon-shouye', path: '/home' },
         { id: 1, title: '商城', icon: 'icon-dianpu', path: '/store' },
-        { id: 2, title: '发布' },
+        { id: 2, title: '发布', icon: 'icon-fabu' },
         { id: 3, title: '消息', icon: 'icon-xinxi', path: '/message' },
         { id: 4, title: '我', icon: 'icon-wode', path: '/mine' }
       ],
@@ -134,17 +140,16 @@ export default {
 
   .big-font {
     position: absolute;
-    height: 48px;
-    width: 48px;
-    left: calc(50% - 24px);
+    left: calc(50% - 27px);
     bottom: 24px;
     border-radius: 50%;
-    background: $default-color;
-    font-size: 43px;
+    padding: 1px;
+    background: #26a2ff;
+    font-size: 42px;
     color: white;
   }
   .common-font {
-    font-size: 22px;
+    font-size: 18px;
   }
 }
 </style>

@@ -6,7 +6,9 @@
         {{ item.title }}
       </div>
     </div>
-    <l-loadmore :customTopText="['1', '2', '3', '4']"></l-loadmore>
+    <l-loadmore :top-load-method="loadmore" ref="loadmore">
+      <div v-for="(item, index) in gridDatas"  :key="index">123</div>
+    </l-loadmore>
   </l-main-layout>
 </template>
 
@@ -36,6 +38,13 @@ export default {
       if (path) {
         this.$router.push({ path: path })
       }
+    },
+    loadmore () {
+      console.log('loadmore.')
+      this.flag = false
+      setTimeout(() => {
+        this.$refs.loadmore.onTopLoaded()
+      }, 1000)
     }
   }
 }
