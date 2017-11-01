@@ -7,11 +7,6 @@
       ref="main">
       <div slot="title">123</div>
 
-      <!-- <mt-swipe :auto="0" :show-indicators="true" ref="swipe" class="swipe">
-        <mt-swipe-item v-for="(item, index) in items" :key="index">
-          <img :src="item.imgSrc" alt="" style="width: 100%;">
-        </mt-swipe-item>
-      </mt-swipe> -->
       <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">
         <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in items" :key="index">
           <img :src="item.imgSrc" width="100%" height="100%">

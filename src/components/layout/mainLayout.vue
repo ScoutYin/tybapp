@@ -7,14 +7,14 @@
       </div>
       <h1 slot="center" class="l-header-title" v-text="headerTitle" v-if="!hideTitle"></h1>
     </l-header>
-    <mt-loadmore
-      :top-method="loadTop"
+    <l-loadmore
+      :top-load-method="loadTop"
       @top-status-change="handleTopChange"
       ref="loadmore"
       class="main"
       v-if="loadmore">
       <slot></slot>
-    </mt-loadmore>
+    </l-loadmore>
     <div class="main" v-else>
       <slot></slot>
     </div>
@@ -25,12 +25,14 @@
 <script>
 import LHeader from 'components/header'
 import LButton from 'components/common/button'
+import LLoadmore from 'components/loadmore'
 
 export default {
   name: 'LMainLayout',
   components: {
     LHeader,
-    LButton
+    LButton,
+    LLoadmore
   },
   props: {
     back: {
