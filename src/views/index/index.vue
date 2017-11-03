@@ -4,40 +4,39 @@
       <router-view class="tab-views"></router-view>
     </keep-alive>
 
-    <mt-tabbar v-model="selected" fixed>
-      <mt-tab-item v-for="(item, index) in tabs" :key="index" :id="item.id" @click.native="toPath(item.path)">
-        <!-- <img slot="icon" :src="item.src" v-if="item.src" :class="item.id === 2 ? 'big-img' : ''"> -->
-        <!-- <i slot="icon" :class="['iconfont', item.icon, item.id === 2 ? 'icon-fabu big-font' : 'common-font']"></i> -->
+    <l-tabbar v-model="selected">
+      <l-tabbar-item v-for="(item, index) in tabs" :key="index" @click.native="toPath(item.path)">
         <svg slot="icon" :class="['icon', item.id === 2 ? 'big-font' : 'common-font']" aria-hidden="true">
           <use :xlink:href="`#${item.icon}`"></use>
         </svg>
-        <div class="">{{ item.title }}</div>
-      </mt-tab-item>
-    </mt-tabbar>
-    <mt-popup
+        <span class="">{{ item.title }}</span>
+      </l-tabbar-item>
+    </l-tabbar>
+
+    <popup
       v-model="popupVisible"
       popup-transition="popup-fade"
-      position="bottom"
       class="popup-wrapper">
-      <!-- 暂时套用tabbar的样式 -->
-      <mt-tabbar>
-        <mt-tab-item v-for="(item, index) in popupItems" :key="index" :id="item.id" @click.native="toPath(item.path)">
-          <!-- <i slot="icon" :class="['iconfont', item.icon, 'common-font']"></i> -->
-          <svg :class="['icon', item.id === 2 ? 'big-font' : 'common-font']" aria-hidden="true">
-            <use :xlink:href="`#${item.icon}`"></use>
-          </svg>
-          <div>{{ item.title }}</div>
-        </mt-tab-item>
-      </mt-tabbar>
-    </mt-popup>
+      <l-popup-items :items="popupItems"></l-popup-items>
+    </popup>
   </div>
 </template>
 
 <script>
 // let imgSrc = '/static/timg.jpg'
+import { Popup } from 'vux'
+import LPopupItems from 'components/publish/popupItems'
+import LTabbar from 'components/tabbar/tabbar'
+import LTabbarItem from 'components/tabbar/tabbarItem'
 
 export default {
   name: 'Index',
+  components: {
+    Popup,
+    LPopupItems,
+    LTabbar,
+    LTabbarItem
+  },
   computed: {
   },
   data () {
@@ -141,7 +140,7 @@ export default {
   .big-font {
     position: absolute;
     left: calc(50% - 27px);
-    bottom: 24px;
+    bottom: 10px;
     border-radius: 50%;
     padding: 1px;
     background: #26a2ff;

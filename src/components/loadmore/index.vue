@@ -89,7 +89,6 @@ export default {
           obj = Object.assign(obj, JSON.parse(`{"${this.keys[index]}": "${value}"}`))
         })
       }
-      console.log('obj: ', obj)
 
       return obj
     },

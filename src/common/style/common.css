@@ -9,10 +9,19 @@ h1 {
   line-height: 2em;
 }
 
+p {
+  margin: 0;
+}
+
 .iconfont {
   font-size: 20px;
 }
 
 @media (min-device-pixel-ratio: 2) {
 
+}
+
+/* vux 样式全局修改 */
+.vux-popup-dialog {
+  overflow-y: auto !important;
 }

@@ -32,24 +32,20 @@ export default {
     type: {
       type: String,
       default: 'default',
-      validator (value) {
-        return [
-          'primary',
-          'danger',
-          'default'
-        ].indexOf(value) > -1
-      }
+      validator: (value) => [
+        'primary',
+        'danger',
+        'default'
+      ].indexOf(value) > -1
     },
     size: {
       type: String,
       default: 'normal',
-      validator (value) {
-        return [
-          'large',
-          'normal',
-          'small'
-        ].indexOf(value) > -1
-      }
+      validator: (value) => [
+        'large',
+        'normal',
+        'small'
+      ].indexOf(value) > -1
     }
   },
   methods: {

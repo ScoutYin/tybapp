@@ -90,10 +90,13 @@ export default {
       flex: 1;
     }
   }
-
-  .is-fixed {
-    position: fixed 0 0 * 0;
-    z-index: 2001;
-  }
+}
+.l-header.is-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  z-index: 2001;
 }
 </style>

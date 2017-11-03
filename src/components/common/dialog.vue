@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import LMask from 'components/common/mask'
+import LMask from './mask'
 export default {
   components: {
     LMask

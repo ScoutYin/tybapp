@@ -6,20 +6,18 @@
         {{ item.title }}
       </div>
     </div>
-    <l-loadmore :top-load-method="loadmore" ref="loadmore">
-      <div v-for="(item, index) in gridDatas"  :key="index">123</div>
-    </l-loadmore>
+    <l-button @click="clicked">123</l-button>
   </l-main-layout>
 </template>
 
 <script>
 import LMainLayout from 'components/layout/mainLayout'
-import LLoadmore from 'components/loadmore'
+import LButton from 'components/common/button'
 export default {
   name: '',
   components: {
     LMainLayout,
-    LLoadmore
+    LButton
   },
   data () {
     return {
@@ -30,7 +28,8 @@ export default {
         { title: '我要求职', src: '/', path: '/recruitment/jobHunting' },
         { title: '我要买货', src: '/', path: '' },
         { title: '我要卖货', src: '/', path: '' }
-      ]
+      ],
+      show: false
     }
   },
   methods: {
@@ -45,6 +44,10 @@ export default {
       setTimeout(() => {
         this.$refs.loadmore.onTopLoaded()
       }, 1000)
+    },
+    clicked () {
+      console.log('clicked.')
+      this.show = true
     }
   }
 }

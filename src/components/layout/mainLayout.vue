@@ -53,7 +53,7 @@ export default {
     },
     fixed: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data () {
@@ -63,15 +63,8 @@ export default {
     }
   },
   created () {
-    if (this.title) {
-      // this.headerTitle = this.$t(this.title)
-      this.headerTitle = this.title
-    }
-    // this.headerTitle = this.$t(this.headerTitle)
-
-    if (this.search) {
-      this.hideTitle = true
-    }
+    this.headerTitle = this.title || this.$route.name
+    this.hideTitle = this.search || false
   },
   methods: {
     goBack () {

@@ -3,7 +3,7 @@
     <div v-if="cartList.length === 0" class="cart-empty-tip">
       <l-part-line text="购物车为空"></l-part-line>
     </div>
-    <mt-cell v-for="(item, index) in cartList" :key="index">{{ item }}</mt-cell>
+    <div v-for="(item, index) in cartList" :key="index">{{ item }}</div>
   </l-main-layout>
 </template>
 

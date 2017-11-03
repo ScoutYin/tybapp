@@ -5,22 +5,24 @@
     </keep-alive>
     <router-view v-if="!$route.meta.keepAlive"></router-view>
 
-    <mt-popup
+    <popup
       v-model="loginVisible"
-      position="bottom"
+      height="100%"
       class="popup-container">
       <login-view></login-view>
-    </mt-popup>
+    </popup>
   </div>
 </template>
 
 <script>
 // import { mapGetters } from 'vuex'
 import LoginView from 'views/login/login'
+import { Popup } from 'vux'
 export default {
   name: 'app',
   components: {
-    LoginView
+    LoginView,
+    Popup
   },
   computed: {
     loginVisible: {
@@ -63,8 +65,7 @@ export default {
   margin: 0;
   padding: 0;
   .popup-container {
-    width: 100%;
-    height: 100vh;
+    overflow: hidden;
   }
   .icon {
     width: 1.3em;

@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="login-container">
-    <l-header fixed :title="headerTitle">
+    <l-header :title="headerTitle">
       <l-button slot="left" icon="guanbi1" @click.native="close"></l-button>
     </l-header>
     <div class="main">
@@ -80,13 +80,12 @@ export default {
 <style lang="scss">
 .login-container {
   background-color: #efefef;
-  height: 100vh;
+  overflow: hidden;
   .main {
-    position: absolute;
-    top: 44px;
-    width: 100%;
+    position: relative;
+    background-color: inherit;
     height: 100%;
-    padding: 10px;
+    width: 100%;
   }
 }
 </style>
