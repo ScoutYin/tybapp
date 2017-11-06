@@ -7,16 +7,14 @@
           class="action-block"
           :style="{ height: `${topDistance}px`, marginTop: `${-topDistance}px` }">
         <slot name="top-block">
-          <svg class="icon"
+          <l-icon class="icon"
+            :icon="iconName"
             :class="{
               'icon-arrow': topStatus === 'pull',
               'icon-arrow': topStatus === 'drop',
               'icon-loading': topStatus === 'loading',
               'icon-complete': topStatus === 'complete'
-            }"
-            aria-hidden="true">
-            <use :xlink:href="iconName"></use>
-          </svg>
+            }"></l-icon>
           <span class="default-text">{{ topText }}</span>
         </slot>
       </div>
@@ -94,10 +92,10 @@ export default {
     },
     iconName () {
       let iconNames = {
-        'pull': '#icon-pulldown',
-        'drop': '#icon-pulldown',
-        'loading': `#icon-loading-${this.loadingType}`,
-        'complete': '#icon-complete'
+        'pull': 'icon-pulldown',
+        'drop': 'icon-pulldown',
+        'loading': `icon-loading-${this.loadingType}`,
+        'complete': 'icon-complete'
       }
 
       return this.topStatus ? iconNames[this.topStatus] : ''

@@ -1,7 +1,10 @@
 <template>
   <div class="main-layout-container">
     <l-header :fixed="fixed">
-      <l-button icon="left" slot="left" @click.native="goBack" v-if="back">返回</l-button>
+      <l-button slot="left" @click.native="goBack" v-if="back">
+        <l-icon slot="icon" icon="icon-left"></l-icon>
+        <span>返回</span>
+      </l-button>
       <div slot="center" v-if="search" @click="toSearch">
         点我搜索
       </div>
@@ -24,14 +27,12 @@
 
 <script>
 import LHeader from 'components/header'
-import LButton from 'components/common/button'
 import LLoadmore from 'components/loadmore'
 
 export default {
   name: 'LMainLayout',
   components: {
     LHeader,
-    LButton,
     LLoadmore
   },
   props: {

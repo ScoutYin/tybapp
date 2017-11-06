@@ -16,12 +16,10 @@
 </template>
 
 <script>
-import LButton from '../common/button'
 
 export default {
   name: 'LMintHeader',
   components: {
-    LButton
   },
   props: {
     fixed: Boolean,

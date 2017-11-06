@@ -30,23 +30,23 @@
 
     <div class="bottom-bar">
       <div class="item-shop item-common">
-        <i class="iconfont icon-dianpu"></i>
+        <l-icon icon="icon-dianpu"></l-icon>
         <div class="title">店铺</div>
       </div>
       <div class="line"></div>
       <div class="item-fav item-common" v-permission-click="addFav">
-        <i class="iconfont icon-biaoxing"></i>
+        <l-icon icon="icon-biaoxing"></l-icon>
         <div class="title">收藏</div>
       </div>
       <div class="line"></div>
       <div class="item-cart" v-permission-click="addGoods">
-        <i class="iconfont icon-gouwuche"></i>
+        <l-icon icon="icon-gouwuche"></l-icon>
         <span class="title">加入购物车</span>
       </div>
     </div>
 
     <div class="cart" v-permission-click="toCart">
-      <i class="iconfont icon-gouwuche"></i>
+      <l-icon icon="icon-gouwuche"></l-icon>
     </div>
   </div>
 </template>
@@ -182,6 +182,9 @@ export default {
       background-color: #f74f0f;
       color: white;
       font-weight: 500;
+      .title {
+        vertical-align: super;
+      }
     }
   }
 
@@ -193,7 +196,7 @@ export default {
     background-color: rgba(240, 255, 255, .7);
     border: 1px solid $line-color;
     border-radius: 50%;
-    padding: 6px 7.2px;
+    padding: 7px 7.6px 5px;
     .icon-gouwuche {
       font-size: 20px;
     }

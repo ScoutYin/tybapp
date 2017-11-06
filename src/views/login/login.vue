@@ -1,7 +1,9 @@
 <template lang="html">
   <div class="login-container">
     <l-header :title="headerTitle">
-      <l-button slot="left" icon="guanbi1" @click.native="close"></l-button>
+      <l-button slot="left" @click.native="close">
+        <l-icon slot="icon" icon="icon-guanbi1"></l-icon>
+      </l-button>
     </l-header>
     <div class="main">
       <l-login-panel @commit="login" v-if="isLogin" ref="login" :data="loginFormData">

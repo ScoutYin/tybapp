@@ -6,9 +6,10 @@
 
     <l-tabbar v-model="selected">
       <l-tabbar-item v-for="(item, index) in tabs" :key="index" @click.native="toPath(item.path)">
-        <svg slot="icon" :class="['icon', item.id === 2 ? 'big-font' : 'common-font']" aria-hidden="true">
+        <!-- <svg slot="icon" :class="['icon', item.id === 2 ? 'big-font' : 'common-font']" aria-hidden="true">
           <use :xlink:href="`#${item.icon}`"></use>
-        </svg>
+        </svg> -->
+        <l-icon slot="icon" :icon="item.icon" :class="['icon', item.id === 2 ? 'big-font' : 'common-font']"></l-icon>
         <span class="">{{ item.title }}</span>
       </l-tabbar-item>
     </l-tabbar>

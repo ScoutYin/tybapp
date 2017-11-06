@@ -7,29 +7,34 @@
       </div>
     </div>
     <div class="list">
-      <mt-cell :title="item.title"
+      <l-cell :title="item.title"
         :icon="item.icon"
         :value="item.value"
         v-for="(item, index) in list"
         :key="index"
+        is-link
         @click.native="toPath(item.path)">
-      </mt-cell>
+        <l-icon slot="slot" :icon="item.icon"></l-icon>
+      </l-cell>
     </div>
   </l-main-layout>
 </template>
 
 <script>
 import LMainLayout from 'components/layout/mainLayout'
+import LCell from 'components/common/cell'
+
 export default {
   name: 'Mine',
   components: {
-    LMainLayout
+    LMainLayout,
+    LCell
   },
   data () {
     return {
       list: [
-        { title: '我的收藏', icon: '', path: '/mine/myfav' },
-        { title: '设置', icon: '', path: '/mine/settings' }
+        { title: '我的收藏', icon: '', value: '123', path: '/mine/myfav' },
+        { title: '设置', icon: 'icon-shezhi', path: '/mine/settings' }
       ]
     }
   },

@@ -1,19 +1,28 @@
 <template lang="html">
   <l-main-layout class="settings-container" back>
-    <mt-cell v-for="item in items" :title="item.title"></mt-cell>
+    <div class="list">
+      <l-cell :title="item.title"
+        v-for="(item, index) in items"
+        :key="index">
+      </l-cell>
+    </div>
     <div>
-      <mt-button size="large" @click.native="logout" v-if="isLogin">退出登录</mt-button>
+      <l-button size="large" @click.native="logout" v-if="isLogin">退出登录</l-button>
     </div>
   </l-main-layout>
 </template>
 
 <script>
 import LMainLayout from 'components/layout/mainLayout'
+import LButton from 'components/common/button'
+import LCell from 'components/common/cell'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Settings',
   components: {
-    LMainLayout
+    LMainLayout,
+    LButton,
+    LCell
   },
   computed: {
     ...mapGetters([

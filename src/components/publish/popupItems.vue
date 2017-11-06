@@ -3,9 +3,7 @@
     <div class="item-wrapper"
       v-for="(item, index) in items"
       :key="index">
-      <svg class="icon" aria-hidden="true">
-        <use :xlink:href="`#${item.icon}`"></use>
-      </svg>
+      <l-icon :icon="item.icon"></l-icon>
       <p class="label">{{ item.title }}</p>
     </div>
   </div>

@@ -1,26 +1,27 @@
 <template>
   <l-main-layout class="message-container">
     <div class="list">
-      <mt-cell :title="item.title"
+      <l-cell :title="item.title"
         :value="item.value"
         v-for="(item, index) in list"
         :key="index"
         @click.native="toPath(item.path)"
         class="message-cell">
-        <svg slot="icon" class="icon" aria-hidden="true">
-          <use :xlink:href="`#${item.icon}`"></use>
-        </svg>
-      </mt-cell>
+        <l-icon slot="icon" :icon="item.icon"></l-icon>
+      </l-cell>
     </div>
   </l-main-layout>
 </template>
 
 <script>
 import LMainLayout from 'components/layout/mainLayout'
+import LCell from 'components/common/cell'
+
 export default {
   name: 'Message',
   components: {
-    LMainLayout
+    LMainLayout,
+    LCell
   },
   data () {
     return {

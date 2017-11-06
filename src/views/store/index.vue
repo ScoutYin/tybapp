@@ -48,9 +48,7 @@
       <tab-item @on-item-click="onItemClick">渔货</tab-item>
     </tab> -->
     <div class="to-top" v-show="isTabTop" @click="toTop">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-dingbu"></use>
-      </svg>
+      <l-icon icon="icon-dingbu"></l-icon>
     </div>
   </div>
 </template>

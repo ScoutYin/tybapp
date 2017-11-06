@@ -11,10 +11,12 @@ import 'common/style/normalize.css'
 import 'common/style/common.css'
 import store from './store'
 import directives from './directives'
+import commonComponents from 'components/common'
 
 console.log('i18n: ', VueI18n)
 
 Vue.use(Mint)
+Vue.use(commonComponents)
 // Vue.use(store)
 
 Vue.config.productionTip = false

@@ -8,12 +8,8 @@
     }]"
     @click="handleClick"
     :disabled="disabled">
-    <span class="l-button-icon" v-if="icon || $slots.icon">
+    <span class="l-button-icon" v-if="$slots.icon">
       <slot name="icon">
-        <svg class="icon" aria-hidden="true">
-          <use :xlink:href="`#icon-${icon}`"></use>
-        </svg>
-        <!-- <i v-if="icon" class="iconfont" :class="'icon-' + icon"></i> -->
       </slot>
     </span>
     <label class="l-button-text"><slot></slot></label>
@@ -28,7 +24,6 @@ export default {
     disabled: Boolean,
     plain: Boolean,
     nativeType: String,
-    icon: String,
     type: {
       type: String,
       default: 'default',
