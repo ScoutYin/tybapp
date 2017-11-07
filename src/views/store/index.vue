@@ -229,9 +229,6 @@ export default {
 @import '../../common/style/var.scss';
 .store-container {
   .main {
-    // .mint-swipe {
-    //   height: 17.5vh;
-    // }
     .hot {
       background: white;
       margin-bottom: 15px;

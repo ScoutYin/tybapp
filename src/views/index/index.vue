@@ -110,34 +110,6 @@ export default {
     margin-bottom: 20px;
   }
 
-  .mint-tab-item-label {
-    font-size: 12px;
-  }
-
-  .popup-wrapper {
-    width: 100%;
-    height: 100px;
-    background-color: $backgroud-color;
-    .mint-tabbar {
-      padding-top: 15px;
-      background-image: none;
-      height: 100%;
-      .common-font {
-        font-size: 28px;
-        color: $default-color;
-      }
-      .mint-tab-item-label {
-        font-size: 16px;
-        line-height: 2em;
-        color: $default-color;
-      }
-    }
-  }
-
-  .mint-tab-item.is-selected {
-    background-color: inherit;
-  }
-
   .big-font {
     position: absolute;
     left: calc(50% - 27px);

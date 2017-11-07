@@ -1,31 +1,34 @@
-<template lang="html">
-  <div class="mint-search">
-    <div class="mint-searchbar">
+<template>
+  <div class="l-search">
+    <div class="l-search-header">
       <!-- 增加一个slot，来提供返回功能 -->
-      <div class="is-left">
-        <slot name="left"></slot>
+      <div class="is-left" v-if="canBack">
+        <slot name="left">
+          <l-icon icon="icon-left"></l-icon>
+        </slot>
       </div>
-      <div class="mint-searchbar-inner">
-        <i class="mintui mintui-search"></i>
+      <div class="l-searchbar-inner">
+        <slot name="icon">
+          <l-icon icon="icon-sousuo"></l-icon>
+        </slot>
         <input
         ref="input"
-        @click="visible = true"
         type="search"
         v-model="currentValue"
         :placeholder="placeholder"
-        class="mint-searchbar-core">
+        class="l-searchbar-core">
+        <l-icon
+          class="l-searchbar-cancel"
+          v-if="visible"
+          @click.native="clear"
+          icon="icon-guanbi1">
+        </l-icon>
       </div>
-      <a
-        class="mint-searchbar-cancel"
-        @click="onCancel"
-        v-show="visible"
-        v-text="cancelText">
-      </a>
     </div>
-    <div class="mint-search-list" v-show="show || currentValue">
-      <div class="mint-search-list-warp">
+    <div class="l-search-list" v-show="showList || currentValue">
+      <div class="l-search-list-warp">
         <slot>
-          <x-cell v-for="(item, index) in result" :key="index" :title="item"></x-cell>
+          <!-- <x-cell v-for="(item, index) in result" :key="index" :title="item"></x-cell> -->
         </slot>
       </div>
     </div>
@@ -33,7 +36,7 @@
 </template>
 
 <script>
-import XCell from 'mint-ui/packages/cell/index.js'
+
 export default {
   name: 'LSearch',
   data () {
@@ -42,10 +45,16 @@ export default {
       currentValue: this.value
     }
   },
-  components: { XCell },
+  components: {},
   watch: {
     currentValue (val) {
       this.$emit('input', val)
+
+      if (val) {
+        this.visible = true
+      } else {
+        this.visible = false
+      }
     },
     value (val) {
       this.currentValue = val
@@ -54,7 +63,11 @@ export default {
   props: {
     value: String,
     autofocus: Boolean,
-    show: Boolean,
+    showList: Boolean,
+    canBack: {
+      type: Boolean,
+      default: true
+    },
     cancelText: {
       default: '取消'
     },
@@ -64,11 +77,9 @@ export default {
     result: Array
   },
   methods: {
-    // 上抛一个cancel事件
-    onCancel () {
-      this.visible = false
+    clear () {
       this.currentValue = ''
-      this.$emit('cancel')
+      this.visible = false
     }
   },
   mounted () {
@@ -78,15 +89,39 @@ export default {
 </script>
 
 <style lang="scss">
-// css直接采用mint-ui的
-.mint-search {
-  .mint-searchbar {
-    .mint-searchbar-inner {
-      height: 20px;
-      .mint-searchbar-core {
-        margin-left: 5px;
+.l-search {
+  background-color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .l-search-header {
+    display: flex;
+    height: 40px;
+    padding: 10px;
+    background: #eee;
+    .is-left {
+      text-align: left;
+      width: 30px;
+    }
+    .l-searchbar-inner {
+      display: flex;
+      flex: 1;
+      background: white;
+      margin-right: 10px;
+      .icon {
+        margin: auto 8px;
+        font-size: 10px;
+      }
+      input {
+        border: none;
+        font-size: 13px;
+        flex: 1;
+        outline: none;
       }
     }
+  }
+  .l-search-list {
+    flex: 1;
   }
 }
 </style>

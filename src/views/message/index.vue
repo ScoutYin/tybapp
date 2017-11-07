@@ -44,9 +44,6 @@ export default {
 <style lang="scss">
 .message-container {
   .message-cell {
-    .mint-cell-text {
-      vertical-align: text-top;
-    }
     .iconfont {
       font-size: 22px;
     }

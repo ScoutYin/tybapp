@@ -1,7 +1,7 @@
 <template>
   <l-search v-model="value" class="search-container" autofocus :result="filterResult">
     <div slot="left" @click="back">
-      <i class="iconfont icon-left"></i>
+      <l-icon icon="icon-left"></l-icon>
     </div>
   </l-search>
 </template>

@@ -6,7 +6,7 @@
         <span>返回</span>
       </l-button>
       <div slot="center" v-if="search" @click="toSearch">
-        点我搜索
+        <l-search-bar placeholder="搜索"></l-search-bar>
       </div>
       <h1 slot="center" class="l-header-title" v-text="headerTitle" v-if="!hideTitle"></h1>
     </l-header>
@@ -28,12 +28,14 @@
 <script>
 import LHeader from 'components/header'
 import LLoadmore from 'components/loadmore'
+import LSearchBar from 'components/search/searchBar'
 
 export default {
   name: 'LMainLayout',
   components: {
     LHeader,
-    LLoadmore
+    LLoadmore,
+    LSearchBar
   },
   props: {
     back: {

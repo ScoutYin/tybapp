@@ -18,7 +18,7 @@
 <script>
 
 export default {
-  name: 'LMintHeader',
+  name: 'LHeader',
   components: {
   },
   props: {
