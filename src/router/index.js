@@ -7,13 +7,13 @@ import IndexHome from 'views/index/home'
 import IndexStore from 'views/store'
 import IndexMessage from 'views/message'
 import IndexMine from 'views/mine'
-import RecruitmentRecruiting from 'views/recruitment/recruiting'
-import RecruitmentJobHunting from 'views/recruitment/jobHunting'
+
 import Search from 'views/search'
-import Settings from 'views/mine/settings'
-import MineMyfav from 'views/mine/myfav'
-import StoreDetail from 'views/store/detail'
-import StoreCart from 'views/store/cart'
+
+// import MineMyfav from 'views/mine/myfav'
+import Recruitment from './recruitment'
+import Store from './store'
+import Mine from './mine'
 
 Vue.use(Router)
 
@@ -51,34 +51,10 @@ let routes = [
     path: '/search',
     component: Search,
     name: 'Search'
-  }, {
-    path: '/recruitment/recruiting',
-    component: RecruitmentRecruiting,
-    name: 'Recruiting'
-  }, {
-    path: '/recruitment/jobHunting',
-    component: RecruitmentJobHunting,
-    name: 'JobHunting'
-  }, {
-    path: '/mine/settings',
-    component: Settings,
-    name: 'Settings'
-  }, {
-    path: '/store/detail',
-    component: StoreDetail,
-    name: 'StoreDetail'
-  }, {
-    path: '/store/cart',
-    component: StoreCart,
-    name: 'StoreCart'
-  }, {
-    path: '/mine/myfav',
-    component: MineMyfav,
-    name: 'MineMyfav',
-    meta: {
-      needLogin: true
-    }
-  }
+  },
+  ...Mine,
+  ...Recruitment,
+  ...Store
 ]
 
 let router = new Router({

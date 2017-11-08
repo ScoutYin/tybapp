@@ -8,13 +8,12 @@
     </div>
     <div class="list">
       <l-cell :title="item.title"
-        :icon="item.icon"
         :value="item.value"
         v-for="(item, index) in list"
         :key="index"
         is-link
         @click.native="toPath(item.path)">
-        <l-icon slot="slot" :icon="item.icon"></l-icon>
+        <l-icon slot="icon" :icon="item.icon"></l-icon>
       </l-cell>
     </div>
   </l-main-layout>
@@ -33,7 +32,8 @@ export default {
   data () {
     return {
       list: [
-        { title: '我的收藏', icon: '', value: '123', path: '/mine/myfav' },
+        { title: '我的收藏', icon: 'icon-xihuan', value: '123', path: '/mine/myfav' },
+        { title: '我的购物车', icon: 'icon-gouwche', path: '/store/cart' },
         { title: '设置', icon: 'icon-shezhi', path: '/mine/settings' }
       ]
     }

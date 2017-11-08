@@ -22,7 +22,7 @@ export default {
 .l-search-bar {
   // background: white;
   text-align: center;
-  display: flex;
+  // display: flex;
   .icon {
     margin: auto 8px;
     font-size: 10px;

@@ -5,37 +5,32 @@
 </template>
 
 <script>
+
 export default {
   name: 'LForm',
   componentName: 'LForm',
-
   props: {
     model: Object,
     labelSuffix: {
       type: String,
       default: ''
+    },
+    labelWidth: {
+      type: String,
+      default: '80'
     }
   },
   data () {
     return {
-      field: []
+      fields: []
     }
   },
   created () {
-    this.$on('lform.addField', (field) => {
-      if (field) {
-        this.fields.push(field)
-      }
-    })
-
-    this.$on('lform.removeField', (field) => {
-      if (field.prop) {
-        this.fields.splice(this.fields.indexOf(field.prop), 1)
-      }
-    })
+    console.log('child: ', this)
   },
-  method: {
+  methods: {
     resetFields () {
+      console.log('fields: ', this.fields)
       this.fields.forEach(field => {
         field.resetField()
       })

@@ -49,15 +49,16 @@ export default {
     line-height: 1;
     width: 100%;
     align-items: center;
-    vertical-align: middle;
-
     .l-cell-title {
       flex: 1;
-      .title {
-
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      .l-cell-icon {
+        margin-right: 5px;
       }
-      .label {
-
+      .l-cell-text {
+        
       }
     }
     .l-cell-value {
@@ -78,6 +79,8 @@ export default {
       content: '';
       position: absolute;
       top: 50%;
+      // 稍微加点补偿
+      margin-top: 1px;
       right: 20px;
       border: solid 2px #c8c8cd;
       border-bottom-width: 0;

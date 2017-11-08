@@ -7,7 +7,7 @@
           <l-icon icon="icon-left"></l-icon>
         </slot>
       </div>
-      <div class="l-searchbar-inner">
+      <div class="l-search-bar">
         <slot name="icon">
           <l-icon icon="icon-sousuo"></l-icon>
         </slot>
@@ -16,9 +16,9 @@
         type="search"
         v-model="currentValue"
         :placeholder="placeholder"
-        class="l-searchbar-core">
+        class="l-search-input">
         <l-icon
-          class="l-searchbar-cancel"
+          class="l-search-clear"
           v-if="visible"
           @click.native="clear"
           icon="icon-guanbi1">
@@ -97,26 +97,28 @@ export default {
   .l-search-header {
     display: flex;
     height: 40px;
-    padding: 10px;
+    padding: 8px 10px;
     background: #eee;
     .is-left {
       text-align: left;
       width: 30px;
     }
-    .l-searchbar-inner {
+    .l-search-bar {
       display: flex;
       flex: 1;
       background: white;
       margin-right: 10px;
+      border-radius: 4px;
       .icon {
         margin: auto 8px;
         font-size: 10px;
       }
-      input {
+      .l-search-input {
         border: none;
         font-size: 13px;
         flex: 1;
         outline: none;
+        margin-right: 5px;
       }
     }
   }

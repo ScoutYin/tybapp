@@ -7,10 +7,14 @@
     </l-header>
     <div class="main">
       <l-login-panel @commit="login" v-if="isLogin" ref="login" :data="loginFormData">
-        <div @click="toRegister">注册</div>
+        <div @click="toRegister" class="to-register">
+           <label @click="toRegister">去注册</label>
+        </div>
       </l-login-panel>
-      <l-register-panel v-else>
-        <div @click="toLogin">登录</div>
+      <l-register-panel @commit="register" :data="registerFormData" ref="register" v-else>
+        <div class="to-login">
+          <label @click="toLogin">去登录</label>
+        </div>
       </l-register-panel>
     </div>
   </div>
@@ -40,10 +44,8 @@ export default {
   data () {
     return {
       isLogin: true,
-      loginFormData: {
-        username: '',
-        password: ''
-      }
+      loginFormData: {},
+      registerFormData: {}
     }
   },
   methods: {
@@ -58,11 +60,15 @@ export default {
       try {
         await this.$store.dispatch('userLogin', params).then(() => {
           // 如果登陆成功，登陆标志置为true，储存token，回调函数if need
+          this.resetData()
           this.$store.dispatch('loginSuccess')
         })
       } catch (err) {
 
       }
+    },
+    async register (params) {
+      console.log('register: ', params)
     },
     toRegister () {
       this.isLogin = false
@@ -73,7 +79,8 @@ export default {
     resetData () {
       this.isLogin = true
       // 还需要清空输入框
-      this.$refs.login.resetFields()
+      this.loginFormData = {}
+      this.registerFormData = {}
     }
   }
 }
@@ -88,6 +95,10 @@ export default {
     background-color: inherit;
     height: 100%;
     width: 100%;
+    .to-register {
+      text-align: right;
+      color: #777;
+    }
   }
 }
 </style>

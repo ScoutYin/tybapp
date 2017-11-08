@@ -1,6 +1,9 @@
 <template>
   <div class="l-form-item">
-    <label :for="prop" v-if="label || $slots.label">
+    <label :for="prop"
+           v-if="label || $slots.label"
+           :style="`width: ${$parent.labelWidth}px;`"
+           class="l-form-label">
       <slot name="label">{{ label + form.labelSuffix }}</slot>
     </label>
     <div class="l-form-item-content">
@@ -14,11 +17,10 @@
 </template>
 
 <script>
-import emitter from '@/mixins/emitter'
+
 export default {
   name: 'LFormItem',
   componentName: 'LFormItem',
-  mixins: [emitter],
   props: {
     prop: String,
     label: String
@@ -34,37 +36,29 @@ export default {
   },
   methods: {
     resetField () {
-      // let model = this.form.model
-      // let value = this.fieldValue
-      // let path = this.prop
-
+      console.log('this.prop: ', this.prop)
     }
   },
   mounted () {
-    if (this.prop) {
-      this.dispatch('LForm', 'lform.addField', [this])
-
-      let initialValue = this.fieldValue
-      if (Array.isArray(initialValue)) {
-        initialValue = [].concat(initialValue)
-      }
-      Object.defineProperty(this, 'initialValue', {
-        value: initialValue
-      })
-    }
   },
   beforeDestroy () {
-    this.dispatch('LForm', 'lform.removeField', [this])
   }
 }
 </script>
 
 <style lang="scss">
 .l-form-item {
+  display: flex;
+  align-items: center;
+  .l-form-label {
+    text-align: right;
+    margin-right: 8px;
+  }
   .l-form-item-content {
+    flex-grow: 1;
     &>input {
       border: none;
-      border-bottom: 1px solid #aaa;
+      outline: none;
     }
   }
 }
