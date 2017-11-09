@@ -1,5 +1,6 @@
-import MineMyfav from 'views/mine/myfav'
+import Myfav from 'views/mine/myfav'
 import Settings from 'views/mine/settings'
+import Order from 'views/mine/order'
 
 export default [
   {
@@ -8,8 +9,15 @@ export default [
     name: 'Settings'
   }, {
     path: '/mine/myfav',
-    component: MineMyfav,
+    component: Myfav,
     name: 'MineMyfav',
+    meta: {
+      needLogin: true
+    }
+  }, {
+    path: '/mine/order',
+    component: Order,
+    name: 'Order',
     meta: {
       needLogin: true
     }
