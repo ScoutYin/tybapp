@@ -65,7 +65,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss">、
 .l-order-item {
   display: flex;
   flex-direction: column;
