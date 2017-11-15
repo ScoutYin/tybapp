@@ -1,3 +1,4 @@
+![](https://travis-ci.org/lyh2668/tybapp.svg?branch=master)
 # 淘渔吧APP
 
 > 采用vue + vuex + axios + cordova（准备构建IOS及Android两个版本） + mint-ui(vux)(正在比对两款UI插件各自比较精华的部分，后续考虑剥离一些组件出来自用）  
