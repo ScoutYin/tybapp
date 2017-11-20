@@ -8,7 +8,7 @@ export default {
   dev: {
     env: devEnv,
     port: process.env.PORT || 3000,
-    baseUrl: 'http://localhost:3000/api'
+    baseUrl: 'http://www.taoyu58.com/api'
     // baseUrl: 'http://192.168.12.140:3000/api'
   }
 }

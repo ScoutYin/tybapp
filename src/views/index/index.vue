@@ -24,7 +24,6 @@
 </template>
 
 <script>
-// let imgSrc = '/static/timg.jpg'
 import { Popup } from 'vux'
 import LPopupItems from 'components/publish/popupItems'
 import LTabbar from 'components/tabbar/tabbar'

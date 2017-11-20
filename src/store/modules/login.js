@@ -1,4 +1,4 @@
-import { login, logout } from 'api'
+import { userLogin, logout } from 'api'
 import Vue from 'vue'
 import { ToastPlugin } from 'vux'
 Vue.use(ToastPlugin)
@@ -25,7 +25,7 @@ const actions = {
     commit('HIDE_LOGIN')
   },
   userLogin: async ({ commit }, params) => {
-    await login(params).then((res) => {
+    await userLogin(params).then((res) => {
       console.log('userLogin:', res)
       if (res) {
         Vue.$vux.toast.text('登陆成功', 'middle')

@@ -4,8 +4,6 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueI18n from './i18n'
-import Mint from 'mint-ui'
-import 'mint-ui/lib/style.css'
 import 'common/style/normalize.css'
 // import './assets/iconfont/iconfont.css'
 import 'common/style/common.css'
@@ -15,7 +13,6 @@ import commonComponents from 'components/common'
 
 console.log('i18n: ', VueI18n)
 
-Vue.use(Mint)
 Vue.use(commonComponents)
 // Vue.use(store)
 
