@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "lib-flexible": "^0.3.2",
     "mint-ui": "^2.2.9",
     "qs": "^6.5.1",
     "validator": "^9.0.0",

@@ -14,9 +14,13 @@
       </swiper>
 
       <div class="hot">
-        <div v-for="(item, index) in hotItems" :key="index" class="hot-item">
+        <l-goods-top-item
+          v-for="(item, index) in hotItems"
+          :key="index"
+          class="hot-item"
+          :item="item">
           {{ item }}
-        </div>
+        </l-goods-top-item>
       </div>
 
       <tab class="tabs" :line-width="2" custom-bar-width="60px" ref="tab" v-model="tabIndex">
@@ -64,6 +68,7 @@ import { Tab, TabItem, Swiper, SwiperItem, InlineLoading } from 'vux'
 import { mapGetters } from 'vuex'
 import { getGoodsList } from 'api'
 import LGoodsItem from 'components/lists/goodsItem'
+import LGoodsTopItem from 'components/lists/goodsTopItem'
 
 const TAB_NUM = 2
 
@@ -77,6 +82,7 @@ export default {
     Swiper,
     SwiperItem,
     LGoodsItem,
+    LGoodsTopItem,
     InlineLoading
   },
   computed: {
@@ -89,25 +95,20 @@ export default {
       items: [
         {
           id: 1,
-          imgSrc: 'http://tyb.allship.cn/Uploads/Picture/2017-09-08/59b237dd62df0.jpg'
+          imgSrc: 'http://www.taoyu58.com/Uploads/Picture/2017-09-08/59b237dd62df0.jpg'
         }, {
           id: 2,
-          imgSrc: 'http://tyb.allship.cn/Uploads/Picture/2017-09-08/59b237e98a3d7.jpg'
+          imgSrc: 'http://www.taoyu58.com/Uploads/Picture/2017-09-08/59b237e98a3d7.jpg'
         }, {
           id: 3,
-          imgSrc: 'http://tyb.allship.cn/Uploads/Picture/2017-09-08/59b237f4a1620.jpg'
+          imgSrc: 'http://www.taoyu58.com/Uploads/Picture/2017-09-08/59b237f4a1620.jpg'
         }
       ],
       lists: [],
       hotItems: [
-        { id: 1 },
-        { id: 1 },
-        { id: 1 },
-        { id: 1 },
-        { id: 1 },
-        { id: 1 },
-        { id: 1 },
-        { id: 1 }
+        { id: 1, src: '', title: 'xxx', price: '100.00' },
+        { id: 1, src: '', title: 'xxx', price: '100.00' },
+        { id: 1, src: '', title: 'xxx', price: '100.00' }
       ],
       loading: false,
       canLoadmore: false,
@@ -233,10 +234,10 @@ export default {
       background: white;
       margin-bottom: 15px;
       display: flex;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: .4rem;
       .hot-item {
-        flex: 1 44%;
-        margin: 3%;
+        max-width: 30%;
       }
     }
 

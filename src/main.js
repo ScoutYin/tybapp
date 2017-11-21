@@ -9,7 +9,9 @@ import 'common/style/normalize.css'
 import 'common/style/common.css'
 import store from './store'
 import directives from './directives'
+import filters from './filters'
 import commonComponents from 'components/common'
+import 'lib-flexible'
 
 console.log('i18n: ', VueI18n)
 
@@ -25,6 +27,7 @@ new Vue({
   store,
   VueI18n,
   directives,
+  filters,
   template: '<App/>',
   components: { App }
 })
