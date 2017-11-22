@@ -102,6 +102,7 @@ export default {
     .is-left {
       text-align: left;
       width: 30px;
+      margin: auto;
     }
     .l-search-bar {
       display: flex;

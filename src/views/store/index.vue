@@ -5,30 +5,20 @@
       loadmore
       @load-top="loadTop"
       ref="main">
-      <div slot="title">123</div>
-
       <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">
         <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in items" :key="index">
           <img :src="item.imgSrc" width="100%" height="100%">
         </swiper-item>
       </swiper>
 
-      <div class="hot">
-        <l-goods-top-item
-          v-for="(item, index) in hotItems"
-          :key="index"
-          class="hot-item"
-          :item="item">
-          {{ item }}
-        </l-goods-top-item>
-      </div>
+      <l-goods-list class="hot"></l-goods-list>
 
-      <tab class="tabs" :line-width="2" custom-bar-width="60px" ref="tab" v-model="tabIndex">
+      <!-- <tab class="tabs" :line-width="2" custom-bar-width="60px" ref="tab" v-model="tabIndex">
         <tab-item  @on-item-click="onItemClick">渔船</tab-item>
         <tab-item  @on-item-click="onItemClick">鱼货</tab-item>
-      </tab>
+      </tab> -->
 
-      <div class="store-list" ref="list"
+      <!-- <div class="store-list" ref="list"
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="loading"
         infinite-scroll-distance="10">
@@ -39,21 +29,20 @@
           class="goods-item"
           @click.native="toGoodsDetail(item.id)">
         </l-goods-item>
-      </div>
-      <div class="loadmore-bottom-text">
+      </div> -->
+      <!-- <div class="loadmore-bottom-text">
         <l-part-line :text="canLoadmore ? '加载更多' : '没有可加载的'">
           <inline-loading slot="left" v-if="canLoadmore" class="inline-loading"></inline-loading>
         </l-part-line>
-      </div>
-      
+      </div> -->
     </l-main-layout>
     <!-- <tab class="tabs-top" :line-width="2" custom-bar-width="60px" v-show="isTabTop" v-model="tabIndex">
       <tab-item @on-item-click="onItemClick">渔船</tab-item>
       <tab-item @on-item-click="onItemClick">渔货</tab-item>
     </tab> -->
-    <div class="to-top" v-show="isTabTop" @click="toTop">
+    <!-- <div class="to-top" v-show="isTabTop" @click="toTop">
       <l-icon icon="icon-dingbu"></l-icon>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -68,7 +57,7 @@ import { Tab, TabItem, Swiper, SwiperItem, InlineLoading } from 'vux'
 import { mapGetters } from 'vuex'
 import { getGoodsList } from 'api'
 import LGoodsItem from 'components/lists/goodsItem'
-import LGoodsTopItem from 'components/lists/goodsTopItem'
+import LGoodsList from 'components/lists/goodsList'
 
 const TAB_NUM = 2
 
@@ -82,7 +71,7 @@ export default {
     Swiper,
     SwiperItem,
     LGoodsItem,
-    LGoodsTopItem,
+    LGoodsList,
     InlineLoading
   },
   computed: {
@@ -105,11 +94,6 @@ export default {
         }
       ],
       lists: [],
-      hotItems: [
-        { id: 1, src: '', title: 'xxx', price: '100.00' },
-        { id: 1, src: '', title: 'xxx', price: '100.00' },
-        { id: 1, src: '', title: 'xxx', price: '100.00' }
-      ],
       loading: false,
       canLoadmore: false,
       isTabTop: false,
@@ -120,23 +104,23 @@ export default {
     }
   },
   created () {
-    this.$nextTick(() => {
-      this.calcTabTop()
-    })
+    // this.$nextTick(() => {
+    //   this.calcTabTop()
+    // })
   },
   mounted () {
-    console.log('swipe:', this.$refs.swipe)
-    if (this.indexStoreTab.length === 0) {
-      // 这里的tab有两个，所以push两个值
-      this.resetIndexStoreTab(this.tabTop)
-    }
+    // console.log('swipe:', this.$refs.swipe)
+    // if (this.indexStoreTab.length === 0) {
+    //   // 这里的tab有两个，所以push两个值
+    //   this.resetIndexStoreTab(this.tabTop)
+    // }
 
-    // 根据Tab的个数来确定List数组的长度，方便后续遍历
-    while (this.lists.length < TAB_NUM) {
-      this.lists.push([])
-    }
+    // // 根据Tab的个数来确定List数组的长度，方便后续遍历
+    // while (this.lists.length < TAB_NUM) {
+    //   this.lists.push([])
+    // }
 
-    this.refreshLists()
+    // this.refreshLists()
   },
   methods: {
     calcTabTop () {
@@ -230,16 +214,7 @@ export default {
 @import '../../common/style/var.scss';
 .store-container {
   .main {
-    .hot {
-      background: white;
-      margin-bottom: 15px;
-      display: flex;
-      justify-content: space-between;
-      padding: .4rem;
-      .hot-item {
-        max-width: 30%;
-      }
-    }
+    .hot {}
 
     /**
     * 使用position: sticky的方式可以完成tabs标签固定的效果

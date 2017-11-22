@@ -54,7 +54,7 @@ const originalConfig = {
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
+        loaders: ['style', 'css', 'sass', 'px2rem']
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

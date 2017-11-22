@@ -30,6 +30,7 @@ export default {
   text-align: center;
   margin: 5px auto;
   width: 100%;
+  color: #888;
   &.is-selected {
     color: $default-color;
   }
@@ -37,7 +38,7 @@ export default {
 
   }
   .item-text {
-    font-size: 12px;
+    // font-size: 14PX;
   }
 }
 </style>

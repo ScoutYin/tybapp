@@ -8,7 +8,7 @@
     <div class="main">
       <l-login-panel @commit="login" v-if="isLogin" ref="login" :data="loginFormData">
         <div @click="toRegister" class="to-register">
-           <label @click="toRegister">去注册</label>
+           <label @click="toRegister">免费注册</label>
         </div>
       </l-login-panel>
       <l-register-panel @commit="register" :data="registerFormData" ref="register" v-else>

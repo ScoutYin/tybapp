@@ -1,13 +1,14 @@
 <template lang="html">
   <div class="login-panel">
-    <div class="main-header"></div>
-    <div class="input-wrapper">
-      <input class="input-username" v-model="data.username" placeholder="用户名 / 手机号码">
-    </div>
-    <div class="input-wrapper">
-      <input v-model="data.password" placeholder="密码">
-    </div>
-    <div @click="onLogin" class="btn-login">登录</div>
+    <l-form class="login-form" ref="form">
+      <l-form-item label="用户名" class="form-item">
+        <input v-model="data.username" placeholder="请输入用户名">
+      </l-form-item>
+      <l-form-item label="密码" class="form-item">
+        <input v-model="data.password" placeholder="请输入密码">
+      </l-form-item>
+    </l-form>
+    <div @click="onLogin" class="btn-login">点 我 登 录</div>
     <slot></slot>
   </div>
 </template>
@@ -46,34 +47,27 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../common/style/var.scss';
-
 .login-panel {
   margin: 10px;
   box-sizing: border-box;
-  font-size: 14px;
-  .main-header {
-    height: 150px;
-  }
-  .input-wrapper {
-    input {
-      width: 100%;
-      height: 40px;
-      border: none;
-      outline: none;
-      padding: 0 10px;
-      margin-bottom: 20px;
+  font-size: 13px;
+  .login-form {
+    background: white;
+    font-weight: 600;
+    .form-item {
+      padding: 10px 0;
+      input {
+        outline: none;
+        font-size: 12px;
+      }
     }
   }
   .btn-login {
-    font-size: 16px;
     margin: 10px 0;
-    padding: 15px;
+    padding: 10px;
     background: rgba(7, 17, 27, 0.1);
     text-align: center;
-    letter-spacing: 20px;
-    background: $default-color;
-    color: #fff;
+    border-radius: 4px;
   }
 }
 </style>
