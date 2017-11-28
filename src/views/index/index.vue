@@ -4,7 +4,7 @@
       <router-view class="tab-views"></router-view>
     </keep-alive>
 
-    <l-tabbar v-model="selected">
+    <l-tabbar v-model="selected" class="tabbar">
       <l-tabbar-item v-for="(item, index) in tabs" :key="index" @click.native="toPath(item.path)">
         <!-- <svg slot="icon" :class="['icon', item.id === 2 ? 'big-font' : 'common-font']" aria-hidden="true">
           <use :xlink:href="`#${item.icon}`"></use>
@@ -25,9 +25,9 @@
 
 <script>
 import { Popup } from 'vux'
-import LPopupItems from 'components/publish/popupItems'
+import LPopupItems from 'components/publish/popup-items'
 import LTabbar from 'components/tabbar/tabbar'
-import LTabbarItem from 'components/tabbar/tabbarItem'
+import LTabbarItem from 'components/tabbar/tabbar-item'
 
 export default {
   name: 'Index',
@@ -100,6 +100,7 @@ export default {
 <style lang="scss">
 @import '../../common/style/var.scss';
 .index-container {
+  overflow: hidden;
   .tab-views {
     position: absolute;
     width: 100%;
@@ -121,6 +122,10 @@ export default {
   }
   .common-font {
     font-size: 18px;
+  }
+  .tabbar {
+    height: 55px;
+    border-top: 1px solid #eee;
   }
 }
 </style>

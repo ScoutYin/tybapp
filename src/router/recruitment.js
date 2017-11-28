@@ -1,5 +1,5 @@
 import RecruitmentRecruiting from 'views/recruitment/recruiting'
-import RecruitmentJobHunting from 'views/recruitment/jobHunting'
+import RecruitmentJobHunting from 'views/recruitment/job-hunting'
 
 export default [
   {

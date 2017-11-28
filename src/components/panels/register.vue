@@ -19,7 +19,7 @@
 
 <script>
 import LForm from 'components/form/form'
-import LFormItem from 'components/form/formItem'
+import LFormItem from 'components/form/form-item'
 export default {
   name: 'LPanelsRegister',
   componentName: 'LPanelsRegister',

@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import LOrderItem from 'components/lists/orderItem'
-import LMainLayout from 'components/layout/mainLayout'
+import LOrderItem from 'components/lists/order-item'
+import LMainLayout from 'components/layout/main-layout'
 export default {
   name: 'MineOrder',
   components: {

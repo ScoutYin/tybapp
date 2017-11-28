@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import LMainLayout from 'components/layout/mainLayout'
-import LPartLine from 'components/common/partLine'
+import LMainLayout from 'components/layout/main-layout'
+import LPartLine from 'components/common/part-line'
 import { mapGetters } from 'vuex'
 export default {
   name: 'StoreCart',

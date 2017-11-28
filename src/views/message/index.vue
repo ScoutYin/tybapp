@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import LMainLayout from 'components/layout/mainLayout'
+import LMainLayout from 'components/layout/main-layout'
 import LCell from 'components/common/cell'
 
 export default {

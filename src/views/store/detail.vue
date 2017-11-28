@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import LMainLayout from 'components/layout/mainLayout'
+import LMainLayout from 'components/layout/main-layout'
 import LPermissionButton from 'components/permission/button'
 import { getGoodsDetail, getStoreShop } from 'api'
 import { Swiper, SwiperItem } from 'vux'

@@ -4,7 +4,7 @@
       <div class="thumb"></div>
     </div>
     <div class="section">
-      <l-cell title="我是买家" is-link></l-cell>
+      <l-cell title="我是买家" v-is-link></l-cell>
       <div class="list-wrapper">
         <div class="list-item"
              v-for="(item, index) in buyerList"
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="section">
-      <l-cell title="我是卖家" is-link></l-cell>
+      <l-cell title="我是卖家" v-is-link></l-cell>
       <div class="list-wrapper">
         <div class="list-item"
              v-for="(item, index) in sellerList"
@@ -30,7 +30,7 @@
         :value="item.value"
         v-for="(item, index) in list"
         :key="index"
-        :is-link="item.isLink"
+        v-is-link="item.isLink"
         @click.native="toPath(item.path)">
         <l-icon slot="icon" :icon="item.icon"></l-icon>
       </l-cell>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import LMainLayout from 'components/layout/mainLayout'
+import LMainLayout from 'components/layout/main-layout'
 import LCell from 'components/common/cell'
 
 export default {
@@ -58,13 +58,13 @@ export default {
       buyerList: [
         { title: '待付款', icon: 'icon-dingdan' },
         { title: '待发货', icon: 'icon-dingdan' },
-        { title: '待收获', icon: 'icon-dingdan' },
+        { title: '待收货', icon: 'icon-dingdan' },
         { title: '评价', icon: 'icon-dingdan' }
       ],
       sellerList: [
         { title: '待付款', num: 12 },
         { title: '待发货', num: 23 },
-        { title: '待收获', num: 34 },
+        { title: '待收货', num: 34 },
         { title: '评价', num: 45 }
       ]
     }

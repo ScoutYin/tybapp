@@ -7,7 +7,8 @@
         :key="index"
         class="list-item"
         :item="item"
-        :num="index + 1">
+        :num="index + 1"
+        @click.native="toDetail(item.id)">
         {{ item }}
       </l-shop-goods-top-item>
     </div>
@@ -37,9 +38,9 @@
 </template>
 
 <script>
-import LShopGoodsTopItem from '../items/shopGoodsTopItem'
-import LShopGoodsItem from '../items/shopGoodsItem'
-import LShopShipItem from '../items/shopShipItem'
+import LShopGoodsTopItem from '../items/shop-goods-top-item'
+import LShopGoodsItem from '../items/shop-goods-item'
+import LShopShipItem from '../items/shop-ship-item'
 export default {
   components: {
     LShopGoodsTopItem,
@@ -66,6 +67,12 @@ export default {
         { id: 0, src: '', title: '编号：TRA273' },
         { id: 0, src: '', title: '编号：TRA273' }
       ]
+    }
+  },
+  methods: {
+    toDetail (id) {
+      console.log('id: ', id)
+      this.$router.push({ path: `/store/detail?id=${id}` })
     }
   }
 }

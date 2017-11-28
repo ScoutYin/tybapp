@@ -51,13 +51,13 @@
  * 该页面未处理的Bug
  * 1. Tab切换的时候仍然会出现一些问题，具体的逻辑还需要稍作修改才能正常切换。
  */
-import LMainLayout from 'components/layout/mainLayout'
-import LPartLine from 'components/common/partLine'
+import LMainLayout from 'components/layout/main-layout'
+import LPartLine from 'components/common/part-line'
 import { Tab, TabItem, Swiper, SwiperItem, InlineLoading } from 'vux'
 import { mapGetters } from 'vuex'
 import { getGoodsList } from 'api'
-import LGoodsItem from 'components/lists/goodsItem'
-import LGoodsList from 'components/lists/goodsList'
+import LGoodsItem from 'components/lists/goods-item'
+import LGoodsList from 'components/lists/goods-list'
 
 const TAB_NUM = 2
 
@@ -215,7 +215,6 @@ export default {
 .store-container {
   .main {
     .hot {}
-
     /**
     * 使用position: sticky的方式可以完成tabs标签固定的效果
     * 兼容性欠佳，但是性能很优秀，比兼容onscroll的性能好很多

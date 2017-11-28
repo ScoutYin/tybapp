@@ -25,3 +25,17 @@ p {
 .vux-popup-dialog {
   overflow-y: auto !important;
 }
+
+.is-link {
+  position: absolute;
+  top: 45%;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border-color: #b7b7b7;
+  border-width: 0 2px 2px 0px;
+  border-style: solid;
+  transform: rotateZ(-45deg) translate3d(0, -50%, 0);
+  margin-right: 10px;
+}

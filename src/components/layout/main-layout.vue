@@ -28,7 +28,7 @@
 <script>
 import LHeader from 'components/header'
 import LLoadmore from 'components/loadmore'
-import LSearchBar from 'components/search/searchBar'
+import LSearchBar from 'components/search/search-bar'
 
 export default {
   name: 'LMainLayout',

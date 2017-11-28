@@ -36,7 +36,7 @@ instance.interceptors.response.use((response) => {
   console.log('response: ', response)
   if (response.status === 200) {
     let data = response.data
-    switch (data.err) {
+    switch (data.code) {
       case 1: {
         return response.data
       }

@@ -26,7 +26,6 @@ const actions = {
   },
   userLogin: async ({ commit }, params) => {
     await userLogin(params).then((res) => {
-      console.log('userLogin:', res)
       if (res) {
         Vue.$vux.toast.text('登陆成功', 'middle')
         commit('USER_LOGIN')

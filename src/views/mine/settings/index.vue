@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import LMainLayout from 'components/layout/mainLayout'
+import LMainLayout from 'components/layout/main-layout'
 import LButton from 'components/common/button'
 import LCell from 'components/common/cell'
 import { mapGetters } from 'vuex'
