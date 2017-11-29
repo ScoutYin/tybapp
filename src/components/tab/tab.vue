@@ -22,10 +22,12 @@ export default {
   computed: {
     style () {
       return {
-        transitionTimingFunction: 'cubic-bezier(0.1, 0.57, 0.1, 1)',
-        // transitionDuration: '0ms',
+        // transitionTimingFunction: 'cubic-bezier(0.1, 0.57, 0.1, 1)',
         transform: `translate(${this.translateX}px, 0px`
       }
+    },
+    listWidth () {
+      return this.$refs.list.clientWidth - window.document.body.clientWidth
     }
   },
   data () {
@@ -54,17 +56,24 @@ export default {
       console.log('start', this.startX)
     },
     handleTouchMove (event) {
-      let currentX = event.touches[0].clientX
-      console.log('this refs', this)
-      if (this.translateX <= 0) {
+      if (this.translateX <= 0 &&
+          this.translateX + this.listWidth >= 0) {
+        let currentX = event.touches[0].clientX
         this.translateX = this.lastX + currentX - this.startX
         event.preventDefault()
         event.stopPropagation()
       }
-      console.log('move', this.translateX)
+      console.log('move', this.translateX, this.listWidth)
     },
     handleTouchEnd (event) {
       console.log('end')
+      if (this.translateX > 0) {
+        this.translateX = 0
+      }
+
+      if (this.translateX + this.listWidth < 0) {
+        this.translateX = -this.listWidth
+      }
     },
     bindEvent () {
       this.$el.addEventListener('touchstart', this.handleTouchStart)
@@ -82,18 +91,23 @@ export default {
   width: 100%;
   height: 44px;
   overflow: hidden;
+  display: flex;
   .l-tab-list {
     display: flex;
+    flex-flow: row nowrap;
+    flex-shrink: 0;
     padding: 0 10px;
     .l-tab-item {
       box-sizing: border-box;
       display: block;
-      // flex: 1 1 50%;
       height: 100%;
       line-height: 44px;
       font-size: 14px;
       text-align: center;
-      margin: 0 20px;
+      padding: 0 10px;
+      &:not(:first-child) {
+        margin-left: 20px;
+      }
     }  
   }
 }

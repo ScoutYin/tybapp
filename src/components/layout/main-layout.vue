@@ -56,7 +56,7 @@ export default {
     },
     fixed: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   data () {
@@ -102,6 +102,7 @@ export default {
     position: relative;
     background-color: inherit;
     height: calc(100% - 40px);
+    top: 44px;
     width: 100%;
     overflow-y: scroll;
     &::-webkit-scrollbar {

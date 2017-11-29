@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="login-container">
-    <l-header :title="headerTitle">
+    <l-header :title="headerTitle" fixed>
       <l-button slot="left" @click.native="close">
         <l-icon slot="icon" icon="icon-guanbi1"></l-icon>
       </l-button>
@@ -92,6 +92,7 @@ export default {
   overflow: hidden;
   .main {
     position: relative;
+    top: 44px;
     background-color: inherit;
     height: 100%;
     width: 100%;

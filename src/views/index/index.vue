@@ -124,6 +124,10 @@ export default {
     font-size: 18px;
   }
   .tabbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     height: 55px;
     border-top: 1px solid #eee;
   }

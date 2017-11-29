@@ -95,6 +95,6 @@ export default {
   left: 0;
   right: 0;
   bottom: auto;
-  z-index: 2001;
+  z-index: 201;
 }
 </style>

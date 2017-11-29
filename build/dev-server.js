@@ -66,8 +66,8 @@ app.use(devMiddleware)
 const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-// const uri = 'http://192.168.12.140:' + port
-const uri = 'http://localhost:' + port
+const uri = 'http://192.168.15.102:' + port
+// const uri = 'http://localhost:' + port
 
 var _resolve
 var _reject
