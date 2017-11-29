@@ -1,7 +1,7 @@
 <template>
   <div class="main-layout-container">
     <l-header :fixed="fixed">
-      <l-button slot="left" @click.native="goBack" v-if="back">
+      <l-button slot="left" @click.native="goBack" v-if="back || handleBack">
         <l-icon slot="icon" icon="icon-left"></l-icon>
         <span>返回</span>
       </l-button>
@@ -15,10 +15,11 @@
       @top-status-change="handleTopChange"
       ref="loadmore"
       class="main"
+      :style="style"
       v-if="loadmore">
       <slot></slot>
     </l-loadmore>
-    <div class="main" v-else>
+    <div class="main" v-else :style="style">
       <slot></slot>
     </div>
   </div>
@@ -42,6 +43,9 @@ export default {
       type: Boolean,
       default: false
     },
+    handleBack: {
+      type: Function
+    },
     title: {
       type: String,
       default: ''
@@ -59,6 +63,11 @@ export default {
       default: true
     }
   },
+  computed: {
+    style () {
+      return this.fixed ? { top: '44px' } : { top: '0' }
+    }
+  },
   data () {
     return {
       headerTitle: this.$route.name,
@@ -71,7 +80,11 @@ export default {
   },
   methods: {
     goBack () {
-      this.$router.back()
+      if (this.handleBack) {
+        this.handleBack()
+      } else {
+        this.$router.back()
+      }
     },
     toSearch () {
       // 可以根据当前的路由休息来判断是从哪张页面进去到search页面的
@@ -101,8 +114,7 @@ export default {
   .main {
     position: relative;
     background-color: inherit;
-    height: calc(100% - 40px);
-    top: 44px;
+    height: calc(100% - 44px);
     width: 100%;
     overflow-y: scroll;
     &::-webkit-scrollbar {

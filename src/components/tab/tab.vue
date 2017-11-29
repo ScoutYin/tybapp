@@ -22,8 +22,8 @@ export default {
   computed: {
     style () {
       return {
-        // transitionTimingFunction: 'cubic-bezier(0.1, 0.57, 0.1, 1)',
-        transform: `translate(${this.translateX}px, 0px`
+        transitionTimingFunction: 'cubic-bezier(0.1, 0.57, 0.1, 1)',
+        transform: `translate3d(${this.translateX}px, 0px, 0px)`
       }
     },
     listWidth () {
@@ -41,15 +41,6 @@ export default {
     this.bindEvent()
   },
   methods: {
-    index (id) {
-      console.log('id: ', id, this.$children)
-      for (let i = 0; i < this.$children.length; ++i) {
-        if (this.$children[i]._uid === id) {
-          return i
-        }
-      }
-      return -1
-    },
     handleTouchStart (event) {
       this.startX = event.touches[0].clientX
       this.lastX = this.translateX
@@ -63,7 +54,7 @@ export default {
         event.preventDefault()
         event.stopPropagation()
       }
-      console.log('move', this.translateX, this.listWidth)
+      // console.log('move', this.translateX, this.listWidth)
     },
     handleTouchEnd (event) {
       console.log('end')
@@ -98,15 +89,15 @@ export default {
     flex-shrink: 0;
     padding: 0 10px;
     .l-tab-item {
-      box-sizing: border-box;
-      display: block;
-      height: 100%;
-      line-height: 44px;
+      // box-sizing: border-box;
+      display: flex;
       font-size: 14px;
       text-align: center;
-      padding: 0 10px;
+      align-items: center;
+      padding: 0 5px;
+      // margin: auto;
       &:not(:first-child) {
-        margin-left: 20px;
+        margin-left: 15px;
       }
     }  
   }

@@ -1,7 +1,6 @@
 <template>
   <div class="l-tab-item"
-       :class="{ 'is-selected': $parent.value === id }"
-       :style="style"
+       :style="$parent.value === id ? style : {}"
        @click="onItemClicked">
     <slot></slot>
   </div>
@@ -20,21 +19,21 @@ export default {
   computed: {
     style () {
       return {
-        color: this.$parent.activeColor,
+        color: this.$parent.activeColor || 'red',
         borderColor: this.$parent.activeColor,
-        borderWidth: `${this.$parent.lineWidth}px`
+        borderWidth: this.$parent.lineWidth,
+        borderBottomStyle: 'solid'
       }
     }
   },
   data () {
     return {
-      id: this.$parent.index(this._uid)
+      id: (this.$parent.$children.length || 1) - 1
     }
   },
   methods: {
     onItemClicked () {
       this.$parent.$emit('input', this.id)
-      console.log('id: ', this.$parent.value, this.id)
     }
   }
 }
@@ -45,8 +44,6 @@ export default {
 
 .l-tab-item {
   &.is-selected {
-    border-bottom-color: $default-color;
-    border-bottom-style: solid;
   }
 }
 </style>

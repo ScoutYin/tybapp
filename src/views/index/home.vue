@@ -1,5 +1,5 @@
 <template>
-  <l-main-layout class="home-container" title="淘鱼宝">
+  <l-main-layout class="home-container" title="淘鱼宝" loadmore>
     <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">
       <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in items" :key="index">
         <img :src="item.imgSrc" width="100%" height="100%">
