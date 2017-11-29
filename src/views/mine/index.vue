@@ -3,7 +3,7 @@
     <div class="head-wrapper" v-permission-click="toUserInfo">
       <div class="thumb"></div>
     </div>
-    <div class="section">
+    <div class="section" @click="toOrderBuyer">
       <l-cell title="我是买家" v-is-link></l-cell>
       <div class="list-wrapper">
         <div class="list-item"
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="section">
+    <div class="section" @click="toOrderSeller">
       <l-cell title="我是卖家" v-is-link></l-cell>
       <div class="list-wrapper">
         <div class="list-item"
@@ -75,6 +75,12 @@ export default {
     },
     toUserInfo () {
       this.$router.push({ path: '/mine/userinfo' })
+    },
+    toOrderBuyer () {
+      this.$router.push({ path: '/mine/order/buyer' })
+    },
+    toOrderSeller () {
+      this.$router.push({ path: '/mine/order/seller' })
     }
   }
 }

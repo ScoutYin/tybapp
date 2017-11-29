@@ -2,6 +2,8 @@ import Myfav from 'views/mine/myfav'
 import Settings from 'views/mine/settings'
 import Order from 'views/mine/order'
 import Userinfo from 'views/mine/userinfo'
+import OrderBuyer from 'views/mine/order/buyer'
+import OrderSeller from 'views/mine/order/seller'
 
 export default [
   {
@@ -28,6 +30,20 @@ export default [
     name: 'Userinfo',
     meta: {
       needLogin: true
+    }
+  }, {
+    path: '/mine/order/buyer',
+    component: OrderBuyer,
+    name: 'OrderBuyer',
+    meta: {
+      needLogin: false // debug
+    }
+  }, {
+    path: '/mine/order/seller',
+    component: OrderSeller,
+    name: 'OrderSeller',
+    meta: {
+      needLogin: false
     }
   }
 ]
