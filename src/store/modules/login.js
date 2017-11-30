@@ -28,7 +28,7 @@ const getters = {
   userToken: (state) => {
     let token = storage.get(USER_TOKEN)
     state.userToken = token
-    return token
+    return state.userToken
   }
 }
 
@@ -80,7 +80,7 @@ const mutations = {
     state.isLogin = true
     state.loginVisible = false
     state.userToken = data.user_token
-    storage.set(USER_TOKEN, state.userToken)
+    storage.set(USER_TOKEN, data.user_token)
   },
   USER_LOGOUT: (state) => {
     // 用户登出，清空用户信息

@@ -26,13 +26,6 @@ var instance = axios.create({
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 instance.interceptors.request.use((conf) => {
-  // conf.headers['VERSION'] = 'v1.0'
-  let userToken = store.getters.userToken
-  console.log(store)
-  if (userToken) {
-    conf.headers['USER-TOKEN'] = userToken
-  }
-  console.log('request conf: ', conf)
   return conf
 }, (error) => {
   return Promise.reject(error)
@@ -84,6 +77,10 @@ instance.interceptors.response.use((response) => {
 })
 
 export default async (url = '', data = {}, type = 'GET') => {
+  let userToken = store.getters.userToken
+  if (userToken) {
+    instance.defaults.headers['USER-TOKEN'] = userToken
+  }
   type = type.toUpperCase()
   url = baseUrl + url
 
@@ -92,7 +89,6 @@ export default async (url = '', data = {}, type = 'GET') => {
   }
 
   if (type === 'POST') {
-    console.log('post data: ', instance.defaults)
     // instance.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     return instance.post(url, qs.stringify(data))
   }
