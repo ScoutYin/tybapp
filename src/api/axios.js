@@ -3,6 +3,7 @@ import axios from 'axios'
 import qs from 'qs'
 import Vue from 'vue'
 import { AlertPlugin } from 'vux'
+import store from '../store'
 Vue.use(AlertPlugin)
 
 if (!process.env.NODE_ENV) {
@@ -26,6 +27,11 @@ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
 
 instance.interceptors.request.use((conf) => {
   // conf.headers['VERSION'] = 'v1.0'
+  let userToken = store.getters.userToken
+  console.log(store)
+  if (userToken) {
+    conf.headers['USER-TOKEN'] = userToken
+  }
   console.log('request conf: ', conf)
   return conf
 }, (error) => {
@@ -36,21 +42,28 @@ instance.interceptors.response.use((response) => {
   console.log('response: ', response)
   if (response.status === 200) {
     let data = response.data
-    switch (data.code) {
-      case 1: {
-        return response.data
-      }
-      default: {
-        Vue.$vux.alert.show({
-          title: '错误',
-          content: data.msg,
-          onShow () {
-            console.log('Plugin: I\'m showing')
-          },
-          onHide () {
-            console.log('Plugin: I\'m hiding')
-          }
-        })
+    if (data.code === 1) {
+      return response.data
+    } else {
+      Vue.$vux.alert.show({
+        title: '错误',
+        content: data.msg,
+        onShow () {
+          console.log('Plugin: I\'m showing')
+        },
+        onHide () {
+          console.log('Plugin: I\'m hiding')
+        }
+      })
+      switch (data.code) {
+        // USER-TOKEN 令牌错误需要退出登录
+        case -9: {
+          store.commit('USER_LOGOUT')
+          break
+        }
+        default: {
+          return Promise.reject(new Error(data.msg))
+        }
       }
     }
   }

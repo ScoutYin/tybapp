@@ -1,17 +1,35 @@
-import { userLogin, logout } from 'api'
+import { userLogin } from 'api'
 import Vue from 'vue'
 import { ToastPlugin } from 'vux'
+import { USER_TOKEN, storage } from '../../utils/storage'
 Vue.use(ToastPlugin)
 
 const state = {
   loginVisible: false,
   isLogin: false,
-  loginNextCb: () => {}
+  loginNextCb: () => {},
+  userToken: ''
 }
 
 const getters = {
   loginVisible: (state) => { return state.loginVisible },
-  isLogin: (state) => { return state.isLogin }
+  isLogin: (state) => {
+    if (state.userToken === '') {
+      let token = storage.get(USER_TOKEN)
+      if (token) {
+        state.isLogin = true
+        return true
+      }
+    } else {
+      state.isLogin = true
+    }
+    return state.isLogin
+  },
+  userToken: (state) => {
+    let token = storage.get(USER_TOKEN)
+    state.userToken = token
+    return token
+  }
 }
 
 const actions = {
@@ -25,20 +43,24 @@ const actions = {
     commit('HIDE_LOGIN')
   },
   userLogin: async ({ commit }, params) => {
-    await userLogin(params).then((res) => {
-      if (res) {
-        Vue.$vux.toast.text('登陆成功', 'middle')
-        commit('USER_LOGIN')
-      }
-    })
+    try {
+      await userLogin(params).then((res) => {
+        if (res) {
+          Vue.$vux.toast.text('登陆成功', 'middle')
+          commit('USER_LOGIN', res.data)
+        }
+      })
+    } catch (err) {
+      console.log(err, err.message)
+    }
   },
   userLogout: async ({ commit }, params) => {
-    await logout().then((res) => {
-      if (res) {
-        Vue.$vux.toast.text('用户登出', 'middle')
-        commit('USER_LOGOUT')
-      }
-    })
+    Vue.$vux.toast.text('用户登出', 'middle')
+    commit('USER_LOGOUT')
+    // await logout().then((res) => {
+    //   if (res) {
+    //   }
+    // })
   }
 }
 
@@ -54,13 +76,17 @@ const mutations = {
   HIDE_LOGIN: (state) => {
     state.loginVisible = false
   },
-  USER_LOGIN: (state) => {
+  USER_LOGIN: (state, data) => {
     state.isLogin = true
     state.loginVisible = false
+    state.userToken = data.user_token
+    storage.set(USER_TOKEN, state.userToken)
   },
   USER_LOGOUT: (state) => {
     // 用户登出，清空用户信息
     state.isLogin = false
+    state.userToken = ''
+    storage.remove(USER_TOKEN)
   }
 }
 

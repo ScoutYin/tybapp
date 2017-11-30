@@ -67,3 +67,6 @@ export const getShopList = (params) => axios('/5a0ea08042a2f', params)
 export const getShopIndex = (params) => axios('/5a0ea3181e57a', params)
 export const getShopProductsList = (params) => axios('/5a0ea485cb348', params)
 export const getShopFishList = (params) => axios('/5a0ea8086819c', params)
+
+// Order
+export const getUserOrderList = (params) => axios('/5a122fe1677cc', params)
