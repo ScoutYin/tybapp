@@ -1,7 +1,8 @@
 import Vue from 'vue'
+import moment from 'moment'
 
-const lPrice = Vue.filter('lPrice', (price) => {
-  if (!price) return ''
+const price = Vue.filter('lPrice', (price) => {
+  if (!price) { return '' }
   price = price.toString()
   if (price === '0.00' || price === '0') {
     return '面议'
@@ -10,6 +11,23 @@ const lPrice = Vue.filter('lPrice', (price) => {
   }
 })
 
+const time2Date = Vue.filter('time2Date', (time) => {
+  if (!time) {
+    return time
+  }
+  return moment(time * 1000).format('YYYY-MM-DD HH:MM')
+})
+
+const fullThumb = Vue.filter('fullThumb', (thumb) => {
+  if (!thumb) {
+    return thumb
+  }
+  // 暂时写死拼接
+  return 'http://www.taoyu58.com' + thumb
+})
+
 export default {
-  lPrice
+  price,
+  time2Date,
+  fullThumb
 }

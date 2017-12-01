@@ -26,8 +26,10 @@ const getters = {
     return state.isLogin
   },
   userToken: (state) => {
-    let token = storage.get(USER_TOKEN)
-    state.userToken = token
+    if (!state.userToken) {
+      let token = storage.get(USER_TOKEN)
+      state.userToken = token
+    }
     return state.userToken
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <l-main-layout :handleBack="back"
                  class="order-seller-container">
-    <l-tab v-model="selected">
+    <l-tab v-model="selected" class="tab">
       <l-tab-item v-for="(item, index) in tabItems"
                   :key="index">
         {{item.title}}
@@ -57,7 +57,13 @@ export default {
 
 <style lang="scss">
 .order-seller-container {
+  .tab {
+    position: fixed;
+    z-index: 10;
+  }
   .main-view {
+    position: relative;
+    top: 44px;
     height: calc(100% - 44px);
   }
 }
