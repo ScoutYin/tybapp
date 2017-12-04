@@ -1,26 +1,24 @@
 <template>
-  <div class="l-loadmore-wrapper">
-    <div class="l-loadmore-content"
+  <div class="l-loadmore-wrapper"
        :class="{ 'is-dropped': topDropped }"
        :style="{ transform: `translate3d(0, ${translateY}px, 0)` }">
-      <div v-if="topLoadMethod"
-          class="action-block"
-          :style="{ height: `${topDistance}px`, marginTop: `${-topDistance}px` }">
-        <slot name="top-block">
-          <l-icon class="icon"
-            :icon="iconName"
-            :class="{
-              'icon-arrow': topStatus === 'pull',
-              'icon-arrow': topStatus === 'drop',
-              'icon-loading': topStatus === 'loading',
-              'icon-complete': topStatus === 'complete'
-            }"></l-icon>
-          <span class="default-text">{{ topText }}</span>
-        </slot>
-      </div>
-      <div class="scroll-container">
-        <slot></slot>
-      </div>
+    <div v-if="topLoadMethod"
+        class="action-block"
+        :style="{ height: `${topDistance}px`, marginTop: `${-topDistance}px` }">
+      <slot name="top-block">
+        <l-icon class="icon"
+          :icon="iconName"
+          :class="{
+            'icon-arrow': topStatus === 'pull',
+            'icon-arrow': topStatus === 'drop',
+            'icon-loading': topStatus === 'loading',
+            'icon-complete': topStatus === 'complete'
+          }"></l-icon>
+        <span class="default-text">{{ topText }}</span>
+      </slot>
+    </div>
+    <div class="scroll-container">
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -144,18 +142,18 @@ export default {
       this.$el.addEventListener('touchmove', this.handleTouchMove)
       this.$el.addEventListener('touchend', this.handleTouchEnd)
     },
+    onTopLoaded () {
+      this.topStatus = 'complete'
+      setTimeout(() => {
+        this.translateY = 0
+      }, 500)
+    },
     init () {
       this.topStatus = 'pull'
       this.scrollEventTarget = this.$el.querySelector('.scroll-container')
       if (typeof this.topLoadMethod === 'function') {
         this.bindTouchEvents()
       }
-    },
-    onTopLoaded () {
-      this.topStatus = 'complete'
-      setTimeout(() => {
-        this.translateY = 0
-      }, 500)
     }
   },
   watch: {
@@ -170,13 +168,14 @@ export default {
 <style lang="scss">
 .l-loadmore-wrapper {
   height: 100%;
-  overflow: hidden;
   .is-dropped {
     transition: .2s;
   }
 
   .scroll-container {
     -webkit-overflow-scrolling: touch;
+    height: 100%;
+    overflow-y: auto;
   }
 
   .action-block {

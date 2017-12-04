@@ -1,55 +1,69 @@
 <template>
-  <div class="seller-pre-payment-container">
+  <l-loadmore class="seller-pre-payment-container"
+              :top-load-method="initData"
+              ref="loadmore">
     <div class="order-list">
-      <l-order-item v-for="(item, index) in orderData"
+      <l-order-item v-for="(item, index) in list"
                     :key="index"
                     class="order-item"
-                    :item="item">
+                    :item="item"
+                    v-infinite-scroll="loadMore"
+                    infinite-scroll-disabled="canLoadMore"
+                    infinite-scroll-distance="10">
       </l-order-item>
     </div>
-  </div>
+  </l-loadmore>
 </template>
 
 <script>
 import { getUserOrderList, getCommonThumb } from 'api'
+import LLoadmore from 'components/loadmore'
 import LOrderItem from 'components/items/order-item'
+import listMixin from '@/mixins/list'
 export default {
   name: 'SellerPrePayment',
   components: {
-    LOrderItem
+    LOrderItem,
+    LLoadmore
   },
+  mixins: [listMixin],
   data () {
     return {
-      orderData: []
     }
   },
+  async mounted () {
+    this.init(getUserOrderList, 'order_id')
+    this.initData()
+  },
   created () {
-    this.getOrderList()
+    // this.getOrderList()
   },
   methods: {
+    initData () {
+      this.maxId = 0
+      this.getOrderList()
+    },
     async getOrderList () {
       try {
-        let res = await getUserOrderList()
-        this.orderData = res.data
-        await this.getThumbs()
-        this.orderData = Object.assign({}, this.orderData)
-        console.log('getOrderList: ', this.orderData)
+        let addList = await this.loadData()
+        this.$refs['loadmore'].onTopLoaded()
+        await this.getThumbs(addList)
       } catch (err) {
         throw err
       }
     },
-    async getThumbs () {
-      for (let i = 0; i < this.orderData.length; ++i) {
-        let arr = this.orderData[i].OrderData || []
+    async getThumbs (addList) {
+      for (let i = addList.length; i > 0; --i) {
+        let arr = addList[addList.length - i].OrderData || []
         let thumbIds = this.getThumbIds(arr)
-        console.log('thumbIds: ', thumbIds)
         try {
           let thumbs = await getCommonThumb({id: thumbIds})
-          this.orderData[i].thumbs = thumbs.data
+          this.list[this.list.length - i].thumbs = thumbs.data
         } catch (err) {
           throw err
         }
       }
+      this.list = Object.assign({}, this.list)
     },
     getThumbIds (arr) {
       let thumbStr = ''
@@ -58,7 +72,6 @@ export default {
         thumbStr = thumbStr + thumbId + ','
       }
       if (thumbStr !== '') {
-        console.log(thumbStr)
         return thumbStr.slice(0, -1)
       }
       return thumbStr

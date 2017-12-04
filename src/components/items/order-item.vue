@@ -70,18 +70,10 @@ export default {
     }
   },
   created () {
-    console.log('item: ', this.item)
   },
   methods: {
   },
   watch: {
-    'item': {
-      handler (val, oldVal) {
-        console.log('val ', val)
-        console.log('thumsIds', this.thumbIds)
-      },
-      deep: true
-    }
   }
 }
 </script>

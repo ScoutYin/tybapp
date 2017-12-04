@@ -177,7 +177,11 @@ export default {
       }
     },
     async loadTop (loadmore) {
-      await this.refreshLists()
+      try {
+        await this.refreshLists()
+      } catch (err) {
+        throw err
+      }
       loadmore.onTopLoaded()
     },
     loadMore () {

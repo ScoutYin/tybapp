@@ -70,3 +70,12 @@ export const getShopFishList = (params) => axios.get('/5a0ea8086819c', params)
 
 // Order
 export const getUserOrderList = (params) => axios.get('/5a122fe1677cc', params)
+
+export const getList = (cb, params = { max_id: -1, limit: 20 }) => {
+  if (typeof cb === 'function') {
+    return cb(params)
+  }
+
+  let error = new Error('cb不是一个function')
+  return Promise.reject(error)
+}
