@@ -10,15 +10,15 @@
       </div>
       <h1 slot="center" class="l-header-title" v-text="headerTitle" v-if="!hideTitle"></h1>
     </l-header>
-    <l-loadmore
+    <l-pulldown-refresh
       :top-load-method="loadTop"
       @top-status-change="handleTopChange"
-      ref="loadmore"
+      ref="topLoad"
       class="main"
       :style="style"
-      v-if="loadmore">
+      v-if="topLoad">
       <slot></slot>
-    </l-loadmore>
+    </l-pulldown-refresh>
     <div class="main" v-else :style="style">
       <slot></slot>
     </div>
@@ -28,14 +28,14 @@
 
 <script>
 import LHeader from 'components/header'
-import LLoadmore from 'components/loadmore'
+import LPulldownRefresh from 'components/pulldown-refresh'
 import LSearchBar from 'components/search/search-bar'
 
 export default {
   name: 'LMainLayout',
   components: {
     LHeader,
-    LLoadmore,
+    LPulldownRefresh,
     LSearchBar
   },
   props: {
@@ -54,7 +54,7 @@ export default {
       type: Boolean,
       default: false
     },
-    loadmore: {
+    topLoad: {
       type: Boolean,
       default: false
     },
@@ -95,13 +95,13 @@ export default {
       this.topStatus = status
     },
     loadTop () {
-      this.$emit('load-top', this.$refs.loadmore)
+      this.$emit('load-top', this.$refs.topLoad)
     },
     setScrollTop (value) {
-      this.$refs.loadmore.$el.scrollTop = value
+      this.$refs.topLoad.$el.scrollTop = value
     },
     getScrollTop () {
-      return this.$refs.loadmore.$el.scrollTop
+      return this.$refs.topLoad.$el.scrollTop
     }
   }
 }

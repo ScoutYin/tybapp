@@ -14,7 +14,7 @@
            v-for="(goodsItem, index) in item.OrderData"
            :key="index">
         <div class="image">
-          <img v-if="item.thumbs" :src="item.thumbs[goodsItem.data_thumb] | fullThumb" alt="">
+          <img v-if="goodsItem.thumb" :src="goodsItem.thumb" alt="">
         </div>
         <div class="content">
           <div class="title">{{goodsItem.data_title}}</div>

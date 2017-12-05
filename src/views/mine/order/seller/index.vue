@@ -24,6 +24,7 @@ export default {
     return {
       selected: -1,
       tabItems: [
+        { title: '全部订单', componentName: 'SellerAll' },
         { title: '待付款', componentName: 'SellerPrePayment' },
         { title: '待发货', componentName: 'SellerPreDeliver' },
         { title: '待评价', componentName: 'SellerPreEvaluate' },
@@ -65,6 +66,11 @@ export default {
     position: relative;
     top: 44px;
     height: calc(100% - 44px);
+    &.order-list-container {
+      .order-item {
+        margin: 15px 0 ;
+      }
+    }
   }
 }
 </style>

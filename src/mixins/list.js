@@ -8,7 +8,8 @@ export default {
       pagination: {},
       total: 0,
       loadFunc: Function,
-      unLoadMore: true
+      loading: true,
+      status: 0
     }
   },
   mounted () {
@@ -17,18 +18,23 @@ export default {
     /**
      * 初始化相关参数以及需要调用列表请求接口
      */
-    init (cb, idType) {
+    init (cb, params) {
       this.maxId = 0
       this.list = []
       this.loadFunc = cb
-      this.idType = idType
+      if (params) {
+        this.idType = params.idType || 'id'
+        this.status = params.status || 0
+      }
     },
-    async loadData (params) {
+    async loadData (params = {}) {
       console.log('我被调用了几次')
       let _params = {
         max_id: this.maxId,
-        limit: this.limit
+        limit: this.limit,
+        status: this.status
       }
+      _params = Object.assign(_params, params)
       if (typeof this.loadFunc === 'function') {
         try {
           let res = await this.loadFunc(_params)
@@ -47,7 +53,7 @@ export default {
     },
     async loadMore (params) {
       console.log('我被调用了吗')
-      this.unLoadMore = true
+      this.loading = true
       let length = this.list.length
       if (length === 0) {
         this.maxId = 0
@@ -58,7 +64,7 @@ export default {
         let addList = await this.loadData(params)
         // 不为0 说明能够继续加载更多
         if (addList.length !== 0) {
-          this.unLoadMore = false
+          this.loading = false
         }
         this.list = Array.concat(this.list, addList)
         return this.list

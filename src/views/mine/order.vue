@@ -1,5 +1,5 @@
 <template>
-  <l-main-layout class="mine-order-container" back loadmore>
+  <l-main-layout class="mine-order-container" back topLoad>
     <div class="order-list">
       <l-order-item v-for="(item, index) in items" :key="index" :item="item" class="item">
       </l-order-item>

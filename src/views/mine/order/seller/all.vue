@@ -1,5 +1,5 @@
 <template>
-  <l-pulldown-refresh class="seller-pre-evaluate-container"
+  <l-pulldown-refresh class="seller-all-container order-list-container"
               :top-load-method="initData"
               ref="topLoad">
     <div class="order-list">
@@ -21,14 +21,14 @@ import LPulldownRefresh from 'components/pulldown-refresh'
 import LOrderItem from 'components/items/order-item'
 import listMixin from '@/mixins/list'
 export default {
-  name: 'SellerPreEvaluate',
+  name: 'SellerAll',
   components: {
-    LPulldownRefresh,
-    LOrderItem
+    LOrderItem,
+    LPulldownRefresh
   },
   mixins: [listMixin],
   async mounted () {
-    this.init(getUserOrderList, { isType: 'order_id' })
+    this.init(getUserOrderList, { idType: 'order_id' })
     this.initData()
   },
   created () {
@@ -51,5 +51,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+.seller-pre-payment-container {
+  .order-item {
+    margin-top: 10px;
+  }
+}
 </style>

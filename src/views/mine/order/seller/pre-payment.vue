@@ -1,30 +1,30 @@
 <template>
-  <l-loadmore class="seller-pre-payment-container"
+  <l-pulldown-refresh class="seller-pre-payment-container"
               :top-load-method="initData"
-              ref="loadmore">
+              ref="topLoad">
     <div class="order-list">
       <l-order-item v-for="(item, index) in list"
                     :key="index"
                     class="order-item"
                     :item="item"
                     v-infinite-scroll="loadMore"
-                    infinite-scroll-disabled="canLoadMore"
+                    infinite-scroll-disabled="loading"
                     infinite-scroll-distance="10">
       </l-order-item>
     </div>
-  </l-loadmore>
+  </l-pulldown-refresh>
 </template>
 
 <script>
-import { getUserOrderList, getCommonThumb } from 'api'
-import LLoadmore from 'components/loadmore'
+import { getUserOrderList } from 'api'
+import LPulldownRefresh from 'components/pulldown-refresh'
 import LOrderItem from 'components/items/order-item'
 import listMixin from '@/mixins/list'
 export default {
   name: 'SellerPrePayment',
   components: {
     LOrderItem,
-    LLoadmore
+    LPulldownRefresh
   },
   mixins: [listMixin],
   data () {
@@ -32,11 +32,10 @@ export default {
     }
   },
   async mounted () {
-    this.init(getUserOrderList, 'order_id')
+    this.init(getUserOrderList, { isType: 'order_id', status: 1 })
     this.initData()
   },
   created () {
-    // this.getOrderList()
   },
   methods: {
     initData () {
@@ -45,36 +44,11 @@ export default {
     },
     async getOrderList () {
       try {
-        let addList = await this.loadData()
-        this.$refs['loadmore'].onTopLoaded()
-        await this.getThumbs(addList)
+        await this.loadData()
+        this.$refs['topLoad'].onTopLoaded()
       } catch (err) {
         throw err
       }
-    },
-    async getThumbs (addList) {
-      for (let i = addList.length; i > 0; --i) {
-        let arr = addList[addList.length - i].OrderData || []
-        let thumbIds = this.getThumbIds(arr)
-        try {
-          let thumbs = await getCommonThumb({id: thumbIds})
-          this.list[this.list.length - i].thumbs = thumbs.data
-        } catch (err) {
-          throw err
-        }
-      }
-      this.list = Object.assign({}, this.list)
-    },
-    getThumbIds (arr) {
-      let thumbStr = ''
-      for (let i = 0; i < arr.length; ++i) {
-        let thumbId = arr[i].data_thumb
-        thumbStr = thumbStr + thumbId + ','
-      }
-      if (thumbStr !== '') {
-        return thumbStr.slice(0, -1)
-      }
-      return thumbStr
     }
   }
 }
@@ -82,8 +56,6 @@ export default {
 
 <style lang="scss">
 .seller-pre-payment-container {
-  .order-item {
-    margin-top: 10px;
-  }
+
 }
 </style>

@@ -4,6 +4,7 @@ import Order from 'views/mine/order'
 import Userinfo from 'views/mine/userinfo'
 import OrderBuyer from 'views/mine/order/buyer/index'
 import OrderSeller from 'views/mine/order/seller/index'
+import SellerAll from 'views/mine/order/seller/all'
 import SellerDelivered from 'views/mine/order/seller/delivered'
 import SellerPreDeliver from 'views/mine/order/seller/pre-deliver'
 import SellerPreEvaluate from 'views/mine/order/seller/pre-evaluate'
@@ -40,18 +41,22 @@ export default [
     component: OrderBuyer,
     name: 'OrderBuyer',
     meta: {
-      needLogin: false // debug
+      needLogin: true
     }
   }, {
     path: '/mine/order/seller',
     component: OrderSeller,
     name: 'OrderSeller',
     meta: {
-      needLogin: false
+      needLogin: true
     },
     // redirect: '/mine/order/seller/pre-deliver',
     children: [
       {
+        path: '/mine/order/seller/all',
+        component: SellerAll,
+        name: 'SellerAll'
+      }, {
         path: '/mine/order/seller/delivered',
         component: SellerDelivered,
         name: 'SellerDelivered'

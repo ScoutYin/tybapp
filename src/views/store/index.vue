@@ -2,7 +2,7 @@
   <div class="store-container">
     <l-main-layout class="main"
       search
-      loadmore
+      topLoad
       @load-top="loadTop"
       ref="main">
       <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">

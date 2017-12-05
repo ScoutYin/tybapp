@@ -1,5 +1,5 @@
 <template>
-  <div class="l-loadmore-wrapper"
+  <div class="l-pulldown-refresh-wrapper"
        :class="{ 'is-dropped': topDropped }"
        :style="{ transform: `translate3d(0, ${translateY}px, 0)` }">
     <div v-if="topLoadMethod"
@@ -25,8 +25,8 @@
 
 <script>
 export default {
-  name: 'LLoadmore',
-  componentName: 'LLoadmore',
+  name: 'LPulldownRefresh',
+  componentName: 'LPulldownRefresh',
   props: {
     autoFill: {
       type: Boolean,
@@ -166,7 +166,7 @@ export default {
 </script>
 
 <style lang="scss">
-.l-loadmore-wrapper {
+.l-pulldown-refresh-wrapper {
   height: 100%;
   .is-dropped {
     transition: .2s;

@@ -1,5 +1,5 @@
 <template>
-  <l-main-layout class="home-container" title="淘鱼宝" loadmore>
+  <l-main-layout class="home-container" title="淘鱼宝" topLoad>
     <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">
       <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in items" :key="index">
         <img :src="item.imgSrc" width="100%" height="100%">
@@ -70,11 +70,11 @@ export default {
         }
       ],
       gridDatas: [
-        { title: '我要买船', icon: 'icon-dianpu', path: '' },
-        { title: '我要买鱼', icon: 'icon-dianpu', path: '' },
+        { title: '我要买船', icon: 'icon-dianpu', path: '/ship/buy-list' },
+        { title: '我要买鱼', icon: 'icon-dianpu', path: '/fish/buy-list' },
         { title: '我要招人', icon: 'icon-dianpu', path: '/recruitment/recruiting' },
-        { title: '我要卖船', icon: 'icon-dianpu', path: '' },
-        { title: '我要卖鱼', icon: 'icon-dianpu', path: '' },
+        { title: '我要卖船', icon: 'icon-dianpu', path: '/ship/sell-list' },
+        { title: '我要卖鱼', icon: 'icon-dianpu', path: '/fish/sell-list' },
         { title: '我要求职', icon: 'icon-dianpu', path: '/recruitment/jobHunting' }
       ],
       dynamicData: [
@@ -90,11 +90,11 @@ export default {
         this.$router.push({ path: path })
       }
     },
-    loadmore () {
-      console.log('loadmore.')
+    topLoad () {
+      console.log('topLoad.')
       this.flag = false
       setTimeout(() => {
-        this.$refs.loadmore.onTopLoaded()
+        this.$refs.topLoad.onTopLoaded()
       }, 1000)
     },
     clicked () {
