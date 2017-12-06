@@ -2,8 +2,6 @@
   <div class="store-container">
     <l-main-layout class="main"
       search
-      topLoad
-      @load-top="loadTop"
       ref="main">
       <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">
         <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in items" :key="index">

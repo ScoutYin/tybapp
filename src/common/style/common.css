@@ -44,3 +44,8 @@ img {
   width: 100%;
   height: 100%;
 }
+
+/* 价格颜色默认为红色 */
+.price {
+  color: red;
+}

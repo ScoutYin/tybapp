@@ -2,7 +2,7 @@
   <div class="login-container">
     <l-header :title="headerTitle" fixed>
       <l-button slot="left" @click.native="close">
-        <l-icon slot="icon" icon="icon-guanbi1"></l-icon>
+        <l-icon slot="icon" icon="icon-guanbi"></l-icon>
       </l-button>
     </l-header>
     <div class="main">

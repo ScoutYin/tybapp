@@ -26,10 +26,10 @@ export default {
   data () {
     return {
       list: [
-        { title: '我的私信', icon: 'icon-liuyan', path: '' },
-        { title: '评论', icon: 'icon-fankui', path: '' },
-        { title: '回复', icon: 'icon-fankui', path: '' },
-        { title: '系统消息', icon: 'icon-tongzhi', path: '' }
+        { title: '我的私信', icon: 'icon-ketaiyesixin', path: '' },
+        { title: '评论', icon: 'icon-pinglun', path: '' },
+        { title: '回复', icon: 'icon-liuyan', path: '' },
+        { title: '系统消息', icon: 'icon-xitongxiaoxi', path: '' }
       ]
     }
   },

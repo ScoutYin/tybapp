@@ -1,5 +1,5 @@
 <template>
-  <l-main-layout class="home-container" title="淘鱼宝" topLoad>
+  <l-main-layout class="home-container" title="淘鱼宝">
     <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">
       <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in items" :key="index">
         <img :src="item.imgSrc" width="100%" height="100%">
@@ -70,12 +70,12 @@ export default {
         }
       ],
       gridDatas: [
-        { title: '我要买船', icon: 'icon-dianpu', path: '/ship/buy-list' },
-        { title: '我要买鱼', icon: 'icon-dianpu', path: '/fish/buy-list' },
-        { title: '我要招人', icon: 'icon-dianpu', path: '/recruitment/recruiting' },
-        { title: '我要卖船', icon: 'icon-dianpu', path: '/ship/sell-list' },
-        { title: '我要卖鱼', icon: 'icon-dianpu', path: '/fish/sell-list' },
-        { title: '我要求职', icon: 'icon-dianpu', path: '/recruitment/jobHunting' }
+        { title: '我要买船', icon: 'icon-chuan', path: '/ship/buy-list' },
+        { title: '我要买鱼', icon: 'icon-buyfish', path: '/fish/buy-list' },
+        { title: '我要招人', icon: 'icon-zhaoping', path: '/recruitment/recruiting' },
+        { title: '我要卖船', icon: 'icon-chuanbojiaoyi', path: '/ship/sell-list' },
+        { title: '我要卖鱼', icon: 'icon-sellfish', path: '/fish/sell-list' },
+        { title: '我要求职', icon: 'icon-qiuzhi', path: '/recruitment/jobHunting' }
       ],
       dynamicData: [
         { buyer: '12312341234', seller: '13533233323', updateTime: '4小时前' },

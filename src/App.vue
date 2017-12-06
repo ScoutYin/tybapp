@@ -65,6 +65,7 @@ export default {
   margin: 0;
   padding: 0;
   color: #555;
+  font-size: 14px;
   .popup-container {
     overflow: hidden;
   }
@@ -74,6 +75,7 @@ export default {
     // vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
+    margin: auto;
   }
 }
 </style>

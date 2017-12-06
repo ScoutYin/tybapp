@@ -2,11 +2,15 @@
   <l-main-layout class="fish-buyer-list-container"
                  back>
     <l-pulldown-refresh :top-load-method="initData"
-                        ref="topLoad">
+                        ref="topLoad"
+                        v-infinite-scroll="loadMore"
+                        infinite-scroll-disabled="loading"
+                        infinite-scroll-distance="10">
       <div class="list">
         <div class="item-wrapper"
              v-for="(item, index) in list"
-             :key="index">
+             :key="index"
+             @click="toDetail(item.id)">
           <div class="item">
             <div class="image">
               <img :src="item.thumb">
@@ -55,6 +59,9 @@ export default {
       } catch (err) {
         throw err
       }
+    },
+    toDetail (id) {
+      this.$router.push({name: 'FishBuyDetail', params: { id: id }})
     }
   }
 }

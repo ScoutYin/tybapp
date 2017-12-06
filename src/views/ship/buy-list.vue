@@ -5,7 +5,8 @@
       <div class="list">
         <div class="item-wrapper"
            v-for="(item, index) in list"
-           :key="index">
+           :key="index"
+           @click="toDetail(item.id)">
         <div class="item">
           <div class="image">
             <img :src="item.thumb">
@@ -34,7 +35,7 @@ import LPulldownRefresh from 'components/pulldown-refresh'
 import listMixin from '@/mixins/list'
 import { getShipList } from 'api'
 export default {
-  name: 'FishBuyList',
+  name: 'ShipBuyList',
   components: {
     LMainLayout,
     LPulldownRefresh
@@ -57,6 +58,9 @@ export default {
       } catch (err) {
         throw err
       }
+    },
+    toDetail (id) {
+      this.$router.push({name: 'ShipBuyDetail', params: { id: id }})
     }
   }
 }

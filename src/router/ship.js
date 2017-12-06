@@ -1,5 +1,6 @@
 import ShipBuyList from '../views/ship/buy-list'
 import ShipSellList from '../views/ship/sell-list'
+import ShipBuyDetail from '../views/ship/buy-detail'
 
 export default [
   {
@@ -10,5 +11,9 @@ export default [
     path: '/ship/sell-list',
     component: ShipSellList,
     name: 'ShipSellList'
+  }, {
+    path: '/ship/buy-detail/:id',
+    component: ShipBuyDetail,
+    name: 'ShipBuyDetail'
   }
 ]

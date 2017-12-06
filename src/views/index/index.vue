@@ -43,7 +43,7 @@ export default {
     return {
       tabs: [
         { id: 0, title: '首页', icon: 'icon-shouye', path: '/home' },
-        { id: 1, title: '商城', icon: 'icon-dianpu', path: '/store' },
+        { id: 1, title: '商城', icon: 'icon-gouwudai', path: '/store' },
         { id: 2, title: '发布', icon: 'icon-fabu' },
         { id: 3, title: '消息', icon: 'icon-xinxi', path: '/message' },
         { id: 4, title: '我', icon: 'icon-wode', path: '/mine' }
