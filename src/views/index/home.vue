@@ -37,6 +37,8 @@
     </div>
     <div class="section">
       <div class="title">政策资讯</div>
+      <l-article-list :list="articleList" class="article-list"></l-article-list>
+      <div class="more" @click="toArticleList">更多资讯</div>
     </div>
   </l-main-layout>
 </template>
@@ -44,8 +46,10 @@
 <script>
 import LMainLayout from 'components/layout/main-layout'
 import LButton from 'components/common/button'
+import LArticleList from 'components/lists/article-list'
 import { Swiper, SwiperItem } from 'vux'
 import LCell from 'components/common/cell'
+import { getArticleList, getFishExponent } from 'api'
 export default {
   name: '',
   components: {
@@ -53,7 +57,8 @@ export default {
     LButton,
     Swiper,
     SwiperItem,
-    LCell
+    LCell,
+    LArticleList
   },
   data () {
     return {
@@ -81,8 +86,14 @@ export default {
         { buyer: '12312341234', seller: '13533233323', updateTime: '4小时前' },
         { buyer: '13555555555', seller: '13512344321', updateTime: '5小时前' }
       ],
+      exponents: [],
+      articleList: [],
       show: false
     }
+  },
+  mounted () {
+    this.getExponents()
+    this.getArticles()
   },
   methods: {
     toPath (path) {
@@ -100,6 +111,27 @@ export default {
     clicked () {
       console.log('clicked.')
       this.show = true
+    },
+    async getExponents () {
+      try {
+        let res = await getFishExponent({limit: 3})
+        this.exponents = res.data
+        console.log('exponent: ', res.data)
+      } catch (err) {
+        throw err
+      }
+    },
+    async getArticles () {
+      try {
+        let res = await getArticleList({limit: 5})
+        this.articleList = res.data
+        console.log(res.data)
+      } catch (err) {
+        throw err
+      }
+    },
+    toArticleList () {
+      this.$router.push({name: 'ArticleList'})
     }
   }
 }
@@ -188,7 +220,15 @@ export default {
     margin-bottom: 20px;
     &>.title {
       text-align: center;
-      font-size: 14px;
+      font-size: 16px;
+      color: #111;
+    }
+    .more {
+      text-align: right;
+      color: #999;
+    }
+    .article-list {
+      margin: 0 -10px;
     }
   }
 }

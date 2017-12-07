@@ -27,6 +27,16 @@
       <article class="content" v-html="content">
       </article>
     </section>
+    <div class="detail-bottom" slot="bottom">
+      <div class="left">
+        <l-icon icon="icon-shoucang"></l-icon>
+        <div>收藏</div>
+      </div>
+      <div class="right">
+        <l-icon icon="icon-dianhua"></l-icon>
+        <span class="text">联系卖家</span>
+      </div>
+    </div>
   </l-detail-layout>
 </template>
 
@@ -94,6 +104,28 @@ export default {
         &.line {
           width: 100%;
         }
+      }
+    }
+  }
+  .detail-bottom {
+    width: 100%;
+    display: flex;
+    .left {
+      width: 80px;
+      text-align: center;
+      margin: auto;
+    }
+    .right {
+      flex: 1;
+      background-color: #3983D2;
+      display: flex;
+      color: #fff;
+      font-size: 20px;
+      justify-content: center;
+      .text {
+        margin: auto 0;
+        font-size: 16px;
+        padding: 0 10px;
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="l-goods-list">
     <div class="l-goods-top-list list">
-      <div class="list-title">鱼获专区</div>
+      <div class="list-title">热销排行</div>
       <l-shop-goods-top-item
         v-for="(item, index) in hotItems"
         :key="index"

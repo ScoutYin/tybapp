@@ -19,7 +19,7 @@
               船质：{{item.material}}
             </div>
             <div class="status">
-              状态：<span style="color: red;">{{item.buytype | buytype}}</span>
+              状态：<span style="color: #b4282d;">{{item.buytype | buytype}}</span>
             </div>
           </div>
         </div>
@@ -70,17 +70,21 @@ export default {
 .ship-buy-list-container {
   .list {
     display: flex;
-    width: 100%;
+    width: 375px;
     flex-wrap: wrap;
-    padding: 0 18px;
-    justify-content: space-between;
+    padding: 0 5px;
+    margin: 0 auto;
+    justify-content: flex-start;
     .item-wrapper {
+      width: 182.5px;
       .item {
         margin: 10px auto;
-        width: 160px;
+        width: 167.5px;
         background: #fff;
+        border-radius: 4px;
+        overflow: hidden;
         .image {
-          width: 160px;
+          width: 100%;
           height: 100px;
         }
         .content {

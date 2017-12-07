@@ -38,7 +38,8 @@ export const getAccessToken = (params) => axios.get('/59f15190b135b', params)
 export const userLogin = (params) => axios.post('/59ffc75e7b127', params)
 
 // Artile
-export const getArticleIndex = (params) => axios.get('/59f175b082680', params)
+export const getArticleList = (params) => axios.get('/59f175b082680', params)
+export const getArticleDetail = (params) => axios.get('/5a28fa9b24c3f', params)
 
 // Crew
 export const getCrewJobList = (params) => axios.get('/5a0270ed98967', params)
@@ -67,6 +68,9 @@ export const getShopList = (params) => axios.get('/5a0ea08042a2f', params)
 export const getShopIndex = (params) => axios.get('/5a0ea3181e57a', params)
 export const getShopProductsList = (params) => axios.get('/5a0ea485cb348', params)
 export const getShopFishList = (params) => axios.get('/5a0ea8086819c', params)
+
+// Fish
+export const getFishExponent = (params) => axios.get('/5a166ad896554', params)
 
 // Order
 export const getUserOrderList = (params) => axios.get('/5a122fe1677cc', params)

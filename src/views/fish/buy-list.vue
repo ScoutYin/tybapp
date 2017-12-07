@@ -71,27 +71,27 @@ export default {
 .fish-buyer-list-container {
   .list {
     display: flex;
-    width: 100%;
+    width: 375px;
     flex-wrap: wrap;
-    padding: 0 18px;
-    justify-content: space-between;
+    padding: 0 5px;
+    margin: 0 auto;
+    justify-content: flex-start;
     .item-wrapper {
-      // width: 50%;
+      width: 182.5px;
       .item {
         margin: 10px auto;
-        width: 160px;
+        width: 167.5px;
         background: #fff;
+        border-radius: 4px;
+        overflow: hidden;
         .image {
-          width: 160px;
+          width: 100%;
           height: 100px;
         }
         .content {
           margin: 5px;
           font-size: 14px;
           line-height: 1.5;
-          .price {
-            color: red;
-          }
         }
       }
     }

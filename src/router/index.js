@@ -16,6 +16,7 @@ import Store from './store'
 import Mine from './mine'
 import Fish from './fish'
 import Ship from './ship'
+import Article from './article'
 
 Vue.use(Router)
 
@@ -58,7 +59,8 @@ let routes = [
   ...Recruitment,
   ...Store,
   ...Fish,
-  ...Ship
+  ...Ship,
+  ...Article
 ]
 
 let router = new Router({
