@@ -60,7 +60,7 @@ export default {
       }
     },
     toDetail (id) {
-      this.$router.push({name: 'ShipBuyDetail', params: { id: id }})
+      this.$router.push({name: 'ShipBuyDetail', query: { id: id }})
     }
   }
 }

@@ -52,12 +52,14 @@ export const getCrewResume = (params) => axios.get('/5a05168975b7b', params)
 export const getCommonThumb = (params) => axios.get('/5a0a425baa1e5', params)
 export const getCommonAvatar = (params) => axios.get('/5a0a43915a839', params)
 export const getCommonRegion = (params) => axios.get('/5a0bcd1c68972', params)
+export const getTaglib = (params) => axios.get('/5a28e13e3a312', params)
 
 // Ship
 export const getShipList = (params) => axios.get('/5a0e467b1df82', params)
 export const getShipDetail = (params) => axios.get('/5a0e737f0f3a1', params)
 export const getShipBuyList = (params) => axios.get('/5a0e755fbfbd1', params)
 export const getShipBuyDetail = (params) => axios.get('/5a0e822176bd3', params)
+export const getShipRecommend = (params = {pos: 22}) => axios.get('/5a28e4b830af0', params)
 
 export const getFishList = (params) => axios.get('/5a0e9b0c5b922', params)
 export const getProductList = (params) => axios.get('/5a0e9e1478595', params)

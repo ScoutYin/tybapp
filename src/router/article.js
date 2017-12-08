@@ -7,7 +7,7 @@ export default [
     component: ArticleList,
     name: 'ArticleList'
   }, {
-    path: '/article/:id',
+    path: '/article/detail',
     component: ArticleDetail,
     name: 'ArticleDetail'
   }

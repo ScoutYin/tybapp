@@ -74,7 +74,7 @@ export default {
     height: 1.3em;
     // vertical-align: -0.15em;
     fill: currentColor;
-    overflow: hidden;
+    // overflow: hidden;
     margin: auto 0;
   }
 }

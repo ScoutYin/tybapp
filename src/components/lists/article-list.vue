@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     toDetail (id) {
-      this.$router.push({name: 'ArticleDetail', params: { id: id }})
+      this.$router.push({name: 'ArticleDetail', query: { id: id }})
     }
   }
 }
@@ -41,29 +41,32 @@ export default {
     padding: 5px 0;
     display: flex;
     border-bottom: 1px solid #f3f3f3;
+    width: 100%;
+    flex-flow: row;
     .aside {
       flex: 1;
       margin-right: 15px;
+      overflow: hidden;
       .title {
         height: 40px;
         line-height: 20px;
         margin-bottom: 10px;
         font-size: 14px;
-        @include text-overflow(2);
+        // @include text-overflow(2);
       }
       .others {
         display: flex;
         font-size: 12px;
         color: #999;
         .copyfrom {
-          width: 140px;
+          max-width: calc(100% - 120px);
           overflow: hidden;
           @include text-overflow(1);
         }
-      }
-      .inputtime {
-        flex: 1;
-        text-align: right;
+        .inputtime {
+          flex: 1;
+          text-align: right;
+        }
       }
     }
     .thumb {

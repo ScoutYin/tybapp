@@ -35,7 +35,7 @@ export default {
   methods: {
     async getDetail () {
       try {
-        let id = this.$route.params.id
+        let id = this.$route.query.id
         let res = await getArticleDetail({id: id})
         if (res.data) {
           this.detailData = res.data

@@ -12,7 +12,7 @@ export default [
     component: FishSellList,
     name: 'FishSellList'
   }, {
-    path: '/fish/buy-detail/:id',
+    path: '/fish/buy-detail',
     component: FishBuyDetail,
     name: 'FishBuyDetail'
   }

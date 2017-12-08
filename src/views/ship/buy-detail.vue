@@ -60,7 +60,7 @@ export default {
   methods: {
     async getDetail () {
       try {
-        let res = await getShipDetail({id: this.$route.params.id})
+        let res = await getShipDetail({id: this.$route.query.id})
         if (res.data) {
           this.detailData = res.data
           this.thumbs = this.detailData.thumb

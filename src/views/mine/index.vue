@@ -3,7 +3,7 @@
     <div class="head-wrapper" v-permission-click="toUserInfo">
       <div class="thumb"></div>
     </div>
-    <div class="section" @click="toOrderBuyer">
+    <div class="section" v-permission-click="toOrderBuyer">
       <l-cell title="我是买家" v-is-link></l-cell>
       <div class="list-wrapper">
         <div class="list-item"
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="section" @click="toOrderSeller">
+    <div class="section" v-permission-click="toOrderSeller">
       <l-cell title="我是卖家" v-is-link></l-cell>
       <div class="list-wrapper">
         <div class="list-item"

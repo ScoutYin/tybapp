@@ -7,9 +7,7 @@
         :key="index"
         class="list-item"
         :item="item"
-        :num="index + 1"
-        @click.native="toDetail(item.id)">
-        {{ item }}
+        :num="index + 1">
       </l-shop-goods-top-item>
     </div>
 
@@ -20,7 +18,6 @@
         :key="index"
         class="list-item"
         :item="item">
-        {{ item }}
       </l-shop-goods-item>
     </div>
 
@@ -31,7 +28,6 @@
         :key="index"
         class="list-item"
         :item="item">
-        {{ item }}
       </l-shop-ship-item>
     </div>
   </div>
@@ -41,6 +37,8 @@
 import LShopGoodsTopItem from '../items/shop-goods-top-item'
 import LShopGoodsItem from '../items/shop-goods-item'
 import LShopShipItem from '../items/shop-ship-item'
+import { getTaglib } from 'api'
+
 export default {
   components: {
     LShopGoodsTopItem,
@@ -49,36 +47,50 @@ export default {
   },
   data () {
     return {
-      hotItems: [
-        { id: 0, src: '', title: '标准型焊接小车/HK-5SN', price: '2800.00' },
-        { id: 1, src: '', title: '野生新鲜 鲜活豆腐鱼 龙头鱼', price: '20.00' },
-        { id: 2, src: '', title: '东海野生银鲳鱼 新鲜平鱼', price: '120.00' }
-      ],
-      goodsItems: [
-        { id: 0, src: '', sales: 30 },
-        { id: 1, src: '', sales: 40 },
-        { id: 2, src: '', sales: 12 }
-      ],
-      shipItems: [
-        { id: 0, src: '', title: '编号：TRA273' },
-        { id: 0, src: '', title: '编号：TRA273' },
-        { id: 0, src: '', title: '编号：TRA273' },
-        { id: 0, src: '', title: '编号：TRA273' },
-        { id: 0, src: '', title: '编号：TRA273' },
-        { id: 0, src: '', title: '编号：TRA273' }
-      ]
+      hotItems: [],
+      goodsItems: [],
+      shipItems: []
     }
   },
+  mounted () {
+    this.getProduct()
+    this.getFish()
+    this.getShip()
+  },
   methods: {
-    toDetail (id) {
-      console.log('id: ', id)
-      this.$router.push({ path: `/store/detail?id=${id}` })
+    async getProduct () {
+      try {
+        let res = await getTaglib({modelid: 5, limit: 3})
+        this.hotItems = res.data
+        console.log('hotItem: ', res.data)
+      } catch (err) {
+        throw err
+      }
+    },
+    async getFish () {
+      try {
+        let res = await getTaglib({modelid: 9, limit: 3})
+        this.goodsItems = res.data
+        console.log('goodsItems: ', res.data)
+      } catch (err) {
+        throw err
+      }
+    },
+    async getShip () {
+      try {
+        let res = await getTaglib({modelid: 7, limit: 6})
+        this.shipItems = res.data
+        console.log('shipItems: ', res.data)
+      } catch (err) {
+        throw err
+      }
     }
   }
 }
 </script>
 
 <style lang="scss">
+@import '../../common/style/mixins.scss';
 .l-goods-list {
   .list {
     position: relative;
@@ -115,8 +127,9 @@ export default {
         margin: 0 auto;
       }
       .title {
-        margin: 6px 0;
         text-align: left;
+        line-height: 1.3;
+        @include text-overflow(2);
       }
       .price {
         color: red;

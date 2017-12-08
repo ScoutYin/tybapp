@@ -12,7 +12,7 @@ export default [
     component: ShipSellList,
     name: 'ShipSellList'
   }, {
-    path: '/ship/buy-detail/:id',
+    path: '/ship/buy-detail',
     component: ShipBuyDetail,
     name: 'ShipBuyDetail'
   }

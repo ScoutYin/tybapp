@@ -1,7 +1,7 @@
 <template>
-  <div class="goods-top-item-wrapper">
+  <div class="goods-top-item-wrapper" @click="toDetail">
     <div class="image">
-      <img :src="item.src">
+      <img :src="item.thumb">
       <div class="flag">0{{num}}</div>
     </div>
     <div class="title">{{ item.title }}</div>
@@ -14,12 +14,20 @@ export default {
   props: {
     item: Object,
     num: Number
+  },
+  methods: {
+    toDetail () {
+      this.$router.push({name: 'FishBuyDetail', query: { id: this.item.id, type: 'product' }})
+    }
   }
 }
 </script>
 
 <style lang="scss">
 .goods-top-item-wrapper {
+  .title {
+    margin-top: 5px;
+  }
   .flag {
     position: absolute;
     right: -1px;

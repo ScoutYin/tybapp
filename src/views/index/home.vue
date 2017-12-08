@@ -30,10 +30,12 @@
       <div class="title">渔获指数</div>
     </div>
     <div class="section">
-      <div class="title">渔获销量</div>
+      <div class="title">渔获销冠</div>
+      <l-fish-recommend-list :list="fishRecommend"></l-fish-recommend-list>
     </div>
     <div class="section">
       <div class="title">渔船推荐</div>
+      <l-ship-recommend-list :list="shipRecommend"></l-ship-recommend-list>
     </div>
     <div class="section">
       <div class="title">政策资讯</div>
@@ -46,10 +48,12 @@
 <script>
 import LMainLayout from 'components/layout/main-layout'
 import LButton from 'components/common/button'
+import LShipRecommendList from 'components/lists/ship-recommend-list'
 import LArticleList from 'components/lists/article-list'
+import LFishRecommendList from 'components/lists/fish-recommend-list'
 import { Swiper, SwiperItem } from 'vux'
 import LCell from 'components/common/cell'
-import { getArticleList, getFishExponent } from 'api'
+import { getArticleList, getFishExponent, getShipRecommend, getTaglib } from 'api'
 export default {
   name: '',
   components: {
@@ -58,6 +62,8 @@ export default {
     Swiper,
     SwiperItem,
     LCell,
+    LShipRecommendList,
+    LFishRecommendList,
     LArticleList
   },
   data () {
@@ -88,12 +94,16 @@ export default {
       ],
       exponents: [],
       articleList: [],
+      shipRecommend: [],
+      fishRecommend: [],
       show: false
     }
   },
   mounted () {
     this.getExponents()
     this.getArticles()
+    this.getShip()
+    this.getFish()
   },
   methods: {
     toPath (path) {
@@ -126,6 +136,24 @@ export default {
         let res = await getArticleList({limit: 5})
         this.articleList = res.data
         console.log(res.data)
+      } catch (err) {
+        throw err
+      }
+    },
+    async getFish () {
+      try {
+        let res = await getTaglib({modelid: 9, limit: 2, sort: 'sales'})
+        this.fishRecommend = res.data
+        console.log('getFish: ', res.data)
+      } catch (err) {
+        throw err
+      }
+    },
+    async getShip () {
+      try {
+        let res = await getShipRecommend()
+        this.shipRecommend = res.data
+        console.log('getShip: ', res.data)
       } catch (err) {
         throw err
       }

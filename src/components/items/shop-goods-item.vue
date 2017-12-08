@@ -1,7 +1,7 @@
 <template>
-  <div class="shop-goods-item-wrapper">
+  <div class="shop-goods-item-wrapper" @click="toDetail">
     <div class="image">
-      <img :src="item.src">
+      <img :src="item.thumb">
     </div>
     <div class="progress-wrapper">
       <div class="progress-inner" :style="`width: ${width}%;`"></div>
@@ -21,6 +21,11 @@ export default {
     },
     width () {
       return parseInt(this.sales)
+    }
+  },
+  methods: {
+    toDetail () {
+      this.$router.push({name: 'FishBuyDetail', query: { id: this.item.id }})
     }
   }
 }

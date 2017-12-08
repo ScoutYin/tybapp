@@ -9,21 +9,8 @@
       <div class="list">
         <div class="item-wrapper"
              v-for="(item, index) in list"
-             :key="index"
-             @click="toDetail(item.id)">
-          <div class="item">
-            <div class="image">
-              <img :src="item.thumb">
-            </div>
-            <div class="content">
-              <div class="title">
-                {{item.title}}
-              </div>
-              <div class="price">
-                {{item.price | lPrice}}
-              </div>
-            </div>
-          </div>
+             :key="index">
+          <l-fish-item :item="item"></l-fish-item>
         </div>
       </div>
     </l-pulldown-refresh>
@@ -33,13 +20,15 @@
 <script>
 import LMainLayout from 'components/layout/main-layout'
 import LPulldownRefresh from 'components/pulldown-refresh'
+import LFishItem from 'components/items/shop-fish-item'
 import listMixin from '@/mixins/list'
 import { getFishList } from 'api'
 export default {
   name: 'FishBuyList',
   components: {
     LMainLayout,
-    LPulldownRefresh
+    LPulldownRefresh,
+    LFishItem
   },
   mixins: [listMixin],
   mounted () {
@@ -59,9 +48,6 @@ export default {
       } catch (err) {
         throw err
       }
-    },
-    toDetail (id) {
-      this.$router.push({name: 'FishBuyDetail', params: { id: id }})
     }
   }
 }
@@ -71,28 +57,25 @@ export default {
 .fish-buyer-list-container {
   .list {
     display: flex;
-    width: 375px;
+    max-width: 375px;
     flex-wrap: wrap;
     padding: 0 5px;
     margin: 0 auto;
     justify-content: flex-start;
     .item-wrapper {
-      width: 182.5px;
-      .item {
-        margin: 10px auto;
-        width: 167.5px;
-        background: #fff;
-        border-radius: 4px;
-        overflow: hidden;
-        .image {
-          width: 100%;
-          height: 100px;
-        }
-        .content {
-          margin: 5px;
-          font-size: 14px;
-          line-height: 1.5;
-        }
+      margin: 10px auto;
+      width: 165px;
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      .image {
+        width: 100%;
+        height: 100px;
+      }
+      .content {
+        margin: 5px;
+        font-size: 14px;
+        line-height: 1.5;
       }
     }
   }
