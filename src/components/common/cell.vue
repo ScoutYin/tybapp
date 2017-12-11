@@ -75,7 +75,7 @@ export default {
     // top: 0;
     // transform: translate3d(100%, 0, 0);
 
-    &::after {
+    &:after {
       content: '';
       position: absolute;
       top: 50%;

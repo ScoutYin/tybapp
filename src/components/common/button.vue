@@ -67,13 +67,13 @@ export default {
   overflow: hidden;
   position: relative;
   text-align: center;
-  &::after {
+  &:after {
     background-color: #000;
     content: "";
     opacity: 0;
     position: absolute 0 0 0 0;
   }
-  &:not(.is-disabled):active::after {
+  &:not(.is-disabled):active:after {
     opacity: .4;
   }
   .l-button-icon {

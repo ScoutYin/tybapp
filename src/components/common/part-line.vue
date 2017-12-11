@@ -47,7 +47,7 @@ export default {
       flex-grow: 1;
     }
 
-    &::after, &::before {
+    &:after, &:before {
       content: "";
       margin-top: 8px;
       display: inline-block;

@@ -56,7 +56,7 @@ export default {
       display: inline-block;
       padding: 0;
       font-size: inherit;
-      &::after {
+      &:after {
         content: none;
       }
     }

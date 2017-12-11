@@ -39,7 +39,7 @@ export default {
     text-align: center;
     padding-top: 6px;
     color: #fff;
-    &::after {
+    &:after {
       content: '';
       position: absolute;
       width: 0px;
