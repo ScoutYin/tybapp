@@ -1,7 +1,7 @@
 <template>
   <div class="l-search-bar">
     <slot name="icon">
-      <l-icon icon="icon-sousuo"></l-icon>
+      <l-icon icon="icon-sousuo2"></l-icon>
     </slot>
     <label class="l-searchbar-label">{{placeholder}}</label>
   </div>

@@ -6,9 +6,6 @@
 
     <l-tabbar v-model="selected" class="tabbar">
       <l-tabbar-item v-for="(item, index) in tabs" :key="index" @click.native="toPath(item.path)">
-        <!-- <svg slot="icon" :class="['icon', item.id === 2 ? 'big-font' : 'common-font']" aria-hidden="true">
-          <use :xlink:href="`#${item.icon}`"></use>
-        </svg> -->
         <l-icon slot="icon" :icon="item.icon" :class="['icon', item.id === 2 ? 'big-font' : 'common-font']"></l-icon>
         <span class="">{{ item.title }}</span>
       </l-tabbar-item>
@@ -49,10 +46,10 @@ export default {
         { id: 4, title: '我', icon: 'icon-wode', path: '/mine' }
       ],
       popupItems: [
-        { id: 0, title: '发鱼货', icon: 'icon-yu', path: '' },
-        { id: 1, title: '发渔船', icon: 'icon-chuan', path: '' },
-        { id: 2, title: '发招聘', icon: 'icon-zhaopin', path: '' },
-        { id: 3, title: '发求职', icon: 'icon-qiuzhi', path: '' }
+        { id: 0, title: '发鱼货', icon: 'icon-buyfish', componentName: 'PublishFish' },
+        { id: 1, title: '发渔船', icon: 'icon-chuan', componentName: 'PublishShip' },
+        { id: 2, title: '发招聘', icon: 'icon-zhaoping', componentName: 'PublishRecruiting' },
+        { id: 3, title: '发求职', icon: 'icon-qiuzhi', componentName: 'PublishJobHunting' }
       ],
       selected: 0,
       popupVisible: false
@@ -130,6 +127,9 @@ export default {
     right: 0;
     height: 55px;
     border-top: 1px solid #eee;
+  }
+  .popup-wrapper {
+    background-color: rgba(255, 255, 255, 0.7);
   }
 }
 </style>

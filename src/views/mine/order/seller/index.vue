@@ -40,9 +40,6 @@ export default {
     this.selected = 0
   },
   methods: {
-    // onTabItem (index) {
-    //   this.router
-    // }
     back () {
       this.$router.push({ name: 'Mine' })
     }

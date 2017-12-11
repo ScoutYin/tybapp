@@ -1,4 +1,4 @@
-import { userLogin } from 'api'
+import { userLogin, getUserIndex } from 'api'
 import Vue from 'vue'
 import { ToastPlugin } from 'vux'
 import { USER_TOKEN, storage } from '../../utils/storage'
@@ -8,7 +8,8 @@ const state = {
   loginVisible: false,
   isLogin: false,
   loginNextCb: () => {},
-  userToken: ''
+  userToken: '',
+  userinfo: {}
 }
 
 const getters = {
@@ -31,6 +32,9 @@ const getters = {
       state.userToken = token
     }
     return state.userToken
+  },
+  userinfo: (state) => {
+    return state.userinfo
   }
 }
 
@@ -51,6 +55,10 @@ const actions = {
           Vue.$vux.toast.text('登陆成功', 'middle')
           commit('USER_LOGIN', res.data)
         }
+      })
+      await getUserIndex(params).then((res) => {
+        console.log('userinfo: ', res.data)
+        commit('USER_INFO', res.data)
       })
     } catch (err) {
       console.log(err, err.message)
@@ -89,6 +97,9 @@ const mutations = {
     state.isLogin = false
     state.userToken = ''
     storage.remove(USER_TOKEN)
+  },
+  USER_INFO: (state, data) => {
+    state.userinfo = data
   }
 }
 

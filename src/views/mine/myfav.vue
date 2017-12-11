@@ -1,12 +1,18 @@
 <template>
-  <div class="">
-    我收藏的x
-  </div>
+  <l-main-layout back>
+    <l-part-line text="暂无收藏"></l-part-line>
+  </l-main-layout>
 </template>
 
 <script>
+import LMainLayout from 'components/layout/main-layout'
+import LPartLine from 'components/common/part-line'
 export default {
-  name: 'MineMayfav'
+  name: 'MineMyFav',
+  components: {
+    LMainLayout,
+    LPartLine
+  }
 }
 </script>
 

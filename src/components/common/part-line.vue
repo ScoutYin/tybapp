@@ -26,6 +26,7 @@ export default {
 
 <style lang="scss">
 .l-part-line {
+  padding: 10px;
   .text {
     text-align: center;
     font-size: 13px;

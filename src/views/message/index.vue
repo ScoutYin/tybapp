@@ -5,7 +5,7 @@
         :value="item.value"
         v-for="(item, index) in list"
         :key="index"
-        @click.native="toPath(item.path)"
+        @click.native="toPath(item.routerName)"
         class="message-cell">
         <l-icon slot="icon" :icon="item.icon"></l-icon>
       </l-cell>
@@ -26,16 +26,20 @@ export default {
   data () {
     return {
       list: [
-        { title: '我的私信', icon: 'icon-ketaiyesixin', path: '' },
-        { title: '评论', icon: 'icon-pinglun', path: '' },
-        { title: '回复', icon: 'icon-liuyan', path: '' },
-        { title: '系统消息', icon: 'icon-xitongxiaoxi', path: '' }
+        { title: '我的私信', icon: 'icon-ketaiyesixin', routerName: 'MessagePersonalLetter' },
+        { title: '评论', icon: 'icon-pinglun', routerName: 'MessageComment' },
+        { title: '回复', icon: 'icon-liuyan', routerName: 'MessageReply' },
+        { title: '系统消息', icon: 'icon-xitongxiaoxi', routerName: 'MessageSystem' }
       ]
     }
   },
   methods: {
-    toPath (path) {
-      this.$router.push({ path: path })
+    toPath (name) {
+      if (this.$store.getters.isLogin) {
+        this.$router.push({ name: name })
+      } else {
+        this.$store.dispatch('showLogin')
+      }
     }
   }
 }

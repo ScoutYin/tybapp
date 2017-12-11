@@ -17,6 +17,8 @@ import Mine from './mine'
 import Fish from './fish'
 import Ship from './ship'
 import Article from './article'
+import Message from './message'
+import Publish from './publish'
 
 Vue.use(Router)
 
@@ -55,12 +57,14 @@ let routes = [
     component: Search,
     name: 'Search'
   },
+  ...Message,
   ...Mine,
   ...Recruitment,
   ...Store,
   ...Fish,
   ...Ship,
-  ...Article
+  ...Article,
+  ...Publish
 ]
 
 let router = new Router({

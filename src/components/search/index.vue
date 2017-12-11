@@ -9,7 +9,7 @@
       </div>
       <div class="l-search-bar">
         <slot name="icon">
-          <l-icon icon="icon-sousuo"></l-icon>
+          <l-icon icon="icon-sousuo2"></l-icon>
         </slot>
         <input
         ref="input"
@@ -105,6 +105,7 @@ export default {
       margin: auto;
     }
     .l-search-bar {
+      padding: 0 10px;
       display: flex;
       flex: 1;
       background: white;

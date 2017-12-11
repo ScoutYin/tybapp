@@ -21,14 +21,14 @@
         </div>
         <div class="right">
           <div class="price">{{goodsItem.data_price | lPrice}}</div>
-          <div class="cnt">×{{goodsItem.data_num}}</div>
+          <div class="cnt price">×{{goodsItem.data_num}}</div>
         </div>
       </div>
     </div>
     <div class="total">
       <div class="left">
         共{{item.total_num}}件商品 合计：
-        <span style="color: red; font-size: 14px">{{item.order_amount | lPrice}}</span>
+        <span style="font-size: 14px" class="price">{{item.order_amount | lPrice}}</span>
         （含运费¥{{item.shipping_price}}）</div>
       <!-- <div class="status">待付款</div> -->
     </div>

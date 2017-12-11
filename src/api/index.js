@@ -77,6 +77,8 @@ export const getFishExponent = (params) => axios.get('/5a166ad896554', params)
 // Order
 export const getUserOrderList = (params) => axios.get('/5a122fe1677cc', params)
 
+export const getUserIndex = (params) => axios.get('/59ffcc65b3e15', params)
+
 export const getList = (cb, params = { max_id: -1, limit: 20 }) => {
   if (typeof cb === 'function') {
     return cb(params)

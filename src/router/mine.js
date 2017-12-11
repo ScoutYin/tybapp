@@ -10,6 +10,11 @@ import SellerPreDeliver from 'views/mine/order/seller/pre-deliver'
 import SellerPreEvaluate from 'views/mine/order/seller/pre-evaluate'
 import SellerPrePayment from 'views/mine/order/seller/pre-payment'
 
+import BuyerAll from 'views/mine/order/buyer/all'
+import BuyerDelivered from 'views/mine/order/buyer/delivered'
+import BuyerPreDeliver from 'views/mine/order/buyer/pre-deliver'
+import BuyerPreEvaluate from 'views/mine/order/buyer/pre-evaluate'
+import BuyerPrePayment from 'views/mine/order/buyer/pre-payment'
 export default [
   {
     path: '/mine/settings',
@@ -42,7 +47,30 @@ export default [
     name: 'OrderBuyer',
     meta: {
       needLogin: true
-    }
+    },
+    children: [
+      {
+        path: '/mine/order/buyer/all',
+        component: BuyerAll,
+        name: 'BuyerAll'
+      }, {
+        path: '/mine/order/buyer/delivered',
+        component: BuyerDelivered,
+        name: 'BuyerDelivered'
+      }, {
+        path: '/mine/order/buyer/pre-deliver',
+        component: BuyerPreDeliver,
+        name: 'BuyerPreDeliver'
+      }, {
+        path: '/mine/order/buyer/pre-evaluate',
+        component: BuyerPreEvaluate,
+        name: 'BuyerPreEvaluate'
+      }, {
+        path: '/mine/order/buyer/pre-payment',
+        component: BuyerPrePayment,
+        name: 'BuyerPrePayment'
+      }
+    ]
   }, {
     path: '/mine/order/seller',
     component: OrderSeller,

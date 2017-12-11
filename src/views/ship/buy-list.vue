@@ -19,7 +19,7 @@
               船质：{{item.material}}
             </div>
             <div class="status">
-              状态：<span style="color: #b4282d;">{{item.buytype | buytype}}</span>
+              状态：<span style="color: red;">{{item.buytype | buytype}}</span>
             </div>
           </div>
         </div>

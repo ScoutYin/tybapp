@@ -47,5 +47,6 @@ img {
 
 /* 价格颜色默认为红色 */
 .price {
-  color: #b4282d;
+  /* color: #b4282d; */
+  color: red;
 }

@@ -1,5 +1,5 @@
 <template>
-  <l-pulldown-refresh class="seller-all-container order-list-container"
+  <l-pulldown-refresh class="order-layout-container order-list-container"
               :top-load-method="initData"
               ref="topLoad">
     <div class="order-list">
@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style lang="scss">
-.seller-pre-payment-container {
+.order-layout-container {
   .order-item {
     margin-top: 10px;
   }
