@@ -1,13 +1,17 @@
 <template lang="html">
   <div class="login-panel">
-    <div class="main-header"></div>
+    <div class="main-header">
+      <img src="http://www.taoyu58.com/Public/Home/images/logom.png" >
+    </div>
     <div class="input-wrapper">
       <input class="input-username" v-model="data.username" placeholder="用户名 / 手机号码">
     </div>
     <div class="input-wrapper">
       <input v-model="data.password" placeholder="密码">
     </div>
-    <div @click="onLogin" class="btn-login">登录</div>
+    <div @click="onLogin" class="btn-login">
+      <span>登录</span>
+    </div>
     <slot></slot>
   </div>
 </template>
@@ -54,6 +58,12 @@ export default {
   font-size: 14px;
   .main-header {
     height: 150px;
+    display: flex;
+    img {
+      width: 100px;
+      height: 100px;
+      margin: auto;
+    }
   }
   .input-wrapper {
     input {
@@ -66,14 +76,20 @@ export default {
     }
   }
   .btn-login {
+    display: flex;
     font-size: 16px;
-    margin: 10px 0;
-    padding: 15px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
     background: rgba(7, 17, 27, 0.1);
     text-align: center;
     letter-spacing: 20px;
     background: $default-color;
     color: #fff;
+    margin-bottom: 20px;
+    span {
+      flex: 1;
+    }
   }
 }
 </style>

@@ -15,7 +15,7 @@
     </section>
     <section class="section">
       <div class="title">产品详情</div>
-      <article class="content" v-html="content">
+      <article class="content" v-html="parseHTML(content)">
       </article>
     </section>
     <div class="bottom-bar" slot="bottom">

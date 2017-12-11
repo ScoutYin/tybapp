@@ -2,9 +2,10 @@ import config from '../config'
 import axios from 'axios'
 import qs from 'qs'
 import Vue from 'vue'
-import { AlertPlugin } from 'vux'
+import { AlertPlugin, LoadingPlugin } from 'vux'
 import store from '../store'
 Vue.use(AlertPlugin)
+Vue.use(LoadingPlugin)
 
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
@@ -33,6 +34,7 @@ instance.interceptors.request.use((conf) => {
 
 instance.interceptors.response.use((response) => {
   console.log('response: ', response)
+  Vue.$vux.loading.hide()
   if (response.status === 200) {
     let data = response.data
     if (data.code === 1) {
@@ -76,24 +78,6 @@ instance.interceptors.response.use((response) => {
   })
 })
 
-// export default async (url = '', data = {}, type = 'GET') => {
-//   let userToken = store.getters.userToken
-//   if (userToken) {
-//     instance.defaults.headers['USER-TOKEN'] = userToken
-//   }
-//   type = type.toUpperCase()
-//   url = baseUrl + url
-
-//   if (type === 'GET') {
-//     return instance.get(url, { params: data })
-//   }
-
-//   if (type === 'POST') {
-//     // instance.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-//     return instance.post(url, qs.stringify(data))
-//   }
-// }
-
 const setHeaderUserToken = () => {
   let userToken = store.getters.userToken
   if (userToken) {
@@ -101,9 +85,31 @@ const setHeaderUserToken = () => {
   }
 }
 
+const loadingList = [
+  '/59f175b082680', // ArticleList
+  '/5a28fa9b24c3f', // ArticleDetail
+  '/5a0e467b1df82', // ShipList
+  '/5a0e737f0f3a1', // ShipDetail
+  '/5a0e9b0c5b922', // FishList
+  '/5a0e9e1478595', // ProductList
+  '/5a0e9d2bda581', // ShopFishDetail
+  '/5a0ea01aad1a0' // ShopProductDetail
+]
+
+const checkLoadingList = (url) => {
+  console.log('show loading')
+  if (loadingList.indexOf(url) > -1) {
+    // console.log('show loading')
+    Vue.$vux.loading.show({
+      text: '加载中...'
+    })
+  }
+}
+
 export default {
   get: (url = '', data = {}) => {
     setHeaderUserToken()
+    checkLoadingList(url)
     return instance.get(baseUrl + url, {params: data})
   },
   post: (url = '', data = {}) => {

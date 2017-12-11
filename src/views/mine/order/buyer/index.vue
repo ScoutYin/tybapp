@@ -54,6 +54,7 @@ export default {
   .tab {
     position: fixed;
     z-index: 10;
+    top: 44px;
   }
   .main-view {
     position: relative;

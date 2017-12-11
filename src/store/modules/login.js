@@ -4,33 +4,22 @@ import { ToastPlugin } from 'vux'
 import { USER_TOKEN, storage } from '../../utils/storage'
 Vue.use(ToastPlugin)
 
+let getToken = storage.get(USER_TOKEN) || ''
+
 const state = {
   loginVisible: false,
-  isLogin: false,
+  isLogin: getToken,
   loginNextCb: () => {},
-  userToken: '',
+  userToken: getToken,
   userinfo: {}
 }
 
 const getters = {
   loginVisible: (state) => { return state.loginVisible },
   isLogin: (state) => {
-    if (state.userToken === '') {
-      let token = storage.get(USER_TOKEN)
-      if (token) {
-        state.isLogin = true
-        return true
-      }
-    } else {
-      state.isLogin = true
-    }
     return state.isLogin
   },
   userToken: (state) => {
-    if (!state.userToken) {
-      let token = storage.get(USER_TOKEN)
-      state.userToken = token
-    }
     return state.userToken
   },
   userinfo: (state) => {
@@ -50,18 +39,17 @@ const actions = {
   },
   userLogin: async ({ commit }, params) => {
     try {
-      await userLogin(params).then((res) => {
-        if (res) {
-          Vue.$vux.toast.text('登陆成功', 'middle')
-          commit('USER_LOGIN', res.data)
-        }
-      })
-      await getUserIndex(params).then((res) => {
-        console.log('userinfo: ', res.data)
-        commit('USER_INFO', res.data)
-      })
+      let res = await userLogin(params)
+      if (res) {
+        console.log('登录成功！', res)
+        Vue.$vux.toast.text('登陆成功', 'middle')
+        commit('USER_LOGIN', res.data)
+      }
+      res = await getUserIndex(params)
+      commit('USER_INFO', res.data)
     } catch (err) {
       console.log(err, err.message)
+      throw err
     }
   },
   userLogout: async ({ commit }, params) => {
@@ -71,6 +59,14 @@ const actions = {
     //   if (res) {
     //   }
     // })
+  },
+  getUserInfo: async ({commit}, params) => {
+    try {
+      let res = await getUserIndex(params)
+      commit('USER_INFO', res.data)
+    } catch (err) {
+      throw err
+    }
   }
 }
 
@@ -96,6 +92,7 @@ const mutations = {
     // 用户登出，清空用户信息
     state.isLogin = false
     state.userToken = ''
+    state.userinfo = {}
     storage.remove(USER_TOKEN)
   },
   USER_INFO: (state, data) => {

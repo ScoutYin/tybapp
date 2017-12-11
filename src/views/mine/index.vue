@@ -1,7 +1,15 @@
 <template>
   <l-main-layout class="mine-container">
     <div class="head-wrapper" v-permission-click="toUserInfo">
-      <div class="thumb"></div>
+      <div class="thumb">
+        <img :src="userinfo.avatar_thumb || ''" alt="">
+      </div>
+      <div class="right">
+        <div class="name">
+          {{userinfo.company || userinfo.nickname || userinfo.mobile || '立即登录'}}
+        </div>
+        <div class="desc" v-if="!userinfo.avatar_thumb">登录可享受更多功能</div>
+      </div>
     </div>
     <div class="section" v-permission-click="toOrderBuyer">
       <l-cell title="我是买家" v-is-link></l-cell>
@@ -41,12 +49,18 @@
 <script>
 import LMainLayout from 'components/layout/main-layout'
 import LCell from 'components/common/cell'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Mine',
   components: {
     LMainLayout,
     LCell
+  },
+  computed: {
+    ...mapGetters([
+      'userinfo'
+    ])
   },
   data () {
     return {
@@ -96,12 +110,25 @@ export default {
     width: 100%;
     overflow: hidden;
     background: $default-color;
+    display: flex;
+    padding: 0 50px;
     .thumb {
       width: 80px;
       height: 80px;
       background: rgba(255, 255, 255, .5);
-      margin: auto;
       // border: 1px solid #eee;
+    }
+    .right {
+      padding-left: 20px;
+      padding-top: 20px;
+      color: #fff;
+      .name {
+        font-size: 18px;
+      }
+      .desc {
+        font-size: 12px;
+        line-height: 2;
+      }
     }
   }
   .section {

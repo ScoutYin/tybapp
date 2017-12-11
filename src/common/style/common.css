@@ -50,3 +50,8 @@ img {
   /* color: #b4282d; */
   color: red;
 }
+
+a, a:hover{
+  text-decoration:none;
+  color: inherit;
+}

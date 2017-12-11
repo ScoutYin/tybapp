@@ -25,8 +25,15 @@ export default {
 
 <style lang="scss">
 .goods-top-item-wrapper {
+  position: relative;
   .title {
     margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  .price {
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
   .flag {
     position: absolute;

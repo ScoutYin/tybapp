@@ -10,16 +10,7 @@
       </div>
       <h1 slot="center" class="l-header-title" v-text="headerTitle" v-if="!hideTitle"></h1>
     </l-header>
-    <l-pulldown-refresh
-      :top-load-method="loadTop"
-      @top-status-change="handleTopChange"
-      ref="topLoad"
-      class="main"
-      :style="style"
-      v-if="topLoad">
-      <slot></slot>
-    </l-pulldown-refresh>
-    <div class="main" v-else :style="style">
+    <div class="main">
       <slot></slot>
     </div>
   </div>
@@ -61,11 +52,6 @@ export default {
     fixed: {
       type: Boolean,
       default: true
-    }
-  },
-  computed: {
-    style () {
-      return this.fixed ? { top: '44px' } : { top: '0' }
     }
   },
   data () {
@@ -115,6 +101,7 @@ export default {
     position: relative;
     background-color: inherit;
     height: calc(100% - 44px);
+    top: 44px;
     width: 100%;
     overflow-y: scroll;
     &::-webkit-scrollbar {

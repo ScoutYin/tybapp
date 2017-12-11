@@ -26,6 +26,13 @@ const fullThumb = Vue.filter('fullThumb', (thumb) => {
   return 'http://www.taoyu58.com' + thumb
 })
 
+// content里面的img标签是相对路径
+const fullImg = Vue.filter('fullImg', (content) => {
+  return content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, (match, url) => {
+    return 'http://www.taoyu58.com' + url
+  })
+})
+
 const buytype = Vue.filter('buytype', (type) => {
   let _type = parseInt(type)
   if (_type === 1) {
@@ -39,5 +46,6 @@ export default {
   price,
   time2Date,
   fullThumb,
-  buytype
+  buytype,
+  fullImg
 }

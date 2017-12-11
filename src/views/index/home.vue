@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="section dynamic-banner" v-is-link>
+    <div class="section dynamic-banner">
       <div class="left-title">
         交易动态
       </div>

@@ -43,7 +43,9 @@ export default {
     }
   },
   mounted () {
-    console.log('t:', this)
+    if (this.$store.getters.isLogin) {
+      this.$store.dispatch('getUserInfo')
+    }
   },
   watch: {
     '$route' (newValue) {

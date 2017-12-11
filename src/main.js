@@ -20,6 +20,15 @@ Vue.use(commonComponents)
 
 Vue.config.productionTip = false
 
+Vue.prototype.parseHTML = (content) => {
+  if (!content) {
+    return content
+  }
+  return content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, (match, url) => {
+    return match.replace(url, 'http://www.taoyu58.com' + url)
+  })
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

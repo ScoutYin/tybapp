@@ -8,7 +8,7 @@
       </div>
     </section>
     <section class="section">
-      <div class="content" v-html="articleData.content"></div>
+      <div class="content" v-html="parseHTML(articleData.content)"></div>
     </section>
   </l-main-layout>
 </template>

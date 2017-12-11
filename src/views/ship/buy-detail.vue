@@ -24,7 +24,7 @@
     </section>
     <section class="section">
       <div class="title">船况描述</div>
-      <article class="content" v-html="content">
+      <article class="content" v-html="parseHTML(content)">
       </article>
     </section>
     <div class="detail-bottom" slot="bottom">
@@ -34,7 +34,8 @@
       </div>
       <div class="right">
         <l-icon icon="icon-dianhua"></l-icon>
-        <span class="text">联系卖家</span>
+        <span class="text">
+          <a :href="`tel:${detailData.tel}`">联系卖家</a></span>
       </div>
     </div>
   </l-detail-layout>
