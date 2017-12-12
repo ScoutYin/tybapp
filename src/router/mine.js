@@ -1,4 +1,3 @@
-import Myfav from 'views/mine/myfav'
 import Settings from 'views/mine/settings'
 import Order from 'views/mine/order'
 import Userinfo from 'views/mine/userinfo'
@@ -15,18 +14,54 @@ import BuyerDelivered from 'views/mine/order/buyer/delivered'
 import BuyerPreDeliver from 'views/mine/order/buyer/pre-deliver'
 import BuyerPreEvaluate from 'views/mine/order/buyer/pre-evaluate'
 import BuyerPrePayment from 'views/mine/order/buyer/pre-payment'
+
+import MineFav from 'views/mine/fav'
+import MineFavProduct from 'views/mine/fav/product'
+import MineFavShop from 'views/mine/fav/shop'
+import MineFavShip from 'views/mine/fav/ship'
+import MineFavFish from 'views/mine/fav/fish'
+import MineFavJob from 'views/mine/fav/job'
+import MineFavResume from 'views/mine/fav/resume'
+
 export default [
   {
     path: '/mine/settings',
     component: Settings,
     name: 'Settings'
   }, {
-    path: '/mine/myfav',
-    component: Myfav,
-    name: 'MineMyfav',
+    path: '/mine/fav',
+    component: MineFav,
+    name: 'MineFav',
     meta: {
       needLogin: true
-    }
+    },
+    children: [
+      {
+        path: '/mine/fav/product',
+        component: MineFavProduct,
+        name: 'MineFavProduct'
+      }, {
+        path: '/mine/fav/shop',
+        component: MineFavShop,
+        name: 'MineFavShop'
+      }, {
+        path: '/mine/fav/ship',
+        component: MineFavShip,
+        name: 'MineFavShip'
+      }, {
+        path: '/mine/fav/fish',
+        component: MineFavFish,
+        name: 'MineFavFish'
+      }, {
+        path: '/mine/fav/job',
+        component: MineFavJob,
+        name: 'MineFavJob'
+      }, {
+        path: '/mine/fav/resume',
+        component: MineFavResume,
+        name: 'MineFavResume'
+      }
+    ]
   }, {
     path: '/mine/order',
     component: Order,

@@ -74,10 +74,18 @@ export const getShopFishList = (params) => axios.get('/5a0ea8086819c', params)
 // Fish
 export const getFishExponent = (params) => axios.get('/5a166ad896554', params)
 
+export const getAdvert = (params) => axios.get('/5a2a4cecb607d', params)
+
 // Order
 export const getUserOrderList = (params) => axios.get('/5a122fe1677cc', params)
 
 export const getUserIndex = (params) => axios.get('/59ffcc65b3e15', params)
+
+// 收藏
+export const getFavorite = (params) => axios.get('/5a2f8fa052742', params)
+export const getFavoriteList = (params) => axios.get('/5a122c5a4bc74', params)
+export const addFavorite = (params) => axios.get('/5a2a41269811a', params)
+export const delFavorite = (params) => axios.get('/5a2f905bbfac9', params)
 
 export const getList = (cb, params = { max_id: -1, limit: 20 }) => {
   if (typeof cb === 'function') {

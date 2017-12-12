@@ -1,25 +1,13 @@
 <template>
-  <l-main-layout :handleBack="back"
-                 class="mine-fav-container">
-    <l-tab v-model="selected" class="tab">
-      <l-tab-item v-for="(item, index) in tabItems"
-                  :key="index">
-        {{item.title}}
-      </l-tab-item>
-    </l-tab>
-    <router-view class="main-view"></router-view>
-  </l-main-layout>
+  <slider-tabview-layout :items="tabItems"></slider-tabview-layout>
 </template>
 
 <script>
-import LMainLayout from 'components/layout/main-layout'
-import { LTab, LTabItem } from 'components/tab'
+import SliderTabviewLayout from 'components/layout/slider-tabview-layout'
 export default {
   name: 'MineMyFav',
   components: {
-    LMainLayout,
-    LTab,
-    LTabItem
+    SliderTabviewLayout
   },
   data () {
     return {
@@ -38,5 +26,7 @@ export default {
 </script>
 
 <style lang="scss">
+.mine-fav-container {
 
+}
 </style>

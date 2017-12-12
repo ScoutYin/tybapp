@@ -1,8 +1,8 @@
 <template>
-  <l-main-layout class="home-container" title="淘鱼吧">
+  <l-main-layout class="home-container" title="淘渔吧">
     <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">
-      <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in items" :key="index">
-        <img :src="item.imgSrc" width="100%" height="100%">
+      <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in ad" :key="index">
+        <img :src="item.thumb" width="100%" height="100%">
       </swiper-item>
     </swiper>
     <div class="grid-layout">
@@ -53,7 +53,7 @@ import LArticleList from 'components/lists/article-list'
 import LFishRecommendList from 'components/lists/fish-recommend-list'
 import { Swiper, SwiperItem } from 'vux'
 import LCell from 'components/common/cell'
-import { getArticleList, getFishExponent, getShipRecommend, getTaglib } from 'api'
+import { getArticleList, getFishExponent, getShipRecommend, getTaglib, getAdvert } from 'api'
 export default {
   name: '',
   components: {
@@ -92,6 +92,7 @@ export default {
         { buyer: '12312341234', seller: '13533233323', updateTime: '4小时前' },
         { buyer: '13555555555', seller: '13512344321', updateTime: '5小时前' }
       ],
+      ad: [],
       exponents: [],
       articleList: [],
       shipRecommend: [],
@@ -100,6 +101,7 @@ export default {
     }
   },
   mounted () {
+    this.getAD()
     this.getExponents()
     this.getArticles()
     this.getShip()
@@ -121,6 +123,15 @@ export default {
     clicked () {
       console.log('clicked.')
       this.show = true
+    },
+    async getAD () {
+      try {
+        let res = await getAdvert({id: 3})
+        this.ad = res.data
+        console.log('ad', res)
+      } catch (err) {
+        throw err
+      }
     },
     async getExponents () {
       try {

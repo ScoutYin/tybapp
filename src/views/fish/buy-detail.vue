@@ -25,7 +25,7 @@
       </div>
       <div class="line"></div>
       <div class="item-fav item-common" v-permission-click="addFav">
-        <l-icon icon="icon-heart"></l-icon>
+        <l-icon :icon="isFav === 0 ? 'icon-shoucang' : 'icon-shoucang-fill'"></l-icon>
         <div class="title">收藏</div>
       </div>
       <div class="line"></div>
@@ -43,7 +43,7 @@
 
 <script>
 import LDetailLayout from 'components/layout/detail-layout'
-import { getShopFishDetail, getShopProductDetail } from 'api'
+import { getShopFishDetail, getShopProductDetail, addFavorite, getFavorite } from 'api'
 export default {
   components: {
     LDetailLayout
@@ -51,15 +51,18 @@ export default {
   data () {
     return {
       detailData: {},
+      isFav: 0,
       thumbs: [],
       content: '',
       type: this.$route.query.type || 'fish',
       fetchObj: {
         'fish': {
+          modelId: 9,
           fetch: getShopFishDetail,
           moreData: 'FishData'
         },
         'product': {
+          modelId: 5,
           fetch: getShopProductDetail,
           moreData: 'ProductData'
         }
@@ -78,6 +81,7 @@ export default {
           this.detailData = res.data
           this.thumbs = this.detailData.thumb
           this.content = this.detailData[moreData].content
+          this.getFav()
         }
         console.log('detailData: ', this.detailData)
       } catch (err) {
@@ -92,8 +96,24 @@ export default {
       }
       this.$store.dispatch('addGoods', goodInfo)
     },
-    addFav () {
-
+    async getFav () {
+      try {
+        let res = await getFavorite({modelid: this.fetchObj[this.type].modelId, id: this.detailData.id})
+        this.isFav = res.data.status
+        console.log(res)
+      } catch (err) {
+        throw err
+      }
+    },
+    async addFav () {
+      try {
+        let res = await addFavorite({modelid: this.fetchObj[this.type].modelId, id: this.detailData.id})
+        this.isFav = res.status
+        this.$vux.toast.text(res.data.msg, 'middle')
+        console.log(res)
+      } catch (err) {
+        throw err
+      }
     },
     toCart () {
       this.$router.push({ path: '/store/cart' })

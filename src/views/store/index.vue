@@ -4,8 +4,8 @@
       search
       ref="main">
       <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">
-        <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in items" :key="index">
-          <img :src="item.imgSrc" width="100%" height="100%">
+        <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in ad" :key="index">
+          <img :src="item.thumb" width="100%" height="100%">
         </swiper-item>
       </swiper>
 
@@ -22,6 +22,7 @@
 <script>
 import LMainLayout from 'components/layout/main-layout'
 import { Swiper, SwiperItem } from 'vux'
+import { getAdvert } from 'api'
 import LGoodsItem from 'components/lists/goods-item'
 import LGoodsList from 'components/lists/goods-list'
 
@@ -50,6 +51,7 @@ export default {
           imgSrc: 'http://www.taoyu58.com/Uploads/Picture/2017-09-08/59b237f4a1620.jpg'
         }
       ],
+      ad: [],
       lists: []
     }
   },
@@ -57,9 +59,18 @@ export default {
 
   },
   mounted () {
-
+    this.getAd()
   },
   methods: {
+    async getAd () {
+      try {
+        let res = await getAdvert({id: 5})
+        this.ad = res.data
+        console.log('ad: ', res)
+      } catch (err) {
+        throw err
+      }
+    },
     toGoodsDetail (id) {
       this.$router.push({ path: `/store/detail?type=${this.tabIndex}&id=${id}` })
     }

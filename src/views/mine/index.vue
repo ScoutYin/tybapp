@@ -65,7 +65,7 @@ export default {
   data () {
     return {
       list: [
-        { title: '我的收藏', icon: 'icon-shoucang', path: '/mine/myfav', isLink: true },
+        { title: '我的收藏', icon: 'icon-shoucang', path: '/mine/fav', isLink: true },
         { title: '设置', icon: 'icon-shezhi', path: '/mine/settings', isLink: true }
       ],
       buyerList: [

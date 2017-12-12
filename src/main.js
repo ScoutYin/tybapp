@@ -48,6 +48,7 @@ new Vue({
 //     store,
 //     VueI18n,
 //     directives,
+//     filters,
 //     template: '<App/>',
 //     components: { App }
 //   })
