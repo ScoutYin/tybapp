@@ -6,9 +6,7 @@
         :key="index">
       </l-cell>
     </div>
-    <div>
-      <l-button size="large" @click.native="logout" v-if="isLogin">退出登录</l-button>
-    </div>
+    <div @click="logout" v-if="isLogin" class="logout">退出当前账号</div>
   </l-main-layout>
 </template>
 
@@ -57,4 +55,15 @@ export default {
 </script>
 
 <style lang="scss">
+.settings-container {
+  .logout {
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    color: #f15a22;
+    &:active {
+      opacity: 0.7;
+    }
+  }
+}
 </style>

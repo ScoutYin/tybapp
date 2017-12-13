@@ -163,6 +163,11 @@ let doCheck = function (force) {
     shouldTrigger = viewportBottom + distance >= elementBottom
   }
 
+  /** add pr **/
+  if (this.shouldTrigger === shouldTrigger) return
+  this.shouldTrigger = shouldTrigger
+  /** end **/
+
   if (shouldTrigger && this.expression) {
     this.expression()
   }

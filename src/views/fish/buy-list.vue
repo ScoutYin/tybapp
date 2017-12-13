@@ -2,17 +2,17 @@
   <l-main-layout class="fish-buyer-list-container"
                  back>
     <l-pulldown-refresh :top-load-method="initData"
-                        ref="topLoad"
-                        v-infinite-scroll="loadMore"
-                        infinite-scroll-disabled="loading"
-                        infinite-scroll-distance="10">
-      <div class="list">
+                        ref="topLoad">
+      <div class="list" v-infinite-scroll="loadMore"
+                      infinite-scroll-disabled="loading"
+                      infinite-scroll-distance="100">
         <div class="item-wrapper"
              v-for="(item, index) in list"
              :key="index">
-          <l-fish-item :item="item"></l-fish-item>
+          <l-fish-item :item="item" class="item"></l-fish-item>
         </div>
       </div>
+      <l-part-line v-if="loading && list.length !== 0 " text="没有更多"></l-part-line>
     </l-pulldown-refresh>
   </l-main-layout>
 </template>
@@ -22,22 +22,23 @@ import LMainLayout from 'components/layout/main-layout'
 import LPulldownRefresh from 'components/pulldown-refresh'
 import LFishItem from 'components/items/shop-fish-item'
 import listMixin from '@/mixins/list'
+import LPartLine from 'components/common/part-line'
 import { getFishList } from 'api'
 export default {
   name: 'FishBuyList',
   components: {
     LMainLayout,
     LPulldownRefresh,
-    LFishItem
+    LFishItem,
+    LPartLine
   },
   mixins: [listMixin],
   mounted () {
-    this.init(getFishList)
     this.initData()
   },
   methods: {
     initData () {
-      this.maxId = 0
+      this.init(getFishList)
       this.getList()
     },
     async getList () {
@@ -57,25 +58,28 @@ export default {
 .fish-buyer-list-container {
   .list {
     display: flex;
-    max-width: 375px;
+    width: 375px;
     flex-wrap: wrap;
     padding: 0 5px;
     margin: 0 auto;
     justify-content: flex-start;
     .item-wrapper {
-      margin: 10px auto;
-      width: 165px;
-      background: #fff;
-      border-radius: 4px;
-      overflow: hidden;
-      .image {
-        width: 100%;
-        height: 100px;
-      }
-      .content {
-        margin: 5px;
-        font-size: 14px;
-        line-height: 1.5;
+      width: 182.5px;
+      .item {
+        margin: 10px auto;
+        width: 167.5px;
+        background: #fff;
+        border-radius: 4px;
+        overflow: hidden;
+        .image {
+          width: 100%;
+          height: 100px;
+        }
+        .content {
+          margin: 5px;
+          font-size: 14px;
+          line-height: 1.5;
+        }
       }
     }
   }

@@ -8,8 +8,10 @@ export default {
       pagination: {},
       total: 0,
       loadFunc: Function,
+      // loadEnd: false,
       loading: true,
-      status: 0
+      status: 0,
+      cnt: 0
     }
   },
   mounted () {
@@ -28,7 +30,6 @@ export default {
       }
     },
     async loadData (params = {}) {
-      console.log('我被调用了几次')
       let _params = {
         max_id: this.maxId,
         limit: this.limit,
@@ -42,6 +43,9 @@ export default {
             this.list = res.data
           }
           this.pagination = res.pagination
+          this.$nextTick(() => {
+            this.loading = false
+          })
           return res.data
         } catch (err) {
           throw err
@@ -52,19 +56,22 @@ export default {
       }
     },
     async loadMore (params) {
-      console.log('我被调用了吗')
-      this.loading = true
+      // 读取到底部则停止
+      if (this.loading) {
+        return
+      }
       let length = this.list.length
       if (length === 0) {
         this.maxId = 0
       } else {
-        this.maxId = this.list[length][this.idType]
+        this.maxId = this.list[length - 1][this.idType]
       }
       try {
         let addList = await this.loadData(params)
-        // 不为0 说明能够继续加载更多
-        if (addList.length !== 0) {
-          this.loading = false
+        console.log('addList: ', addList)
+        // 为0 不能够继续加载更多
+        if (addList.length === 0) {
+          this.loading = true
         }
         this.list = Array.concat(this.list, addList)
         return this.list

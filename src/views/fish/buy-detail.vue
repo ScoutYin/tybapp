@@ -24,10 +24,7 @@
         <div class="title">店铺</div>
       </div>
       <div class="line"></div>
-      <div class="item-fav item-common" v-permission-click="addFav">
-        <l-icon :icon="isFav === 0 ? 'icon-shoucang' : 'icon-shoucang-fill'"></l-icon>
-        <div class="title">收藏</div>
-      </div>
+      <l-unit-button-fav :modelId="fetchObj[this.type].modelId" :id="detailData.id"></l-unit-button-fav>
       <div class="line"></div>
       <div class="item-cart" v-permission-click="addGoods">
         <l-icon icon="icon-gouwuche"></l-icon>
@@ -43,10 +40,12 @@
 
 <script>
 import LDetailLayout from 'components/layout/detail-layout'
-import { getShopFishDetail, getShopProductDetail, addFavorite, getFavorite } from 'api'
+import { getShopFishDetail, getShopProductDetail } from 'api'
+import LUnitButtonFav from 'components/unit/button-fav'
 export default {
   components: {
-    LDetailLayout
+    LDetailLayout,
+    LUnitButtonFav
   },
   data () {
     return {
@@ -81,7 +80,6 @@ export default {
           this.detailData = res.data
           this.thumbs = this.detailData.thumb
           this.content = this.detailData[moreData].content
-          this.getFav()
         }
         console.log('detailData: ', this.detailData)
       } catch (err) {
@@ -95,25 +93,6 @@ export default {
         // shop: this.shopData
       }
       this.$store.dispatch('addGoods', goodInfo)
-    },
-    async getFav () {
-      try {
-        let res = await getFavorite({modelid: this.fetchObj[this.type].modelId, id: this.detailData.id})
-        this.isFav = res.data.status
-        console.log(res)
-      } catch (err) {
-        throw err
-      }
-    },
-    async addFav () {
-      try {
-        let res = await addFavorite({modelid: this.fetchObj[this.type].modelId, id: this.detailData.id})
-        this.isFav = res.status
-        this.$vux.toast.text(res.data.msg, 'middle')
-        console.log(res)
-      } catch (err) {
-        throw err
-      }
     },
     toCart () {
       this.$router.push({ path: '/store/cart' })
@@ -159,7 +138,7 @@ export default {
     .item-common {
       padding: 0 10px;
       margin: auto;
-      width: 50px;
+      width: 60px;
       text-align: center;
       vertical-align: middle;
       .title {

@@ -2,29 +2,32 @@
   <l-main-layout class="ship-buy-list-container" back>
     <l-pulldown-refresh :top-load-method="initData"
                         ref="topLoad">
-      <div class="list">
+      <div class="list" v-infinite-scroll="loadMore"
+                      infinite-scroll-disabled="loading"
+                      infinite-scroll-distance="100">
         <div class="item-wrapper"
            v-for="(item, index) in list"
            :key="index"
            @click="toDetail(item.id)">
-        <div class="item">
-          <div class="image">
-            <img :src="item.thumb">
-          </div>
-          <div class="content">
-            <div class="name">
-              编号：{{item.name}}
+          <div class="item">
+            <div class="image">
+              <img :src="item.thumb">
             </div>
-            <div class="material">
-              船质：{{item.material}}
-            </div>
-            <div class="status">
-              状态：<span style="color: red;">{{item.buytype | buytype}}</span>
+            <div class="content">
+              <div class="name">
+                编号：{{item.name}}
+              </div>
+              <div class="material">
+                船质：{{item.material}}
+              </div>
+              <div class="status">
+                状态：<span style="color: red;">{{item.buytype | buytype}}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
+      <l-part-line v-if="loading && list.length !== 0 " text="没有更多"></l-part-line>
     </l-pulldown-refresh>
   </l-main-layout>
 </template>
@@ -33,21 +36,22 @@
 import LMainLayout from 'components/layout/main-layout'
 import LPulldownRefresh from 'components/pulldown-refresh'
 import listMixin from '@/mixins/list'
+import LPartLine from 'components/common/part-line'
 import { getShipList } from 'api'
 export default {
   name: 'ShipBuyList',
   components: {
     LMainLayout,
-    LPulldownRefresh
+    LPulldownRefresh,
+    LPartLine
   },
   mixins: [listMixin],
   mounted () {
-    this.init(getShipList)
     this.initData()
   },
   methods: {
     initData () {
-      this.maxId = 0
+      this.init(getShipList)
       this.getList()
     },
     async getList () {

@@ -28,7 +28,7 @@
         <div class="list-item"
              v-for="(item, index) in sellerList"
              :key="index">
-          <div class="num">{{ item.num }}</div>
+          <l-icon :icon="item.icon" class="icon"></l-icon>
           <div class="title">{{ item.title }}</div>
         </div>
       </div>
@@ -69,16 +69,16 @@ export default {
         { title: '设置', icon: 'icon-shezhi', path: '/mine/settings', isLink: true }
       ],
       buyerList: [
-        { title: '待付款', icon: 'icon-dingdan' },
-        { title: '待发货', icon: 'icon-dingdan' },
-        { title: '待收货', icon: 'icon-dingdan' },
-        { title: '评价', icon: 'icon-dingdan' }
+        { title: '待付款', icon: 'icon-daifukuan' },
+        { title: '待发货', icon: 'icon-daifahuo' },
+        { title: '待收货', icon: 'icon-daishouhuo' },
+        { title: '评价', icon: 'icon-daipingjia-2' }
       ],
       sellerList: [
-        { title: '待付款', num: 12 },
-        { title: '待发货', num: 23 },
-        { title: '待收货', num: 34 },
-        { title: '评价', num: 45 }
+        { title: '待付款', icon: 'icon-daifukuan' },
+        { title: '待发货', icon: 'icon-daifahuo' },
+        { title: '待收货', icon: 'icon-daishouhuo' },
+        { title: '待评价', icon: 'icon-daipingjia-2' }
       ]
     }
   },

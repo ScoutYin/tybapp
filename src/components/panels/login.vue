@@ -7,7 +7,7 @@
       <input class="input-username" v-model="data.username" placeholder="用户名 / 手机号码">
     </div>
     <div class="input-wrapper">
-      <input v-model="data.password" placeholder="密码">
+      <input v-model="data.password" type="password" placeholder="密码">
     </div>
     <div @click="onLogin" class="btn-login">
       <span>登录</span>

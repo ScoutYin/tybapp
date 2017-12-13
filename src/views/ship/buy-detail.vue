@@ -28,10 +28,7 @@
       </article>
     </section>
     <div class="detail-bottom" slot="bottom">
-      <div class="left">
-        <l-icon icon="icon-shoucang"></l-icon>
-        <div>收藏</div>
-      </div>
+      <l-unit-button-fav class="left" modelId="7" :id="detailData.id"></l-unit-button-fav>
       <div class="right">
         <l-icon icon="icon-dianhua"></l-icon>
         <span class="text">
@@ -44,9 +41,11 @@
 <script>
 import LDetailLayout from 'components/layout/detail-layout'
 import { getShipDetail } from 'api'
+import LUnitButtonFav from 'components/unit/button-fav'
 export default {
   components: {
-    LDetailLayout
+    LDetailLayout,
+    LUnitButtonFav
   },
   data () {
     return {
