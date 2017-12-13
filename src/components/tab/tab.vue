@@ -62,7 +62,7 @@ export default {
         this.translateX = 0
       }
 
-      if (this.translateX + this.listWidth < 0) {
+      if (this.translateX + this.listWidth < 0 && this.listWidth > 0) {
         this.translateX = -this.listWidth
       }
     },

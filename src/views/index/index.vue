@@ -5,7 +5,7 @@
     </keep-alive>
 
     <l-tabbar v-model="selected" class="tabbar">
-      <l-tabbar-item v-for="(item, index) in tabs" :key="index" @click.native="toPath(item.path)">
+      <l-tabbar-item v-for="(item, index) in tabs" :key="index" @click.native="jump(item.componentName)">
         <l-icon slot="icon" :icon="item.icon" :class="['icon', item.id === 2 ? 'big-font' : 'common-font']"></l-icon>
         <span class="">{{ item.title }}</span>
       </l-tabbar-item>
@@ -39,11 +39,11 @@ export default {
   data () {
     return {
       tabs: [
-        { id: 0, title: '首页', icon: 'icon-shouye', path: '/home' },
-        { id: 1, title: '商城', icon: 'icon-gouwudai', path: '/store' },
+        { id: 0, title: '首页', icon: 'icon-shouye', componentName: 'Home' },
+        { id: 1, title: '商城', icon: 'icon-gouwudai', componentName: 'Store' },
         { id: 2, title: '发布', icon: 'icon-fabu' },
-        { id: 3, title: '消息', icon: 'icon-xinxi', path: '/message' },
-        { id: 4, title: '我', icon: 'icon-wode', path: '/mine' }
+        { id: 3, title: '消息', icon: 'icon-xinxi', componentName: 'Message' },
+        { id: 4, title: '我', icon: 'icon-wode', componentName: 'Mine' }
       ],
       popupItems: [
         { id: 0, title: '发鱼获', icon: 'icon-buyfish', componentName: 'PublishFish' },
@@ -63,14 +63,14 @@ export default {
   methods: {
     initTabs () {
       for (let i = 0; i < this.tabs.length; ++i) {
-        if (this.$route.path === this.tabs[i].path) {
+        if (this.$route.name === this.tabs[i].componentName) {
           this.selected = i
         }
       }
     },
-    toPath (path) {
-      if (path) {
-        this.$router.push({ path: path })
+    jump (name) {
+      if (name) {
+        this.$router.push({ name: name })
       } else {
         this.publish()
       }
@@ -84,11 +84,14 @@ export default {
     }
   },
   watch: {
-    'selected' (newValue, oldValue) {
+    'selected' (newVal, oldValue) {
       // 如果选中中间的，则修改成之前的
-      if (newValue === 2) {
+      if (newVal === 2) {
         this.selected = oldValue
       }
+    },
+    '$route' (newVal) {
+      this.initTabs()
     }
   }
 }
