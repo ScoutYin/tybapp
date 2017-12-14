@@ -12,10 +12,13 @@ import directives from './directives'
 import filters from './filters'
 import commonComponents from 'components/common'
 import 'lib-flexible'
+import { DatetimePlugin } from 'vux'
 
 console.log('i18n: ', VueI18n)
 
 Vue.use(commonComponents)
+Vue.use(DatetimePlugin)
+// Vue.use(PopupPickerPlugin)
 // Vue.use(store)
 
 Vue.config.productionTip = false
@@ -24,9 +27,17 @@ Vue.prototype.parseHTML = (content) => {
   if (!content) {
     return content
   }
-  return content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, (match, url) => {
+  // 处理img相对路径问题
+  content = content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, (match, url) => {
     return match.replace(url, 'http://www.taoyu58.com' + url)
   })
+  // 处理table style 宽度过宽问题
+  content = content.replace(/<table [^>]*style=['"]([^'"]+)[^>]*>/gi, (match, style) => {
+    console.log('match: ', match, 'style: ', style)
+    return match.replace(style, 'width: 100%;')
+  })
+
+  return content
 }
 
 /* eslint-disable no-new */

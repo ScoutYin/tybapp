@@ -83,6 +83,7 @@ export default {
   height: 44px;
   overflow: hidden;
   display: flex;
+  border-bottom: 1px solid #ddd;
   .l-tab-list {
     display: flex;
     flex-flow: row nowrap;

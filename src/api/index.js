@@ -53,6 +53,7 @@ export const getCommonThumb = (params) => axios.get('/5a0a425baa1e5', params)
 export const getCommonAvatar = (params) => axios.get('/5a0a43915a839', params)
 export const getCommonRegion = (params) => axios.get('/5a0bcd1c68972', params)
 export const getTaglib = (params) => axios.get('/5a28e13e3a312', params)
+export const getLinkage = (params) => axios.get('/5a1631062ee22', params)
 
 // Ship
 export const getShipList = (params) => axios.get('/5a0e467b1df82', params)

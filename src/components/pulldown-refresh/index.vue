@@ -176,6 +176,7 @@ export default {
     -webkit-overflow-scrolling: touch;
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .action-block {
