@@ -23,10 +23,10 @@
                :value="obj[formDataskeys[index]]"
                v-if="item.type === 'datetime'"
                @click="selectDatetime(index)">
-        <!-- <popup-picker class="l-input-core"
+        <popup-picker class="l-input-core"
               valueTextAlign="left"
               v-if="item.type === 'select'"
-              :placeholder="`${item.required ? '*' : ''}${item.label}`"></popup-picker> -->
+              :placeholder="`${item.required ? '*' : ''}${item.label}`"></popup-picker>
         <div class="icon">
           <l-icon :icon="`${item.icon}`"></l-icon>
         </div>
@@ -44,12 +44,12 @@
 </template>
 
 <script>
-// import { PopupPicker } from 'vux'
+import { PopupPicker } from 'vux'
 import { getLinkage } from 'api'
 export default {
-  // components: {
-  //   PopupPicker
-  // },
+  components: {
+    PopupPicker
+  },
   props: {
     formDatas: {
       type: Map,
@@ -85,6 +85,9 @@ export default {
       console.log('selectDatetime.')
       let key = this.formDataskeys[index]
       this.$vux.datetime.show({
+        onShow: (value) => {
+          console.log('onshow.')
+        },
         onConfirm: (value) => {
           this.$set(this.obj, key, value)
         }
@@ -113,16 +116,16 @@ export default {
         width: 100%;
         height: 100%;
         padding: 0 10px;
-        // .weui-cell {
-        //   width: 100%;
-        //   height: 100%;
-        //   display: flex;
-        //   align-items: center;
-        //   .vux-popup-picker-placeholder {
-        //     margin: auto 0;
-        //     color: #757575;
-        //   }
-        // }
+        .weui-cell {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          .vux-popup-picker-placeholder {
+            margin: auto 0;
+            color: #757575;
+          }
+        }
       }
       .icon {
         position: absolute;
