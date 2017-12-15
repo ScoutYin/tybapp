@@ -11,26 +11,43 @@
       class="popup-container">
       <login-view></login-view>
     </popup>
+
+    <popup
+      v-model="selectVisible"
+      height="100%"
+      class="popup-container">
+      <select-view></select-view>
+    </popup>
   </div>
 </template>
 
 <script>
 // import { mapGetters } from 'vuex'
-import LoginView from 'views/login/login'
+import LoginView from 'views/popup/login'
+import SelectView from 'views/popup/select'
 import { Popup } from 'vux'
 export default {
   name: 'app',
   components: {
     LoginView,
+    SelectView,
     Popup
   },
   computed: {
     loginVisible: {
       get: function () {
-        return this.$store.state['Login'].loginVisible
+        return this.$store.getters.loginVisible
       },
       set: function (newValue) {
         this.$store.state['Login'].loginVisible = newValue
+      }
+    },
+    selectVisible: {
+      get: function () {
+        return this.$store.getters.selectVisible
+      },
+      set: function (newValue) {
+        this.$store.state['Form'].selectVisible = newValue
       }
     }
     // ...mapGetters([

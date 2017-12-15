@@ -7,32 +7,32 @@
         <input class="l-input-core"
                :placeholder="`${item.required ? '*' : ''}${item.label}`"
                v-if="item.type === 'input'">
-        <!-- <input class="l-input-core"
-               :placeholder="`${item.required ? '*' : ''}${item.label}`"
-               :readonly="true"
-               v-if="item.type === 'select'"
-               @click="select(item.selectType)"> -->
-        <input class="l-input-core"
-               :placeholder="`${item.required ? '*' : ''}${item.label}`"
-               :readonly="true"
+        <div class="l-input-core"
+               :class="{'placeholder': !obj[formDataskeys[index]]}"
                v-if="item.type === 'select-city'"
-               @click="selectCity">
+               @click="selectCity"
+               v-is-link>
+          {{ obj[formDataskeys[index]] ?
+          `${obj[formDataskeys[index]].label}` :
+          `${item.required ? '*' : ''}${item.label}` }}
+        </div>
         <input class="l-input-core"
                :placeholder="`${item.required ? '*' : ''}${item.label}`"
                :readonly="true"
                :value="obj[formDataskeys[index]]"
                v-if="item.type === 'datetime'"
                @click="selectDatetime(index)">
-        <popup-picker class="l-input-core"
-              valueTextAlign="left"
+        <div class="l-input-core"
               v-if="item.type === 'select'"
-              :placeholder="`${item.required ? '*' : ''}${item.label}`"></popup-picker>
+              @click="select(item)"
+              :class="{'placeholder': !obj[formDataskeys[index]]}"
+              v-is-link>
+          {{ obj[formDataskeys[index]] ?
+          `${obj[formDataskeys[index]].label}` :
+          `${item.required ? '*' : ''}${item.label}` }}
+        </div>
         <div class="icon">
           <l-icon :icon="`${item.icon}`"></l-icon>
-        </div>
-        <div class="icon"
-             v-if="item.type === 'select' || item.type === 'select-city'">
-          <l-icon icon="icon-xiangxia"></l-icon>
         </div>
         <div class="icon"
              v-if="item.type === 'datetime'">
@@ -44,11 +44,12 @@
 </template>
 
 <script>
-import { PopupPicker } from 'vux'
+import { PopupPicker, Group } from 'vux'
 import { getLinkage } from 'api'
 export default {
   components: {
-    PopupPicker
+    PopupPicker,
+    Group
   },
   props: {
     formDatas: {
@@ -70,13 +71,25 @@ export default {
   },
   data () {
     return {
-      obj: {}
+      obj: {},
+      selectOptions: [],
+      showPopupPicker: false,
+      arr: [['123', '234']]
     }
   },
   methods: {
-    async select (selectType) {
-      let res = await getLinkage({name: selectType})
-      console.log('select.', res.data)
+    async select (item, key) {
+      // this.selectOptions = [['123', '234']]
+      this.selectOptions = []
+      let res = await getLinkage({name: item.selectType})
+      console.log('res: ', res.data)
+      this.$store.dispatch('showSelectView', {
+        title: `请选择${item.label}`,
+        selectList: res.data,
+        onComplete: (item) => {
+          console.log('成功获取item', item)
+        }
+      })
     },
     selectCity () {
       console.log('selectCity.')
@@ -105,8 +118,7 @@ export default {
     .item {
       margin: 10px;
       height: 40px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
+      border-bottom: 1px solid #ddd;
       overflow: hidden;
     }
     .l-input-wrapper {
@@ -116,16 +128,8 @@ export default {
         width: 100%;
         height: 100%;
         padding: 0 10px;
-        .weui-cell {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          .vux-popup-picker-placeholder {
-            margin: auto 0;
-            color: #757575;
-          }
-        }
+        display: flex;
+        align-items: center;
       }
       .icon {
         position: absolute;
@@ -133,6 +137,9 @@ export default {
         top: 50%;
         transform: translateY(-50%);
         color: #777;
+      }
+      .placeholder {
+        color: #757575;
       }
     }
   }

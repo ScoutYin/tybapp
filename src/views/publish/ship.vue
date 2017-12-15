@@ -76,7 +76,8 @@ export default {
           'material': {
             label: '渔船材质',
             type: 'select',
-            required: true
+            required: true,
+            selectType: 'SHIP_MATERIAL'
           },
           'price': {
             label: '价格',
