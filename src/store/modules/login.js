@@ -82,6 +82,9 @@ const mutations = {
   HIDE_LOGIN: (state) => {
     state.loginVisible = false
   },
+  CONTROL_LOGIN: (state, visible) => {
+    state.loginVisible = visible
+  },
   USER_LOGIN: (state, data) => {
     state.isLogin = true
     state.loginVisible = false

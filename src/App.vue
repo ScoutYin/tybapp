@@ -11,20 +11,13 @@
       class="popup-container">
       <login-view></login-view>
     </popup>
-
-    <popup
-      v-model="selectVisible"
-      height="100%"
-      class="popup-container">
-      <select-view></select-view>
-    </popup>
   </div>
 </template>
 
 <script>
 // import { mapGetters } from 'vuex'
-import LoginView from 'views/popup/login'
-import SelectView from 'views/popup/select'
+import LoginView from 'components/popup/login'
+import SelectView from 'components/popup/select'
 import { Popup } from 'vux'
 export default {
   name: 'app',
@@ -39,7 +32,7 @@ export default {
         return this.$store.getters.loginVisible
       },
       set: function (newValue) {
-        this.$store.state['Login'].loginVisible = newValue
+        this.$store.commit('CONTROL_LOGIN', newValue)
       }
     },
     selectVisible: {
@@ -47,7 +40,7 @@ export default {
         return this.$store.getters.selectVisible
       },
       set: function (newValue) {
-        this.$store.state['Form'].selectVisible = newValue
+        this.$store.commit('CONTROL_SELECT_VIEW', newValue)
       }
     }
     // ...mapGetters([
@@ -56,7 +49,7 @@ export default {
   },
   data () {
     return {
-
+      cityPickerVisible: true
     }
   },
   mounted () {

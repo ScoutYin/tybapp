@@ -11,12 +11,14 @@ import store from './store'
 import directives from './directives'
 import filters from './filters'
 import commonComponents from 'components/common'
+import LHeader from 'components/header'
 import 'lib-flexible'
 import { DatetimePlugin } from 'vux'
 
 console.log('i18n: ', VueI18n)
 
 Vue.use(commonComponents)
+Vue.use(LHeader)
 Vue.use(DatetimePlugin)
 // Vue.use(PopupPickerPlugin)
 // Vue.use(store)
