@@ -10,16 +10,6 @@ export default {
   component: 'LTabbar',
   props: {
     value: {}
-  },
-  methods: {
-    index (id) {
-      for (let i = 0; i < this.$children.length; ++i) {
-        if (this.$children[i]._uid === id) {
-          return i
-        }
-      }
-      return -1
-    }
   }
 }
 </script>

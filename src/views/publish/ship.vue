@@ -81,6 +81,23 @@ export default {
               required: true,
               type: 'select-city'
             },
+            'nationality': {
+              label: '船舶国籍证',
+              required: true,
+              type: 'picture'
+            },
+            'ownership': {
+              label: '所有权登记证',
+              type: 'picture'
+            },
+            'license': {
+              label: '渔业捕捞许可证',
+              type: 'picture'
+            },
+            'certificate': {
+              label: '船舶检验证',
+              type: 'picture'
+            },
             'material': {
               label: '渔船材质',
               type: 'select',
@@ -219,8 +236,20 @@ export default {
       --this.selected
       this.$refs['content'].offsetParent.scrollTop = 0
     },
-    commit () {
+    // 把需要提交的数据整合起来
+    mergeFormData () {
+      // let obj = {}
 
+      let values = Object.values(this.formDatas)
+      for (let item of values) {
+        for (let mapItem of item) {
+          console.log('mapItem: ', mapItem)
+        }
+      }
+      console.log(values, this.formDatas)
+    },
+    commit () {
+      this.mergeFormData()
     }
   }
 }
@@ -232,8 +261,8 @@ export default {
 .publish-ship-container {
   .content {
     position: relative;
-    height: 100%;
-    overflow: scroll;
+    // overflow: scroll;
+    // -webkit-overflow-scrolling: touch;
     .section {
       margin-bottom: 10px;
     }

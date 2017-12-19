@@ -24,7 +24,7 @@ var instance = axios.create({
   withCredentials: false
 })
 
-instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+// instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 instance.interceptors.request.use((conf) => {
   return conf
@@ -64,6 +64,7 @@ instance.interceptors.response.use((response) => {
   }
 }, (error) => {
   console.log(new Error(error))
+  Vue.$vux.loading.hide()
   Vue.$vux.alert.show({
     title: '网络错误',
     content: new Error(error.message),
@@ -97,9 +98,7 @@ const loadingList = [
 ]
 
 const checkLoadingList = (url) => {
-  console.log('show loading')
   if (loadingList.indexOf(url) > -1) {
-    // console.log('show loading')
     Vue.$vux.loading.show({
       text: '加载中...'
     })
@@ -114,6 +113,23 @@ export default {
   },
   post: (url = '', data = {}) => {
     setHeaderUserToken()
-    return instance.post(baseUrl + url, qs.stringify(data))
+    return instance.post(baseUrl + url, qs.stringify(data, { indices: false }))
+  },
+  upload: (url = '', data = {}) => {
+    Vue.$vux.loading.show({
+      text: '上传中...'
+    })
+    setHeaderUserToken()
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }
+    let params = new FormData()
+    params.append('file', data.file, data.file.name)
+    return instance.post(
+      baseUrl + url,
+      params,
+      config)
   }
 }

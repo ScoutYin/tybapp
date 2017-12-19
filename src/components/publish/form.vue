@@ -1,7 +1,7 @@
 <template>
   <div class="l-publish-form">
     <div class="l-form-wrapper"
-         :class="{ 'small': item.size === 'small' }"
+         :class="{ 'small': item.size === 'small' || item.type === 'picture' }"
          v-for="(item, index) of formDatasValue"
          :key="index">
       <div class="l-input-wrapper">
@@ -26,10 +26,10 @@
                v-if="item.type === 'datetime'"
                @click="selectDatetime(index)">
         <div class="l-input-core"
-               :class="{'placeholder': !formObj['district']}"
-               v-if="item.type === 'select-city'"
-               @click="selectCity(item, index)"
-               v-is-link>
+             :class="{'placeholder': !formObj['district']}"
+             v-if="item.type === 'select-city'"
+             @click="selectCity(item, index)"
+             v-is-link>
           {{ formObj['district'] ?
           `${selectObj[formDataskeys[index]]['province'].value}/
            ${selectObj[formDataskeys[index]]['city'].value}/
@@ -37,38 +37,21 @@
           `${item.required ? '*' : ''}${item.label}` }}
         </div>
         <div class="l-input-core"
-              v-if="item.type === 'select'"
-              @click="select(item, index)"
-              :class="{'placeholder': !formObj[formDataskeys[index]]}"
-              v-is-link>
+             v-if="item.type === 'select'"
+             @click="select(item, index)"
+             :class="{'placeholder': !formObj[formDataskeys[index]]}"
+             v-is-link>
           {{ formObj[formDataskeys[index]] ?
           `${selectObj[formDataskeys[index]].label}` :
           `${item.required ? '*' : ''}${item.label}` }}
         </div>
 
-        <div v-if="item.type === 'picture'" class="picture">
-          <input type="file"
-               accept="image/*"
-               capture="camera"
-               data-role="none"
-               @change="pictureChange" multiple>
-          <div class="picture-icon">
-            <l-icon icon="icon-zhaoxiangji"></l-icon>
-          </div>
-          <div class="placeholder">{{`${item.required ? '*' : ''}${item.label}`}}</div>
-        </div>
+        <l-upload-picture-item v-if="item.type === 'picture'"
+          :placeholder="`${item.required ? '*' : ''}${item.label}`"
+          :id="formDataskeys[index]"
+          @success="pictureUploadSuccess">
+        </l-upload-picture-item>
 
-        <div v-if="item.type === 'pictures'" class="picture">
-          <input type="file"
-               accept="image/*"
-               capture="camera"
-               data-role="none"
-               @change="pictureChange" multiple>
-          <div class="picture-icon">
-            <l-icon icon="icon-zhaoxiangji"></l-icon>
-          </div>
-          <div class="placeholder">{{`${item.required ? '*' : ''}${item.label}`}}</div>
-        </div>
         <div class="icon" v-if="item.icon">
           <l-icon :icon="`${item.icon}`"></l-icon>
         </div>
@@ -109,6 +92,7 @@ import { getLinkage } from 'api'
 import LHeader from 'components/header'
 import SelectList from 'components/lists/select-list'
 import VDistpicker from 'v-distpicker'
+import LUploadPictureItem from 'components/upload/picture-item'
 export default {
   components: {
     PopupPicker,
@@ -116,7 +100,8 @@ export default {
     Popup,
     LHeader,
     SelectList,
-    VDistpicker
+    VDistpicker,
+    LUploadPictureItem
   },
   props: {
     formDatas: {
@@ -189,14 +174,18 @@ export default {
         }
       })
     },
-    pictureChange (v1, v2) {
-      console.log(v1, v2)
+    pictureUploadSuccess (id, data) {
+      this.$set(this.selectObj, id, data)
+      this.formObj[id] = data && data.id
+      console.log('pictureUploadSuccess', this.formObj)
     }
   }
 }
 </script>
 
 <style lang="scss">
+@import '../../common/style/var.scss';
+
 .l-publish-form {
   background: #fff;
   display: flex;
@@ -207,7 +196,7 @@ export default {
   .l-form-wrapper {
     width: 100%;
     &.small {
-      width: 48%;
+      width: 170px;
     }
     .l-input-wrapper {
       margin-bottom: 10px;
@@ -229,10 +218,9 @@ export default {
         right: 5px;
         top: 50%;
         transform: translateY(-50%);
-        color: #777;
       }
       .placeholder {
-        color: #757575;
+        color: $placeholder-color;
       }
       .textarea {
         padding: 10px;
@@ -244,7 +232,7 @@ export default {
         height: 100px;
         border: 1px dashed #ddd;
         text-align: center;
-        color: #757575;
+        color: $placeholder-color;
         .picture-icon {
           margin-top: 10px;
           font-size: 40px;

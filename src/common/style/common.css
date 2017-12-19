@@ -55,3 +55,15 @@ a, a:hover{
   text-decoration:none;
   color: inherit;
 }
+
+input {
+  -webkit-appearance: none;
+}
+textarea { -webkit-appearance: none; } 
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #939393;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: #939393;
+}

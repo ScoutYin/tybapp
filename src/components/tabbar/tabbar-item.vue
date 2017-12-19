@@ -17,7 +17,7 @@ export default {
   component: 'LTabbarItem',
   data () {
     return {
-      id: this.$parent.index(this._uid)
+      id: (this.$parent.$children.length || 1) - 1
     }
   }
 }
