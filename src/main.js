@@ -13,13 +13,14 @@ import filters from './filters'
 import commonComponents from 'components/common'
 import LHeader from 'components/header'
 import 'lib-flexible'
-import { DatetimePlugin } from 'vux'
+import { DatetimePlugin, ConfirmPlugin } from 'vux'
 
 console.log('i18n: ', VueI18n)
 
 Vue.use(commonComponents)
 Vue.use(LHeader)
 Vue.use(DatetimePlugin)
+Vue.use(ConfirmPlugin)
 // Vue.use(PopupPickerPlugin)
 // Vue.use(store)
 

@@ -89,3 +89,4 @@ export const addFavorite = (params) => axios.get('/5a2a41269811a', params)
 export const delFavorite = (params) => axios.get('/5a2f905bbfac9', params)
 
 export const uploadPictures = (params) => axios.upload('/5a03fbdbe2829', params)
+export const addShip = (params) => axios.post('/5a14cab13e993', params)

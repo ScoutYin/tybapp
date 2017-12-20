@@ -1,15 +1,26 @@
+import Vue from 'vue'
 
 const state = {
-  selectVisible: false
+  formObj: {},
+  selectObj: {}
 }
 
 const getters = {
-  selectVisible: (state) => { return state.selectVisible }
+  formObj: (state) => { return state.formObj },
+  selectObj: (state) => { return state.selectObj }
 }
 
 const mutations = {
-  CONTROL_SELECT_VIEW: (state, visible) => {
-    state.selectVisible = visible
+  SET_FORMOBJ_ITEM: (state, params) => {
+    console.log('params: ', params)
+    Vue.set(state.formObj, params.key, params.value)
+  },
+  SET_SELECTOBJ_ITEM: (state, params) => {
+    Vue.set(state.selectObj, params.key, params.value)
+  },
+  CLEAR_FORMOBJ: (state) => {
+    state.formObj = {}
+    state.selectObj = {}
   }
 }
 

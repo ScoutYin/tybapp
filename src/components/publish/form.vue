@@ -88,6 +88,7 @@
 
 <script>
 import { PopupPicker, Group, Popup } from 'vux'
+import { mapGetters } from 'vuex'
 import { getLinkage } from 'api'
 import LHeader from 'components/header'
 import SelectList from 'components/lists/select-list'
@@ -119,12 +120,16 @@ export default {
     formDatasValue () {
       console.log([...this.formDatas.values()])
       return [...this.formDatas.values()]
-    }
+    },
+    ...mapGetters([
+      'formObj',
+      'selectObj'
+    ])
   },
   data () {
     return {
-      formObj: {},
-      selectObj: {},
+      // formObj: {},
+      // selectObj: {},
       selectList: [],
       selectTitle: '',
       cityVisible: false,
@@ -132,7 +137,18 @@ export default {
       key: ''
     }
   },
+  mounted () {
+    this.default()
+  },
   methods: {
+    default () {
+      for (const [key, value] of this.formDatas) {
+        if (this.formDatas.get(key).default) {
+          this.$store.commit('SET_FORMOBJ_ITEM', { key, value: value.default })
+          console.log(key, value.default)
+        }
+      }
+    },
     async select (item, index) {
       try {
         let res = await getLinkage({name: item.selectType})
@@ -149,15 +165,22 @@ export default {
       this.cityVisible = true
     },
     selected (item) {
-      this.$set(this.selectObj, this.key, item)
-      this.$set(this.formObj, this.key, item.value)
+      // this.$set(this.selectObj, this.key, item)
+      // this.$set(this.formObj, this.key, item.value)
+      this.$store.commit('SET_SELECTOBJ_ITEM', { key: this.key, value: item })
+      this.$store.commit('SET_FORMOBJ_ITEM', { key: this.key, value: item.value })
       this.selectVisible = false
+      console.log('selected: ', this.selectObj)
     },
     selectedCity (item) {
-      this.$set(this.selectObj, this.key, item)
-      this.$set(this.formObj, 'province', item['province'].code)
-      this.$set(this.formObj, 'city', item['city'].code)
-      this.$set(this.formObj, 'district', item['area'].code)
+      // this.$set(this.selectObj, this.key, item)
+      // this.$set(this.formObj, 'province', item['province'].code)
+      // this.$set(this.formObj, 'city', item['city'].code)
+      // this.$set(this.formObj, 'district', item['area'].code)
+      this.$store.commit('SET_SELECTOBJ_ITEM', { key: this.key, value: item })
+      this.$store.commit('SET_FORMOBJ_ITEM', { key: 'province', value: item['province'].code })
+      this.$store.commit('SET_FORMOBJ_ITEM', { key: 'city', value: item['city'].code })
+      this.$store.commit('SET_FORMOBJ_ITEM', { key: 'district', value: item['area'].code })
       console.log('selectedCity: ', item, this.key)
       console.log('this.formObj: ', this.formObj)
       this.cityVisible = false
@@ -170,13 +193,16 @@ export default {
           console.log('onshow.')
         },
         onConfirm: (value) => {
-          this.$set(this.formObj, key, value)
+          // this.$set(this.formObj, key, value)
+          this.$store.commit('SET_FORMOBJ_ITEM', { key: key, value: value })
         }
       })
     },
     pictureUploadSuccess (id, data) {
-      this.$set(this.selectObj, id, data)
-      this.formObj[id] = data && data.id
+      // this.$set(this.selectObj, id, data)
+      // this.formObj[id] = data && data.id
+      this.$store.commit('SET_SELECTOBJ_ITEM', { key: id, value: data })
+      this.$store.commit('SET_FORMOBJ_ITEM', { key: id, value: data && data.id })
       console.log('pictureUploadSuccess', this.formObj)
     }
   }

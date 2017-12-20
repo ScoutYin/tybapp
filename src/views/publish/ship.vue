@@ -23,9 +23,10 @@
       <div class="button" @click="preStep()">
         上一步
       </div>
-      <div class="button" @click="commit()">
-        发布
-      </div>
+      <l-button-commit class="button"
+        type="ship"
+        :method="method"
+        @success="commitSuccess">发布</l-button-commit>
     </div>
   </l-main-layout>
 </template>
@@ -35,6 +36,8 @@ import LMainLayout from 'components/layout/main-layout'
 import LPartLine from 'components/common/part-line'
 import { LButtonTab, LButtonTabItem } from 'components/button-tab'
 import publishForm from 'components/publish/form'
+import { addShip } from 'api'
+import LButtonCommit from 'components/unit/button-commit'
 export default {
   name: 'MineMyFav',
   components: {
@@ -42,7 +45,8 @@ export default {
     LPartLine,
     LButtonTab,
     LButtonTabItem,
-    publishForm
+    publishForm,
+    LButtonCommit
   },
   data () {
     return {
@@ -67,6 +71,12 @@ export default {
               label: '船名号',
               type: 'input',
               required: true
+            },
+            'buytype': {
+              label: '类型',
+              type: 'switch',
+              required: true,
+              default: 1
             }
           }),
           this.initFormDatas({
@@ -130,7 +140,7 @@ export default {
               type: 'input-number',
               required: true
             },
-            'descrition': {
+            'content': {
               label: '详细内容',
               type: 'textarea'
             }
@@ -210,7 +220,9 @@ export default {
             }
           })
         ]
-      }
+      },
+      commitBtnDisable: false,
+      method: addShip
     }
   },
   mounted () {
@@ -238,18 +250,21 @@ export default {
     },
     // 把需要提交的数据整合起来
     mergeFormData () {
-      // let obj = {}
+      let obj = {}
 
       let values = Object.values(this.formDatas)
       for (let item of values) {
         for (let mapItem of item) {
           console.log('mapItem: ', mapItem)
+          for (let [key, value] of mapItem) {
+            obj[key] = value
+          }
         }
       }
-      console.log(values, this.formDatas)
+      console.log(obj)
     },
-    commit () {
-      this.mergeFormData()
+    commitSuccess () {
+      this.$router.back()
     }
   }
 }
