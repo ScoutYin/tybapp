@@ -3,12 +3,14 @@ import { FORM_FISH, FORM_SHIP, storage } from '@/utils/storage'
 
 const state = {
   formObj: {},
-  selectObj: {}
+  selectObj: {},
+  defaultObj: {}
 }
 
 const getters = {
   formObj: (state) => { return state.formObj },
-  selectObj: (state) => { return state.selectObj }
+  selectObj: (state) => { return state.selectObj },
+  defaultObj: (state) => { return state.defaultObj }
 }
 
 const mutations = {
@@ -19,9 +21,13 @@ const mutations = {
   SET_SELECTOBJ_ITEM: (state, params) => {
     Vue.set(state.selectObj, params.key, params.value)
   },
+  SET_FORM_DEFAULT_ITEM: (state, params) => {
+    Vue.set(state.defaultObj, params.key, params.value)
+  },
   CLEAR_FORMOBJ: (state) => {
     state.formObj = {}
     state.selectObj = {}
+    state.defaultObj = {}
   },
   SAVE_FORM_FISH: (state) => {
     const obj = {

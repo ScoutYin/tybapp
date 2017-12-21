@@ -20,7 +20,8 @@ export default {
       if (this.disable) {
         return
       }
-
+      console.log('formObj: ', this.$store.getters.formObj)
+      console.log('defaultObj: ', this.$store.getters.defaultObj)
       this.$vux.confirm.show({
         title: '提交表单',
         content: '是否编辑完成，确定提交？',
@@ -29,8 +30,11 @@ export default {
         },
         onConfirm: async () => {
           this.disable = true
-          const params = this.$store.getters.formObj
-          console.log('commit obj: ', params)
+          let params = Object.assign(
+            {},
+            this.$store.getters.defaultObj,
+            this.$store.getters.formObj
+          )
           try {
             let res = await this.method(params)
             console.log('res: ', res.data)

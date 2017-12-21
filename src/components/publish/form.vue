@@ -150,8 +150,7 @@ export default {
     default () {
       for (const [key, value] of this.formDatas) {
         if (this.formDatas.get(key).default) {
-          this.$store.commit('SET_FORMOBJ_ITEM', { key, value: value.default })
-          console.log(key, value.default)
+          this.$store.commit('SET_FORM_DEFAULT_ITEM', {key: key, value: value.default})
         }
       }
     },

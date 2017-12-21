@@ -1,5 +1,7 @@
 <template>
-  <l-main-layout back class="publish-ship-container">
+  <l-main-layout class="publish-ship-container"
+    :handleBack="cancel">
+    <div slot="header-right" @click="save">保存</div>
     <l-button-tab v-model="selected">
       <l-button-tab-item>基本信息</l-button-tab-item>
       <l-button-tab-item>渔船参数</l-button-tab-item>
@@ -38,6 +40,7 @@ import PublishForm from 'components/publish/form'
 import { addShip } from 'api'
 import LButtonCommit from 'components/unit/button-commit'
 import { createMap } from '@/utils/common'
+import PublishMixin from '@/mixins/publish'
 export default {
   name: 'MineMyFav',
   components: {
@@ -47,6 +50,7 @@ export default {
     PublishForm,
     LButtonCommit
   },
+  mixins: [PublishMixin],
   data () {
     return {
       selected: 0,
@@ -225,6 +229,7 @@ export default {
     }
   },
   mounted () {
+    this.publishType = 'SHIP'
   },
   methods: {
     nextStep () {
