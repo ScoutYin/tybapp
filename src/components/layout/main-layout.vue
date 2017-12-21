@@ -8,6 +8,7 @@
       <div slot="center" v-if="search" @click="toSearch">
         <l-search-bar placeholder="搜索"></l-search-bar>
       </div>
+      <l-button slot="right"><slot name="header-right"></slot></l-button>
       <h1 slot="center" class="l-header-title" v-text="headerTitle" v-if="!hideTitle"></h1>
     </l-header>
     <div class="main">

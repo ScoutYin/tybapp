@@ -79,8 +79,14 @@
       v-model="cityVisible"
       height="100%"
       class="popup-container">
+      <l-header title="选择地区" fixed>
+        <l-button slot="left" @click.native="cityVisible = false">
+          取消
+        </l-button>
+      </l-header>
       <v-distpicker type="mobile"
-                    @selected="selectedCity">
+                    @selected="selectedCity"
+                    class="distpicker-container">
       </v-distpicker>
     </popup>
   </div>
@@ -238,6 +244,7 @@ export default {
         padding: 0 10px;
         display: flex;
         align-items: center;
+        border-radius: 5px;
       }
       &>.icon {
         position: absolute;
@@ -277,6 +284,27 @@ export default {
   }
   .main {
     background: #fff;
+  }
+  // 修改地区选择层叠样式
+  .popup-container {
+    .distpicker-container {
+      margin-top: 44px;
+    }
+    .distpicker-close-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+    .distpicker-address-wrapper {
+      color: #333;
+      .address-header ul li.active {
+        color: $default-color;
+        border-color: $default-color;
+      }
+      .address-container ul li.active {
+        color: $default-color;
+      }
+    }
   }
 }
 </style>

@@ -33,19 +33,18 @@
 
 <script>
 import LMainLayout from 'components/layout/main-layout'
-import LPartLine from 'components/common/part-line'
 import { LButtonTab, LButtonTabItem } from 'components/button-tab'
-import publishForm from 'components/publish/form'
+import PublishForm from 'components/publish/form'
 import { addShip } from 'api'
 import LButtonCommit from 'components/unit/button-commit'
+import { createMap } from '@/utils/common'
 export default {
   name: 'MineMyFav',
   components: {
     LMainLayout,
-    LPartLine,
     LButtonTab,
     LButtonTabItem,
-    publishForm,
+    PublishForm,
     LButtonCommit
   },
   data () {
@@ -56,7 +55,7 @@ export default {
       },
       formDatas: {
         step1: [
-          this.initFormDatas({
+          createMap({
             'title': {
               label: '标题',
               type: 'input',
@@ -79,7 +78,7 @@ export default {
               default: 1
             }
           }),
-          this.initFormDatas({
+          createMap({
             'catid': {
               label: '作业类型',
               type: 'select',
@@ -129,7 +128,7 @@ export default {
               type: 'pictures'
             }
           }),
-          this.initFormDatas({
+          createMap({
             'linkman': {
               label: '联系人',
               type: 'input',
@@ -147,7 +146,7 @@ export default {
           })
         ],
         step2: [
-          this.initFormDatas({
+          createMap({
             'buildtime': {
               label: '完工时间',
               type: 'datetime',
@@ -169,7 +168,7 @@ export default {
               required: true
             }
           }),
-          this.initFormDatas({
+          createMap({
             'width': {
               label: '型宽(米)',
               type: 'input-number',
@@ -207,7 +206,7 @@ export default {
               size: 'small'
             }
           }),
-          this.initFormDatas({
+          createMap({
             'shipyard': {
               label: '船厂',
               type: 'input',
@@ -228,17 +227,6 @@ export default {
   mounted () {
   },
   methods: {
-    initFormDatas (obj) {
-      let map = new Map()
-      if (!obj) {
-        return map
-      }
-
-      Object.keys(obj).forEach((key) => {
-        map.set(key, obj[key])
-      })
-      return map
-    },
     nextStep () {
       this.$refs['content'].offsetParent.scrollTop = 0
       ++this.selected
@@ -247,21 +235,6 @@ export default {
     preStep () {
       --this.selected
       this.$refs['content'].offsetParent.scrollTop = 0
-    },
-    // 把需要提交的数据整合起来
-    mergeFormData () {
-      let obj = {}
-
-      let values = Object.values(this.formDatas)
-      for (let item of values) {
-        for (let mapItem of item) {
-          console.log('mapItem: ', mapItem)
-          for (let [key, value] of mapItem) {
-            obj[key] = value
-          }
-        }
-      }
-      console.log(obj)
     },
     commitSuccess () {
       this.$router.back()

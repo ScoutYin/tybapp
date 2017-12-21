@@ -74,6 +74,7 @@ export default {
   border: 1px dashed #ddd;
   text-align: center;
   color: $placeholder-color;
+  border-radius: 5px;
   .picture-img {
     position: absolute;
     top: 0;

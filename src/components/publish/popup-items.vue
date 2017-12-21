@@ -34,7 +34,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   // justify-content: space-around;
-  // overflow: hidden;
+  overflow: hidden;
   padding-top: 40px;
   .item-wrapper {
     text-align: center;
@@ -65,7 +65,7 @@ export default {
       height: 100%;
       margin: 5px auto;
       display: flex;
-      
+      border-radius: 8px;
     }
     .icon {
       color: white;
