@@ -257,6 +257,8 @@ export default {
     // overflow: scroll;
     // -webkit-overflow-scrolling: touch;
     .section {
+      padding: 10px 10px 0 10px;
+      background: #fff;
       margin-bottom: 10px;
     }
     .button {

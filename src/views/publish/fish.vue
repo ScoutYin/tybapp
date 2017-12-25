@@ -40,46 +40,46 @@ export default {
           'title': {
             label: '标题',
             type: 'input',
-            reqauired: true
+            required: true
           },
           'catchtime': {
             label: '日期',
             type: 'datetime',
-            reqauired: true
+            required: true
           },
           'address': {
             label: '所在地',
             type: 'select-city',
-            reqauired: true
+            required: true
           }
         }),
         createMap({
           'stock': {
             label: '库存',
             type: 'input',
-            reqauired: true
+            required: true
           },
           'norms': {
             label: '规格',
             type: 'input',
-            reqauired: true
+            required: true
           },
           'price': {
             label: '单价',
             type: 'input',
-            reqauired: true
+            required: true
           },
           'num': {
             label: '起售量',
             type: 'input',
-            reqauired: true
+            required: true
           }
         }),
         createMap({
           'content': {
             label: '详细内容',
             type: 'textarea',
-            reqauired: true
+            required: true
           }
         })
       ]
@@ -103,6 +103,8 @@ export default {
   .content {
     position: relative;
     .section {
+      padding: 10px 10px 0 10px;
+      background: #fff;
       margin-bottom: 10px;
     }
     .button {

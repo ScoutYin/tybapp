@@ -20,8 +20,26 @@ export default {
     })
   },
   methods: {
+    createMultipleMap (key, obj, index = 0) {
+      if (!key || isEmptyObject(obj)) {
+        return new Map()
+      }
+
+      let map = new Map()
+      let mapInner = new Map()
+      const newKey = key + index
+
+      Object.keys(obj).forEach((_key) => {
+        const _newKey = `${key}[${_key}][${index}]`
+        mapInner.set(_newKey, obj[_key])
+      })
+
+      map.set(newKey, { type: 'multiple', data: mapInner })
+      console.log(map)
+      return map
+    },
     checkType () {
-      return ['FISH', 'SHIP'].indexOf(this.publishType.toLocaleUpperCase()) > -1
+      return ['FISH', 'SHIP', 'RECRUITING', 'JOBHUNTING'].indexOf(this.publishType.toLocaleUpperCase()) > -1
     },
     save () {
       console.log('save')

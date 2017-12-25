@@ -81,6 +81,7 @@ export default {
   background-color: #fff;
   width: 100%;
   height: 44px;
+  line-height: 44px;
   overflow: hidden;
   display: flex;
   border-bottom: 1px solid #ddd;
@@ -89,12 +90,12 @@ export default {
     flex-flow: row nowrap;
     flex-shrink: 0;
     padding: 0 10px;
+    min-width: 100%;
     .l-tab-item {
       // box-sizing: border-box;
-      display: flex;
+      flex-grow: 1;
       font-size: 14px;
       text-align: center;
-      align-items: center;
       padding: 0 5px;
       // margin: auto;
       &:not(:first-child) {

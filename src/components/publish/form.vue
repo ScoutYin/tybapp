@@ -5,6 +5,7 @@
          v-for="(item, index) of formDatasValue"
          :key="index">
       <div class="l-input-wrapper">
+        <publish-form v-if="item.type === 'multiple'" :formDatas="item.data"></publish-form>
         <input class="l-input-core"
                :placeholder="`${item.required ? '*' : ''}${item.label}`"
                v-if="item.type === 'input'"
@@ -101,6 +102,7 @@ import SelectList from 'components/lists/select-list'
 import VDistpicker from 'v-distpicker'
 import LUploadPictureItem from 'components/upload/picture-item'
 export default {
+  name: 'PublishForm',
   components: {
     PopupPicker,
     Group,
@@ -155,12 +157,19 @@ export default {
       }
     },
     async select (item, index) {
+      if (!item.selectType) {
+        console.error('selectType is required.')
+        return
+      }
+
       try {
-        let res = await getLinkage({name: item.selectType})
-        this.selectList = res.data
+        // 最好可以对selectType的范围进行验证
         this.selectTitle = `请选择${item.label}`
         this.key = this.formDataskeys[index]
         this.selectVisible = true
+        this.selectList = []
+        let res = await getLinkage({name: item.selectType})
+        this.selectList = res.data
       } catch (err) {
         throw err
       }
@@ -170,18 +179,12 @@ export default {
       this.cityVisible = true
     },
     selected (item) {
-      // this.$set(this.selectObj, this.key, item)
-      // this.$set(this.formObj, this.key, item.value)
       this.$store.commit('SET_SELECTOBJ_ITEM', { key: this.key, value: item })
       this.$store.commit('SET_FORMOBJ_ITEM', { key: this.key, value: item.value })
       this.selectVisible = false
       console.log('selected: ', this.selectObj)
     },
     selectedCity (item) {
-      // this.$set(this.selectObj, this.key, item)
-      // this.$set(this.formObj, 'province', item['province'].code)
-      // this.$set(this.formObj, 'city', item['city'].code)
-      // this.$set(this.formObj, 'district', item['area'].code)
       this.$store.commit('SET_SELECTOBJ_ITEM', { key: this.key, value: item })
       this.$store.commit('SET_FORMOBJ_ITEM', { key: 'province', value: item['province'].code })
       this.$store.commit('SET_FORMOBJ_ITEM', { key: 'city', value: item['city'].code })
@@ -194,18 +197,16 @@ export default {
       console.log('selectDatetime.')
       let key = this.formDataskeys[index]
       this.$vux.datetime.show({
+        minYear: '1900',
         onShow: (value) => {
           console.log('onshow.')
         },
         onConfirm: (value) => {
-          // this.$set(this.formObj, key, value)
           this.$store.commit('SET_FORMOBJ_ITEM', { key: key, value: value })
         }
       })
     },
     pictureUploadSuccess (id, data) {
-      // this.$set(this.selectObj, id, data)
-      // this.formObj[id] = data && data.id
       this.$store.commit('SET_SELECTOBJ_ITEM', { key: id, value: data })
       this.$store.commit('SET_FORMOBJ_ITEM', { key: id, value: data && data.id })
       console.log('pictureUploadSuccess', this.formObj)
@@ -222,8 +223,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 10px 10px 0 10px;
-  
+
   .l-form-wrapper {
     width: 100%;
     &.small {

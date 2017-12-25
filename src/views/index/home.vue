@@ -6,7 +6,7 @@
       </swiper-item>
     </swiper>
     <div class="grid-layout">
-      <div class="grid-item" v-for="(item, index) in gridDatas" :key="index" @click="toPath(item.path)">
+      <div class="grid-item" v-for="(item, index) in gridDatas" :key="index" @click="toView(item)">
         <l-icon :icon="item.icon"></l-icon>
         <div>{{ item.title }}</div>
       </div>
@@ -81,12 +81,12 @@ export default {
         }
       ],
       gridDatas: [
-        { title: '我要买船', icon: 'icon-chuan', path: '/ship/buy-list' },
-        { title: '我要买鱼', icon: 'icon-buyfish', path: '/fish/buy-list' },
-        { title: '我要招人', icon: 'icon-zhaoping', path: '/recruitment/recruiting' },
-        { title: '我要卖船', icon: 'icon-chuanbojiaoyi', path: '/ship/sell-list' },
-        { title: '我要卖鱼', icon: 'icon-sellfish', path: '/fish/sell-list' },
-        { title: '我要求职', icon: 'icon-qiuzhi', path: '/recruitment/jobHunting' }
+        { title: '我要买船', icon: 'icon-chuan', componentName: 'ShipBuyList' },
+        { title: '我要买鱼', icon: 'icon-buyfish', componentName: 'FishBuyList' },
+        { title: '我要求职', icon: 'icon-qiuzhi', componentName: 'PublishJobHunting' },
+        { title: '我要卖船', icon: 'icon-chuanbojiaoyi', componentName: 'PublishShip' },
+        { title: '我要卖鱼', icon: 'icon-sellfish', componentName: 'PublishFish' },
+        { title: '我要招人', icon: 'icon-zhaoping', componentName: 'PublishRecruiting' }
       ],
       dynamicData: [
         { buyer: '12312341234', seller: '13533233323', updateTime: '4小时前' },
@@ -108,9 +108,9 @@ export default {
     this.getFish()
   },
   methods: {
-    toPath (path) {
-      if (path) {
-        this.$router.push({ path: path })
+    toView (item) {
+      if (item.componentName) {
+        this.$router.push({ name: item.componentName })
       }
     },
     topLoad () {

@@ -35,9 +35,9 @@ instance.interceptors.request.use((conf) => {
 instance.interceptors.response.use((response) => {
   console.log('response: ', response)
   Vue.$vux.loading.hide()
-  if (response.status === 200) {
+  if (response.status === 200 && response.data) {
     let data = response.data
-    if (data.code === 1) {
+    if (data && data.code === 1) {
       return response.data
     } else {
       Vue.$vux.alert.show({
