@@ -10,6 +10,21 @@ export const createMap = (obj) => {
   return map
 }
 
+export const createMultipleMap = (key, obj, index = 0) => {
+  if (!key || isEmptyObject(obj)) {
+    return new Map()
+  }
+
+  let mapInner = new Map()
+
+  Object.keys(obj).forEach((_key) => {
+    const _newKey = `${key}[${_key}][${index}]`
+    mapInner.set(_newKey, obj[_key])
+  })
+
+  return mapInner
+}
+
 export const isEmptyObject = (obj) => {
   for (const key in obj) {
     if (hasOwnProperty.call(obj, key)) {

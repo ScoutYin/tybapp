@@ -5,7 +5,19 @@
          v-for="(item, index) of formDatasValue"
          :key="index">
       <div class="l-input-wrapper">
-        <publish-form v-if="item.type === 'multiple'" :formDatas="item.data"></publish-form>
+        <template v-if="item.type === 'multiple' && multipleObj[formDataskeys[index]]">
+          <publish-form v-for="(multipleItem, multipleIndex) in multipleObj[formDataskeys[index]]"
+            :key="multipleIndex"
+            :formDatas="multipleItem">
+          </publish-form>
+          <div class="multiple-button-group">
+            <div class="add-button" @click="multipleAddOne(item, formDataskeys[index])">
+              {{`添加${item.label}`}}</div>
+            <div class="delete-button" @click="multipleDeleteOne(item, formDataskeys[index])">
+              删除最后一项</div>
+          </div>
+        </template>
+       
         <input class="l-input-core"
                :placeholder="`${item.required ? '*' : ''}${item.label}`"
                v-if="item.type === 'input'"
@@ -101,6 +113,7 @@ import LHeader from 'components/header'
 import SelectList from 'components/lists/select-list'
 import VDistpicker from 'v-distpicker'
 import LUploadPictureItem from 'components/upload/picture-item'
+import { createMultipleMap } from '@/utils/common'
 export default {
   name: 'PublishForm',
   components: {
@@ -131,7 +144,8 @@ export default {
     },
     ...mapGetters([
       'formObj',
-      'selectObj'
+      'selectObj',
+      'multipleObj'
     ])
   },
   data () {
@@ -147,6 +161,7 @@ export default {
   },
   mounted () {
     this.default()
+    this.initMultipleData()
   },
   methods: {
     default () {
@@ -210,6 +225,26 @@ export default {
       this.$store.commit('SET_SELECTOBJ_ITEM', { key: id, value: data })
       this.$store.commit('SET_FORMOBJ_ITEM', { key: id, value: data && data.id })
       console.log('pictureUploadSuccess', this.formObj)
+    },
+    initMultipleData () {
+      this.formDatas.forEach((value, key) => {
+        if (value.type === 'multiple' && !this.multipleObj[key]) {
+          this.$store.commit('SET_MULTIPLEOBJ_ITEM', {
+            key: key,
+            value: [createMultipleMap(key, value.obj, 0)]
+          })
+        }
+      })
+    },
+    multipleAddOne (item, type) {
+      let length = this.multipleObj[type].length
+      this.multipleObj[type].push(createMultipleMap(type, item.obj, length))
+      console.log('add: ', item, type)
+    },
+    multipleDeleteOne (item, type) {
+      if (this.multipleObj[type].length > 1) {
+        this.multipleObj[type].pop()
+      }
     }
   }
 }
@@ -278,6 +313,23 @@ export default {
           height: 100px;
           opacity: 0;
         }
+      }
+    }
+    .multiple-button-group {
+      display: flex;
+      text-align: center;
+      .add-button {
+        flex: 1;
+        background: $default-color;
+        padding: 10px;
+        margin-right: 10px;
+        color: #fff;
+      }
+      .delete-button {
+        flex: 1;
+        padding: 10px;
+        background: #dfdfdf;
+        color: $default-color;
       }
     }
   }

@@ -1,16 +1,38 @@
 import Vue from 'vue'
 import { storage } from '@/utils/storage'
 
+const jsonToMap = (obj) => {
+  let newObj = {}
+  Object.keys(obj).forEach((key, index) => {
+    newObj[key] = {}
+    let value = obj[key]
+    if (value && value.length > 0) {
+      for (let objItem of value) {
+        let map = new Map()
+        for (let item of objItem) {
+          let key = item[0]
+          let value = item[1]
+          map.set(key, value)
+        }
+        newObj[key] = map
+      }
+    }
+  })
+  console.log('newObj: ', newObj)
+}
+
 const state = {
   formObj: {},
   selectObj: {},
-  defaultObj: {}
+  defaultObj: {},
+  multipleObj: {}
 }
 
 const getters = {
   formObj: (state) => { return state.formObj },
   selectObj: (state) => { return state.selectObj },
-  defaultObj: (state) => { return state.defaultObj }
+  defaultObj: (state) => { return state.defaultObj },
+  multipleObj: (state) => { return state.multipleObj }
 }
 
 const mutations = {
@@ -21,6 +43,9 @@ const mutations = {
   SET_SELECTOBJ_ITEM: (state, params) => {
     Vue.set(state.selectObj, params.key, params.value)
   },
+  SET_MULTIPLEOBJ_ITEM: (state, params) => {
+    Vue.set(state.multipleObj, params.key, params.value)
+  },
   SET_FORM_DEFAULT_ITEM: (state, params) => {
     Vue.set(state.defaultObj, params.key, params.value)
   },
@@ -28,18 +53,13 @@ const mutations = {
     state.formObj = {}
     state.selectObj = {}
     state.defaultObj = {}
-  },
-  SET_FORM_OBJ: (state, data) => {
-    console.log('SET_FORM_OBJ: ', data)
-    if (data) {
-      state.formObj = data.formObj
-      state.selectObj = data.selectObj
-    }
+    state.multipleObj = {}
   },
   SAVE_FORM_DATA: (stata, type) => {
     const obj = {
       formObj: state.formObj,
-      selectObj: state.selectObj
+      selectObj: state.selectObj,
+      multipleObj: state.multipleObj
     }
     storage.setObj(`TYBFORM_${type}`, obj)
   },
@@ -49,6 +69,7 @@ const mutations = {
     if (data) {
       state.formObj = data.formObj
       state.selectObj = data.selectObj
+      state.multipleObj = jsonToMap(data.multipleObj)
     }
   },
   CLEAR_FORM_DATA: (state, type) => {

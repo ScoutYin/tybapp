@@ -40,7 +40,7 @@ import { LButtonTab, LButtonTabItem } from 'components/button-tab'
 import PublishForm from 'components/publish/form'
 import { addJobHunting } from 'api'
 import LButtonCommit from 'components/unit/button-commit'
-import { createMap } from '@/utils/common'
+import { createMap, createMultipleMap } from '@/utils/common'
 import PublishMixin from '@/mixins/publish'
 
 export default {
@@ -178,7 +178,16 @@ export default {
               size: 'small'
             }
           }),
-          this.createMultipleMap('cert', certObj, 0)
+          createMap({
+            'cert': {
+              label: '证书',
+              type: 'multiple',
+              obj: workObj,
+              data: [
+                createMultipleMap('cert', certObj, 0)
+              ]
+            }
+          })
         ], [
           createMap({
             'job': {
@@ -206,7 +215,17 @@ export default {
             }
           })
         ], [
-          this.createMultipleMap('work', workObj, 0)
+          // this.createMultipleMap('work', workObj, 0)
+          createMap({
+            'work': {
+              label: '工作',
+              type: 'multiple',
+              obj: workObj,
+              data: [
+                createMultipleMap('work', workObj, 0)
+              ]
+            }
+          })
         ], [
           createMap({
             'mobile': {
