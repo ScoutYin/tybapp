@@ -67,6 +67,17 @@ export default {
       font-size: 12px;
       color: #999;
     }
+    .content {
+      p {
+        line-height: 1.5;
+        // text-indent: 25px;
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+      table {
+        margin-bottom: 10px;
+      }
+    }
   }
 }
 </style>

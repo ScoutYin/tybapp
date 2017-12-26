@@ -67,9 +67,9 @@ export default {
             required: true
           },
           'catid': {
-            label: '作业类型',
+            label: '渔船类型',
             type: 'select',
-            selectType: 'SHIP_CATEGORY',
+            selectType: 'SHIP_CATEGORY_ONE',
             size: 'small',
             required: true
           },

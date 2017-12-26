@@ -28,7 +28,7 @@ export default {
   position: relative;
   .title {
     margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
   .price {
     position: absolute;

@@ -73,7 +73,7 @@ export default {
       catid: {
         label: '作业类型',
         type: 'select',
-        selectType: 'SHIP_CATEGORY'
+        selectType: 'SHIP_CATEGORY_ONE'
       }
     }
     const certObj = {
@@ -206,7 +206,7 @@ export default {
             'catid': {
               label: '作业要求',
               type: 'select',
-              selectType: 'SHIP_CATEGORY',
+              selectType: 'SHIP_CATEGORY_ONE',
               size: 'small',
               required: true
             },

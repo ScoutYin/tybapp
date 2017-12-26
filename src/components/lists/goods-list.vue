@@ -1,7 +1,7 @@
 <template>
   <div class="l-goods-list">
     <div class="l-goods-top-list list">
-      <div class="list-title">热销排行</div>
+      <div class="list-title goods-top">热销排行</div>
       <l-shop-goods-top-item
         v-for="(item, index) in hotItems"
         :key="index"
@@ -12,7 +12,7 @@
     </div>
 
     <div class="list">
-      <div class="list-title">鱼获专区</div>
+      <div class="list-title goods">鱼获专区</div>
       <l-shop-goods-item
         v-for="(item, index) in goodsItems"
         :key="index"
@@ -22,7 +22,7 @@
     </div>
 
     <div class="list">
-      <div class="list-title">渔船专区</div>
+      <div class="list-title ship">渔船专区</div>
       <l-shop-ship-item
         v-for="(item, index) in shipItems"
         :key="index"
@@ -111,6 +111,15 @@ export default {
       background: yellowgreen;
       color: #fff;
       font-size: 14px;
+      &.goods-top {
+        background-color: #51ABA1;
+      }
+      &.goods {
+        background-color: #F1A239;
+      }
+      &.ship {
+        background-color: #3880CC;
+      }
     }
     .list-item {
       display: flex;

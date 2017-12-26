@@ -36,8 +36,19 @@ Vue.prototype.parseHTML = (content) => {
   })
   // 处理table style 宽度过宽问题
   content = content.replace(/<table [^>]*style=['"]([^'"]+)[^>]*>/gi, (match, style) => {
-    console.log('match: ', match, 'style: ', style)
     return match.replace(style, 'width: 100%;')
+  })
+
+  content = content.replace(/<table [^>]*width=['"]([^'"]+)[^>]*>/gi, (match, width) => {
+    return match.replace(width, '')
+  })
+
+  content = content.replace(/<td [^>]*style=['"]([^'"]+)[^>]*>/gi, (match, style) => {
+    return match.replace(style, '')
+  })
+
+  content = content.replace(/<td [^>]*class=['"]([^'"]+)[^>]*>/gi, (match, _class) => {
+    return match.replace(_class, '')
   })
 
   return content

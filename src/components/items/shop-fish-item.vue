@@ -38,7 +38,7 @@ export default {
 .l-shop-fish-item-wrapper {
   .content {
     .title {
-      padding: 5px;
+      margin: 5px 0;
       @include text-overflow(2);
     }
     .bottom {

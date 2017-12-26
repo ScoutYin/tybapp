@@ -53,7 +53,7 @@ export default {
       flex: 1;
       display: flex;
       align-items: center;
-      font-size: 14px;
+      font-size: 16px;
       .l-cell-icon {
         margin-right: 5px;
       }
