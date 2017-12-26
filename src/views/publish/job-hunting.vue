@@ -40,7 +40,7 @@ import { LButtonTab, LButtonTabItem } from 'components/button-tab'
 import PublishForm from 'components/publish/form'
 import { addJobHunting } from 'api'
 import LButtonCommit from 'components/unit/button-commit'
-import { createMap, createMultipleMap } from '@/utils/common'
+import { createMap } from '@/utils/common'
 import PublishMixin from '@/mixins/publish'
 
 export default {
@@ -55,7 +55,7 @@ export default {
   mixins: [PublishMixin],
   data () {
     const workObj = {
-      position: {
+      postion: {
         label: '担任职位',
         type: 'select',
         selectType: 'JOB'
@@ -80,7 +80,7 @@ export default {
       cert: {
         label: '证书名称',
         type: 'select',
-        selectType: '',
+        selectType: 'SEAMAN_CERTIFICATE',
         size: 'small',
         required: true
       },
@@ -89,7 +89,10 @@ export default {
         type: 'select',
         size: 'small',
         required: true,
-        options: []
+        options: [
+          { label: '有且有效', value: 1 },
+          { label: '有且失效', value: 2 }
+        ]
       },
       cert_no: {
         label: '证书编号',
@@ -131,12 +134,14 @@ export default {
             },
             'school': {
               label: '毕业学校',
-              type: 'input'
+              type: 'input',
+              required: true
             },
             'graduation_date': {
               label: '毕业时间',
               type: 'datetime',
-              size: 'small'
+              size: 'small',
+              required: true
             },
             // '': {
             //   label: '所学专业',
@@ -182,10 +187,7 @@ export default {
             'cert': {
               label: '证书',
               type: 'multiple',
-              obj: workObj,
-              data: [
-                createMultipleMap('cert', certObj, 0)
-              ]
+              obj: certObj
             }
           })
         ], [
@@ -220,10 +222,7 @@ export default {
             'work': {
               label: '工作',
               type: 'multiple',
-              obj: workObj,
-              data: [
-                createMultipleMap('work', workObj, 0)
-              ]
+              obj: workObj
             }
           })
         ], [

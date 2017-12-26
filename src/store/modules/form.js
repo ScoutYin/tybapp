@@ -4,7 +4,7 @@ import { storage } from '@/utils/storage'
 const jsonToMap = (obj) => {
   let newObj = {}
   Object.keys(obj).forEach((key, index) => {
-    newObj[key] = {}
+    newObj[key] = []
     let value = obj[key]
     if (value && value.length > 0) {
       for (let objItem of value) {
@@ -14,11 +14,12 @@ const jsonToMap = (obj) => {
           let value = item[1]
           map.set(key, value)
         }
-        newObj[key] = map
+        newObj[key].push(map)
       }
     }
   })
   console.log('newObj: ', newObj)
+  return newObj
 }
 
 const state = {
@@ -48,6 +49,11 @@ const mutations = {
   },
   SET_FORM_DEFAULT_ITEM: (state, params) => {
     Vue.set(state.defaultObj, params.key, params.value)
+  },
+  DELETE_FORMOBJ_KEYS: (state, keys) => {
+    for (let key of keys) {
+      delete state.formObj[key]
+    }
   },
   CLEAR_FORMOBJ: (state) => {
     state.formObj = {}

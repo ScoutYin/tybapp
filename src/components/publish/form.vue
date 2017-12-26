@@ -173,6 +173,13 @@ export default {
     },
     async select (item, index) {
       if (!item.selectType) {
+        if (item.options) {
+          this.selectTitle = `请选择${item.label}`
+          this.key = this.formDataskeys[index]
+          this.selectVisible = true
+          this.selectList = item.options
+          return
+        }
         console.error('selectType is required.')
         return
       }
@@ -243,7 +250,8 @@ export default {
     },
     multipleDeleteOne (item, type) {
       if (this.multipleObj[type].length > 1) {
-        this.multipleObj[type].pop()
+        let lastOne = this.multipleObj[type].pop()
+        this.$store.commit('DELETE_FORMOBJ_KEYS', lastOne.keys())
       }
     }
   }
