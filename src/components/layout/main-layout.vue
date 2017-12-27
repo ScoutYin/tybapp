@@ -15,6 +15,7 @@
       <slot></slot>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -56,16 +57,13 @@ export default {
   },
   data () {
     return {
-      headerTitle: '',
+      headerTitle: this.$route.name,
       hideTitle: false
     }
   },
   created () {
-    this.headerTitle = this.title || `headerTitle.${this.$route.name}`
+    this.headerTitle = this.title || this.$i18n.messages[this.$i18n.locale].headerTitle[this.$route.name]
     this.hideTitle = this.search || false
-  },
-  mounted () {
-    // console.log('this.$t: ', this.$t(`headerTitle.Home`), this)
   },
   methods: {
     goBack () {
