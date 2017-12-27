@@ -9,7 +9,13 @@
         <div class="item-wrapper"
              v-for="(item, index) in list"
              :key="index">
-          <l-fish-item :item="item" class="item"></l-fish-item>
+          <l-fish-item :title="item.title"
+                       :price="item.price"
+                       :thumb="item.thumb"
+                       :sales="item.sales"
+                       @click.native="toDetail(item.id)"
+                       class="item">
+          </l-fish-item>
         </div>
       </div>
       <l-part-line v-if="loading && list.length !== 0 " text="没有更多"></l-part-line>
@@ -49,6 +55,9 @@ export default {
       } catch (err) {
         throw err
       }
+    },
+    toDetail (id) {
+      this.$router.push({name: 'FishBuyDetail', query: { id: id }})
     }
   }
 }

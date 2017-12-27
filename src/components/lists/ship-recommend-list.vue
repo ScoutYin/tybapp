@@ -3,7 +3,9 @@
     <div v-for="(item, index) in list"
          :key="index"
          class="item">
-      <ship-item :item="item"></ship-item>
+      <ship-item :title="item.title"
+                 :thumb="item.thumb"
+                 @click.native="toShipDetail(item.id)"></ship-item>
     </div>
   </div>
 </template>
@@ -17,6 +19,11 @@ export default {
   },
   props: {
     list: Array
+  },
+  methods: {
+    toShipDetail (id) {
+      this.$router.push({name: 'ShipBuyDetail', query: { id: id }})
+    }
   }
 }
 </script>

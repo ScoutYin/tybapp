@@ -1,10 +1,10 @@
 <template>
-  <div class="l-shop-ship-item-wrapper" @click="toShipDetail(item.id)">
+  <div class="l-shop-ship-item-wrapper">
     <div class="image">
-      <img :src="item.thumb">
+      <img :src="thumb">
     </div>
     <div class="content">
-      <div class="title">{{ item.title }}</div>
+      <div class="title">{{ title }}</div>
     </div>
   </div>
 </template>
@@ -12,12 +12,9 @@
 <script>
 export default {
   props: {
-    item: Object
-  },
-  methods: {
-    toShipDetail (id) {
-      this.$router.push({name: 'ShipBuyDetail', query: { id: id }})
-    }
+    item: Object,
+    title: String,
+    thumb: String
   }
 }
 </script>

@@ -32,7 +32,7 @@ export default {
     LPartLine
   },
   mixins: [listMixin],
-  async mounted () {
+  mounted () {
     this.init(getUserOrderList, { idType: 'order_id' })
     this.initData()
   },

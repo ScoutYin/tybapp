@@ -27,7 +27,9 @@
         v-for="(item, index) in shipItems"
         :key="index"
         class="list-item"
-        :item="item">
+        :title="item.title"
+        :thumb="item.thumb"
+        @click.native="toShipDetail(item.id)">
       </l-shop-ship-item>
     </div>
   </div>
@@ -84,6 +86,9 @@ export default {
       } catch (err) {
         throw err
       }
+    },
+    toShipDetail (id) {
+      this.$router.push({name: 'ShipBuyDetail', query: { id: id }})
     }
   }
 }

@@ -1,29 +1,34 @@
 <template>
-  <div class="l-shop-fish-item-wrapper"
-       @click="toDetail(item.id)">
+  <div class="l-shop-fish-item-wrapper">
     <div class="image">
-      <img :src="item.thumb">
+      <img :src="thumb">
     </div>
     <div class="content">
       <div class="title">
-        {{item.title}}
+        {{title}}
       </div>
       <div class="bottom">
-        <div class="price">
-          {{item.price | lPrice}}
+        <div class="price" v-if="price">
+          {{price | lPrice}}
         </div>
-        <div class="sales">
-          销量：{{item.sales}}
+        <div class="sales" v-if="sales">
+          销量：{{sales}}
         </div>
       </div>
     </div>
+    <div class="is-edit" v-if="isEdit">123</div>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    item: Object
+    // item: Object
+    title: String,
+    price: [String, Number],
+    sales: String,
+    thumb: String,
+    isEdit: Boolean
   },
   methods: {
     toDetail (id) {
@@ -36,6 +41,7 @@ export default {
 <style lang="scss">
 @import '../../common/style/mixins.scss';
 .l-shop-fish-item-wrapper {
+  position: relative;
   .content {
     .title {
       margin: 5px 0;
@@ -48,6 +54,11 @@ export default {
         font-size: 12px;
       }
     }
+  }
+  .is-edit {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 }
 </style>

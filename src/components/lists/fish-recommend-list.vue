@@ -3,7 +3,12 @@
     <div v-for="(item, index) in list"
          :key="index"
          class="item">
-      <l-fish-item :item="item"></l-fish-item>
+      <l-fish-item :title="item.title"
+                   :price="item.price"
+                   :thumb="item.thumb"
+                   :sales="item.sales"
+                   @click.native="toDetail(item.id)">
+      </l-fish-item>
     </div>
   </div>
 </template>
@@ -17,6 +22,11 @@ export default {
   },
   props: {
     list: Array
+  },
+  methods: {
+    toDetail (id) {
+      this.$router.push({name: 'FishBuyDetail', query: { id: id }})
+    }
   }
 }
 </script>
