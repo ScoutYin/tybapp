@@ -28,7 +28,7 @@ export default {
   methods: {
     toPath (name) {
       if (name === 'PublishFish' &&
-        this.userinfo && !this.userinfo.shipid) {
+        this.userinfo && !this.userinfo.shopid) {
         this.$vux.toast.text('非商家不能发布鱼获', 'middle')
         return
       }

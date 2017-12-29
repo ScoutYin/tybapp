@@ -46,7 +46,7 @@ export default {
         { id: 4, title: '我', icon: 'icon-wode', componentName: 'Mine' }
       ],
       popupItems: [
-        { id: 0, title: '发鱼获', icon: 'icon-buyfish', componentName: 'PublishFish' },
+        { id: 0, title: '发渔获', icon: 'icon-buyfish', componentName: 'PublishFish' },
         { id: 1, title: '发渔船', icon: 'icon-chuan', componentName: 'PublishShip' },
         { id: 2, title: '发招聘', icon: 'icon-zhaoping', componentName: 'PublishRecruiting' },
         { id: 3, title: '发求职', icon: 'icon-qiuzhi', componentName: 'PublishJobHunting' }

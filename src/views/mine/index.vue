@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="section" v-permission-click="toOrderSeller" v-if="userinfo && userinfo.shipid">
+    <div class="section" v-permission-click="toOrderSeller" v-if="userinfo && userinfo.shopid">
       <l-cell title="我是卖家" v-is-link></l-cell>
       <div class="list-wrapper">
         <div class="list-item"

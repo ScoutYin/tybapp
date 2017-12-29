@@ -20,12 +20,15 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../common/style/mixins';
+
 .l-shop-ship-item-wrapper {
   .content {
     border: 1px solid #eee;
     border-top: none;
+    @include text-overflow(1);
     .title {
-      padding: 5px;
+      margin: 5px;
     }
   }
 }
