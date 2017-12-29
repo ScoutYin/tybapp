@@ -20,14 +20,28 @@
         <div class="item"
               v-for="(item, index) in dynamicData"
               :key="index">
-          {{`${item.buyer}和${item.seller}成交`}}
-          <span class="update-time">{{item.updateTime}}</span>
+          {{item.title}}
+          <span class="update-time">{{item.inputtime | time2Date('YYYY-MM-DD', item.inputtime)}}</span>
         </div>
       </div>
     </div>
 
-    <div class="section">
+    <div class="section fish-exponent">
       <div class="title">渔获指数</div>
+      <swiper :aspect-ratio="225/375" dots-position="center">
+        <swiper-item>
+          <l-fish-exponent-item :list="exponents.live" title="活品"></l-fish-exponent-item>
+        </swiper-item>
+        <swiper-item>
+          <l-fish-exponent-item :list="exponents.freeze" title="冻品"></l-fish-exponent-item>
+        </swiper-item>
+        <swiper-item>
+          <l-fish-exponent-item :list="exponents.fresh" title="鲜品"></l-fish-exponent-item>
+        </swiper-item>
+        <swiper-item>
+          <l-fish-exponent-item :list="exponents.salt" title="腌制品"></l-fish-exponent-item>
+        </swiper-item>
+      </swiper>
     </div>
     <div class="section">
       <div class="title">渔获销冠</div>
@@ -53,7 +67,8 @@ import LArticleList from 'components/lists/article-list'
 import LFishRecommendList from 'components/lists/fish-recommend-list'
 import { Swiper, SwiperItem } from 'vux'
 import LCell from 'components/common/cell'
-import { getArticleList, getFishExponent, getShipRecommend, getTaglib, getAdvert } from 'api'
+import LFishExponentItem from 'components/items/fish-exponent-item'
+import { getArticleList, getFishExponent, getShipRecommend, getTaglib, getAdvert, getDynamicData } from 'api'
 export default {
   name: '',
   components: {
@@ -64,7 +79,8 @@ export default {
     LCell,
     LShipRecommendList,
     LFishRecommendList,
-    LArticleList
+    LArticleList,
+    LFishExponentItem
   },
   data () {
     return {
@@ -88,12 +104,9 @@ export default {
         { title: '我要卖鱼', icon: 'icon-sellfish', componentName: 'PublishFish' },
         { title: '我要招人', icon: 'icon-zhaoping', componentName: 'PublishRecruiting' }
       ],
-      dynamicData: [
-        { buyer: '12312341234', seller: '13533233323', updateTime: '4小时前' },
-        { buyer: '13555555555', seller: '13512344321', updateTime: '5小时前' }
-      ],
+      dynamicData: [],
       ad: [],
-      exponents: [],
+      exponents: {},
       articleList: [],
       shipRecommend: [],
       fishRecommend: [],
@@ -102,6 +115,7 @@ export default {
   },
   mounted () {
     this.getAD()
+    this.getDynamicData()
     this.getExponents()
     this.getArticles()
     this.getShip()
@@ -133,11 +147,21 @@ export default {
         throw err
       }
     },
+    async getDynamicData () {
+      try {
+        let res = await getDynamicData()
+        this.dynamicData = res.data
+      } catch (err) {
+        throw err
+      }
+    },
     async getExponents () {
       try {
-        let res = await getFishExponent({limit: 3})
-        this.exponents = res.data
-        console.log('exponent: ', res.data)
+        let res = await getFishExponent({limit: 1})
+        if (res.data) {
+          this.exponents = res.data[0]
+        }
+        console.log('exponent: ', this.exponents)
       } catch (err) {
         throw err
       }
@@ -269,6 +293,10 @@ export default {
     .article-list {
       margin: 0 -10px;
     }
+  }
+  .fish-exponent {
+    padding: 0;
+    padding-top: 10px;
   }
 }
 </style>

@@ -76,6 +76,7 @@ export const getShopFishList = (params) => axios.get('/5a0ea8086819c', params)
 export const getFishExponent = (params) => axios.get('/5a166ad896554', params)
 
 export const getAdvert = (params) => axios.get('/5a2a4cecb607d', params)
+export const getDynamicData = () => axios.get('/59f175b082680', { catid: 11, limit: 2 })
 
 // Order
 export const getUserOrderList = (params) => axios.get('/5a122fe1677cc', params)

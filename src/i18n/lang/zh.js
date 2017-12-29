@@ -9,9 +9,9 @@ export const headerTitle = {
   ArticleDetail: '资讯详情',
   FishBuyList: '渔获列表',
   FishBuyDetail: '渔获详情',
-  MessageComment: '消息评论',
-  MessagePersonalLetter: '消息通知',
-  MessageReply: '消息回复',
+  MessageComment: '评论',
+  MessagePersonalLetter: '私信',
+  MessageReply: '回复',
   MessageSystem: '系统消息',
   MineFav: '我的收藏',
   MineFavProduct: '商品收藏',
@@ -22,8 +22,8 @@ export const headerTitle = {
   MineFavResume: '简历收藏',
   Order: '我的订单',
   Userinfo: '用户信息',
-  OrderBuyer: '订单买家',
-  OrderSeller: '订单卖家',
+  OrderBuyer: '买家订单',
+  OrderSeller: '卖家订单',
   PublishFish: '渔获发布',
   PublishShip: '渔船发布',
   PublishRecruiting: '招聘发布',
@@ -34,4 +34,11 @@ export const headerTitle = {
   ShipBuyDetail: '渔船详情',
   StoreDetail: '商城详情',
   StoreCart: '购物车'
+}
+
+export const ExponentType = {
+  fish: '鱼类',
+  shellfish: '贝类',
+  cephalopod: '头足类',
+  crap: '虾蟹类'
 }

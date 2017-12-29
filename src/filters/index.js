@@ -11,11 +11,11 @@ const price = Vue.filter('lPrice', (price) => {
   }
 })
 
-const time2Date = Vue.filter('time2Date', (time) => {
+const time2Date = Vue.filter('time2Date', (time, formatType) => {
   if (!time) {
     return time
   }
-  return moment(time * 1000).format('YYYY-MM-DD HH:MM')
+  return moment(time * 1000).format(formatType || 'YYYY-MM-DD HH:MM')
 })
 
 const fullThumb = Vue.filter('fullThumb', (thumb) => {

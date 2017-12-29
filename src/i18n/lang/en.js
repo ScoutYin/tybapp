@@ -35,3 +35,10 @@ export const headerTitle = {
   StoreDetail: 'Store Detail',
   StoreCart: 'Cart'
 }
+
+export const ExponentType = {
+  fish: 'fish',
+  shellfish: 'shellfish',
+  cephalopod: 'cephalopod',
+  crap: 'crap'
+}

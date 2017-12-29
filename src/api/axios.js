@@ -63,11 +63,11 @@ instance.interceptors.response.use((response) => {
     }
   }
 }, (error) => {
-  console.log(new Error(error))
+  console.err(error.msg)
   Vue.$vux.loading.hide()
   Vue.$vux.alert.show({
     title: '网络错误',
-    content: new Error(error.message),
+    content: error.message,
     onShow () {
       console.log('Plugin: I\'m showing')
       return Promise.reject(error)
