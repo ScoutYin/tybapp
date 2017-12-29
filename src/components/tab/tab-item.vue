@@ -44,6 +44,7 @@ export default {
 
 .l-tab-item {
   &.is-selected {
+    color: $default-color;
   }
 }
 </style>
