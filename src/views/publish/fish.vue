@@ -76,6 +76,11 @@ export default {
           }
         }),
         createMap({
+          'picture': {
+            label: '选择图片',
+            type: 'picture',
+            required: true
+          },
           'content': {
             label: '详细内容',
             type: 'textarea',

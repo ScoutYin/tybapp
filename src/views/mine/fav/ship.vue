@@ -12,7 +12,7 @@
         class="item"
         :title="item.title"
         :thumb="item.thumb"
-        @click.native="toShipDetail(item.id)">
+        @click.native="toShipDetail(item.contentid)">
       </l-shop-ship-item>
     </div>
     <l-part-line v-if="loading && list.length !== 0 " text="没有更多"></l-part-line>
@@ -49,6 +49,9 @@ export default {
       } catch (err) {
         throw err
       }
+    },
+    toShipDetail (id) {
+      this.$router.push({name: 'ShipBuyDetail', query: { id: id }})
     }
   }
 }

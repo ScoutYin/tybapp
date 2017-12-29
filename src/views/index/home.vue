@@ -1,7 +1,7 @@
 <template>
   <l-main-layout class="home-container" title="淘渔吧">
     <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">
-      <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in ad" :key="index">
+      <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in ad" :key="index" dots-class="dots-class">
         <img :src="item.thumb" width="100%" height="100%">
       </swiper-item>
     </swiper>

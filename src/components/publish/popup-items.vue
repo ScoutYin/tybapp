@@ -13,14 +13,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'LPopupItems',
   componentName: 'LPopupItems',
   props: {
     items: Array
   },
+  computed: {
+    ...mapGetters([
+      'userinfo'
+    ])
+  },
   methods: {
     toPath (name) {
+      if (name === 'PublishFish' &&
+        this.userinfo && !this.userinfo.shipid) {
+        this.$vux.toast.text('非商家不能发布鱼获', 'middle')
+        return
+      }
       this.$router.push({name: name})
     }
   }

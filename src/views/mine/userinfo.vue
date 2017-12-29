@@ -35,7 +35,7 @@ export default {
   data () {
     return {
       fields: createMap({
-        username: '昵称',
+        nickname: '昵称',
         mobile: '手机',
         email: '邮箱',
         company: '公司',

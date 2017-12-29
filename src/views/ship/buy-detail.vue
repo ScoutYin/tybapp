@@ -29,10 +29,10 @@
     </section>
     <div class="detail-bottom" slot="bottom">
       <l-unit-button-fav class="left" modelId="7" :id="detailData.id"></l-unit-button-fav>
-      <div class="right">
+      <div class="right" @click="callTel(detailData.tel)">
         <l-icon icon="icon-dianhua"></l-icon>
         <span class="text">
-          <a :href="`tel:${detailData.tel}`">联系卖家</a></span>
+          <a>联系卖家</a></span>
       </div>
     </div>
   </l-detail-layout>
@@ -70,6 +70,9 @@ export default {
       } catch (err) {
         throw err
       }
+    },
+    callTel (tel) {
+      window.location.href = `tel:${tel}`
     }
   }
 }

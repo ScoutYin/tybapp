@@ -220,6 +220,8 @@ export default {
       let key = this.formDataskeys[index]
       this.$vux.datetime.show({
         minYear: '1900',
+        confirmText: '确定',
+        cancelText: '取消',
         onShow: (value) => {
           console.log('onshow.')
         },

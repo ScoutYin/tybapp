@@ -128,8 +128,9 @@ export default {
               required: true
             },
             'picture': {
-              label: '渔船图片',
-              type: 'pictures'
+              label: '选择图片',
+              type: 'picture',
+              required: true
             }
           }),
           createMap({

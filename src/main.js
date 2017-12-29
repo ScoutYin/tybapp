@@ -35,9 +35,21 @@ Vue.prototype.parseHTML = (content) => {
     return match.replace(url, 'http://www.taoyu58.com' + url)
   })
   // 处理table style 宽度过宽问题
+  content = content.replace(/<table [^>]*width=['"]([^'"]+)[^>]*>/gi, (match, width) => {
+    return match.replace(width, '')
+  })
+  content = content.replace(/<table [^>]*class=['"]([^'"]+)[^>]*>/gi, (match, _class) => {
+    return match.replace(_class, '')
+  })
   content = content.replace(/<table [^>]*style=['"]([^'"]+)[^>]*>/gi, (match, style) => {
     console.log('match: ', match, 'style: ', style)
     return match.replace(style, 'width: 100%;')
+  })
+  content = content.replace(/<td [^>]*style=['"]([^'"]+)[^>]*>/gi, (match, style) => {
+    return match.replace(style, '')
+  })
+  content = content.replace(/<td [^>]*width=['"]([^'"]+)[^>]*>/gi, (match, width) => {
+    return match.replace(width, '')
   })
 
   return content
