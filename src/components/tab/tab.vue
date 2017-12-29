@@ -52,7 +52,7 @@ export default {
       startTimeStamp: 0,
       defaultOptions: {
         // 最大回弹距离;
-        reBoundX: 30,
+        reBoundX: 60,
         // 惯性力;
         force: 2,
         // transition动画duration;
@@ -100,7 +100,7 @@ export default {
       if (this.translateX > 0) {
         this.translateX = 0
       }
-      if (this.translateX + this.listWidth < 0 && this.listWidth > 0) {
+      if (this.translateX + this.listWidth < 0 && this.listWidth >= 0) {
         this.translateX = -this.listWidth
       }
     },

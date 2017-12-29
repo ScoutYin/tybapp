@@ -2,7 +2,10 @@
   <l-pulldown-refresh class="mine-fav-layout-container"
     :top-load-method="initData"
     ref="topLoad">
-    <div class="fav-list">
+    <div class="fav-list"
+      v-infinite-scroll="loadMore"
+      infinite-scroll-disabled="loading"
+      infinite-scroll-distance="100">
       <l-fish-item :title="item.title"
                    :price="item.extend"
                    :thumb="item.thumb"
@@ -12,9 +15,8 @@
                    class="item">
       </l-fish-item>
     </div>
-    <div v-if="list && list.length <= 0">
-      <l-part-line text="暂无收藏"></l-part-line>
-    </div>
+    <l-part-line v-if="loading && list.length !== 0 " text="没有更多"></l-part-line>
+    <l-part-line text="暂无收藏" v-else></l-part-line>
   </l-pulldown-refresh>
 </template>
 

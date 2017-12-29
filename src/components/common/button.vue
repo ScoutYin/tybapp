@@ -51,7 +51,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../common/style/var.scss';
 
 .l-button {
@@ -122,6 +122,6 @@ export default {
   color: $button-default-plain-color;
 }
 .is-disabled {
-  opacity: .6;
+  opacity: .3;
 }
 </style>

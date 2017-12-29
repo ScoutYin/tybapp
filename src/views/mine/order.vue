@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import LOrderItem from 'components/lists/order-item'
+import LOrderItem from 'components/items/order-item'
 import LMainLayout from 'components/layout/main-layout'
 export default {
   name: 'MineOrder',

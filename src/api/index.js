@@ -80,6 +80,7 @@ export const getDynamicData = () => axios.get('/59f175b082680', { catid: 11, lim
 
 // Order
 export const getUserOrderList = (params) => axios.get('/5a122fe1677cc', params)
+export const getShopOrderList = (params) => axios.get('/5a45ac614a4c1', params)
 
 export const getUserIndex = (params) => axios.get('/59ffcc65b3e15', params)
 

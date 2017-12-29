@@ -26,10 +26,10 @@
       <div class="line"></div>
       <l-unit-button-fav :modelId="fetchObj[this.type].modelId" :id="detailData.id"></l-unit-button-fav>
       <div class="line"></div>
-      <div class="item-cart" v-permission-click="addGoods">
+      <l-button class="item-cart" v-permission-click="addGoods" disabled>
         <l-icon icon="icon-gouwuche"></l-icon>
         <span class="title">加入购物车</span>
-      </div>
+      </l-button>
     </div>
 
     <div class="cart" v-permission-click="toCart">
@@ -154,11 +154,13 @@ export default {
     .item-fav {
     }
     .item-cart {
+      height: 50px;
       line-height: 50px;
       flex: 2;
       text-align: center;
       background-color: #f74f0f;
       color: white;
+      border-radius: 0;
       font-weight: 500;
       .title {
         vertical-align: super;

@@ -1,23 +1,25 @@
 <template>
-  <l-pulldown-refresh class="order-layout-container order-list-container"
+  <l-pulldown-refresh class="seller-all-container order-list-container"
               :top-load-method="initData"
               ref="topLoad">
-    <div class="order-list"
-      v-infinite-scroll="loadMore"
-      infinite-scroll-disabled="loading"
-      infinite-scroll-distance="100">
+    <div class="order-list">
       <l-order-item v-for="(item, index) in list"
                     :key="index"
                     class="order-item"
-                    :item="item">
+                    :item="item"
+                    v-infinite-scroll="loadMore"
+                    infinite-scroll-disabled="loading"
+                    infinite-scroll-distance="10">
       </l-order-item>
     </div>
-    <l-part-line v-if="loading && list.length !== 0 " text="没有更多"></l-part-line>
-    <l-part-line text="暂无订单" v-else></l-part-line>
+    <div v-if="list.length <= 0">
+      <l-part-line text="暂无订单"></l-part-line>
+    </div>
   </l-pulldown-refresh>
 </template>
 
 <script>
+import { getUserOrderList } from 'api'
 import LPulldownRefresh from 'components/pulldown-refresh'
 import LOrderItem from 'components/items/order-item'
 import listMixin from '@/mixins/list'
@@ -29,13 +31,9 @@ export default {
     LPulldownRefresh,
     LPartLine
   },
-  props: {
-    type: [String, Number],
-    method: Function
-  },
   mixins: [listMixin],
-  mounted () {
-    this.init(this.method, { idType: 'order_id' })
+  async mounted () {
+    this.init(getUserOrderList, { idType: 'order_id' })
     this.initData()
   },
   created () {
@@ -47,7 +45,7 @@ export default {
     },
     async getOrderList () {
       try {
-        await this.loadData({status: this.type})
+        await this.loadData()
         this.$refs['topLoad'].onTopLoaded()
       } catch (err) {
         throw err
@@ -58,7 +56,7 @@ export default {
 </script>
 
 <style lang="scss">
-.order-layout-container {
+.seller-pre-payment-container {
   .order-item {
     margin-top: 10px;
   }

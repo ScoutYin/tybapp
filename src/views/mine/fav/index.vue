@@ -26,7 +26,30 @@ export default {
 </script>
 
 <style lang="scss">
-.mine-fav-container {
-
+.mine-fav-layout-container {
+  .fav-list {
+    display: flex;
+    width: 375px;
+    flex-wrap: wrap;
+    padding: 0 5px;
+    margin: 0 auto;
+    justify-content: flex-start;
+    .item {
+      margin: 10px 5px;
+      width: 170px;
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      .image {
+        width: 100%;
+        height: 100px;
+      }
+      .content {
+        margin: 5px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+    }
+  }
 }
 </style>

@@ -15,7 +15,7 @@ export default {
         { title: '全部订单', componentName: 'SellerAll' },
         { title: '待付款', componentName: 'SellerPrePayment' },
         { title: '待发货', componentName: 'SellerPreDeliver' },
-        { title: '待评价', componentName: 'SellerPreEvaluate' },
+        // { title: '待评价', componentName: 'SellerPreEvaluate' },
         { title: '已发货', componentName: 'SellerDelivered' },
         { title: '退款中' },
         { title: '交易成功' },
