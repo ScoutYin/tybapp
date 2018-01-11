@@ -2,6 +2,7 @@ export const USER_TOKEN = 'tybUserToken'
 export const FORM_FISH = 'tybFormFish'
 export const FORM_SHIP = 'tybFormShip'
 export const FORM_RECRUITING = 'tybFormRecruiting'
+export const USER_NAME_DEFAULT = 'tybUserNameDefault'
 
 export const storage = {
   set (key, value) {

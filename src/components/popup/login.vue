@@ -25,6 +25,8 @@ import LHeader from 'components/header'
 import LButton from 'components/common/button'
 import LLoginPanel from 'components/panels/login'
 import LRegisterPanel from 'components/panels/register'
+import { USER_NAME_DEFAULT, storage } from '@/utils/storage'
+
 export default {
   name: 'LoginView',
   components: {
@@ -48,6 +50,9 @@ export default {
       registerFormData: {}
     }
   },
+  mounted () {
+    this.resetData()
+  },
   methods: {
     close () {
       this.$store.dispatch('hideLogin')
@@ -58,13 +63,15 @@ export default {
     },
     async login (params) {
       try {
+        // 保存默认用户名
         await this.$store.dispatch('userLogin', params).then(() => {
           // 如果登陆成功，登陆标志置为true，储存token，回调函数if need
+          storage.set(USER_NAME_DEFAULT, params.username)
           this.resetData()
           this.$store.dispatch('loginSuccess')
         })
       } catch (err) {
-
+        console.error('err: ', err.message)
       }
     },
     async register (params) {
@@ -79,7 +86,7 @@ export default {
     resetData () {
       this.isLogin = true
       // 还需要清空输入框
-      this.loginFormData = {}
+      this.loginFormData = {username: storage.get(USER_NAME_DEFAULT) || ''}
       this.registerFormData = {}
     }
   }
