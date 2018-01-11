@@ -16,15 +16,9 @@ const state = {
 
 const getters = {
   loginVisible: (state) => { return state.loginVisible },
-  isLogin: (state) => {
-    return state.isLogin
-  },
-  userToken: (state) => {
-    return state.userToken
-  },
-  userinfo: (state) => {
-    return state.userinfo
-  }
+  isLogin: (state) => { return state.isLogin },
+  userToken: (state) => { return state.userToken },
+  userinfo: (state) => { return state.userinfo }
 }
 
 const actions = {
