@@ -96,7 +96,6 @@ export default {
 <style lang="scss">
 .login-container {
   background-color: #efefef;
-  overflow: hidden;
   .main {
     position: relative;
     top: 44px;
@@ -105,7 +104,7 @@ export default {
     width: 100%;
     .to-register {
       text-align: right;
-      color: #777;
+      color: fff;
     }
   }
 }

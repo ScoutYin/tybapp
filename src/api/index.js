@@ -95,3 +95,8 @@ export const addShip = (params) => axios.post('/5a14cab13e993', params)
 export const addFish = (params) => axios.post('/5a150c5513514', params)
 export const addRecruiting = (params) => axios.post('/5a12930c732b2', params)
 export const addJobHunting = (params) => axios.post('/5a1292c57b971', params)
+
+// 购物车
+export const addCartItem = (params) => axios.post('', params)
+export const deleteCartItem = (params) => axios.post('', params)
+export const getCartList = (params) => axios.get('', params)

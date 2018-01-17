@@ -19,6 +19,7 @@ import Ship from './ship'
 import Article from './article'
 import Message from './message'
 import Publish from './publish'
+import Shop from './shop'
 
 Vue.use(Router)
 
@@ -64,7 +65,8 @@ let routes = [
   ...Fish,
   ...Ship,
   ...Article,
-  ...Publish
+  ...Publish,
+  ...Shop
 ]
 
 let router = new Router({

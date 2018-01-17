@@ -19,10 +19,10 @@
       </article>
     </section>
     <div class="bottom-bar" slot="bottom">
-      <!-- <div class="item-shop item-common">
+      <div class="item-shop item-common" @click="toShop">
         <l-icon icon="icon-dianpu"></l-icon>
         <div class="title">店铺</div>
-      </div> -->
+      </div>
       <div class="line"></div>
       <l-unit-button-fav :modelId="fetchObj[this.type].modelId" :id="detailData.id"></l-unit-button-fav>
       <div class="line"></div>
@@ -96,6 +96,9 @@ export default {
     },
     toCart () {
       this.$router.push({ path: '/store/cart' })
+    },
+    toShop () {
+      this.$router.push({ path: '/shop' })
     }
   }
 }
