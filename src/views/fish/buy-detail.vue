@@ -19,7 +19,7 @@
       </article>
     </section>
     <div class="bottom-bar" slot="bottom">
-      <div class="item-shop item-common" @click="toShop">
+      <div class="item-shop item-common" @click="toShop(detailData.shopid)">
         <l-icon icon="icon-dianpu"></l-icon>
         <div class="title">店铺</div>
       </div>
@@ -97,8 +97,8 @@ export default {
     toCart () {
       this.$router.push({ path: '/store/cart' })
     },
-    toShop () {
-      this.$router.push({ path: '/shop' })
+    toShop (shopid) {
+      this.$router.push({ path: '/shop', query: { shopid } })
     }
   }
 }
