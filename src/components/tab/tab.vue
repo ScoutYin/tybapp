@@ -103,9 +103,6 @@ export default {
   methods: {
     // start
     handleTouchStart (event) {
-      if (this.listWidth <= 0) {
-        return
-      }
       cancelAnimationFrame(this.inertiaFrame)
       cancelAnimationFrame(this.touchFrame)
       this.startX = this.lastX = event.touches[0].clientX
@@ -113,6 +110,9 @@ export default {
     },
     // move
     handleTouchMove (event) {
+      if (this.listWidth <= 0) {
+        return
+      }
       event.preventDefault()
       event.stopPropagation()
       this.touching = true
