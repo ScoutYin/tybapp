@@ -11,14 +11,16 @@ const state = {
   isLogin: getToken,
   loginNextCb: () => {},
   userToken: getToken,
-  userinfo: {}
+  userinfo: {},
+  registerEndTime: null
 }
 
 const getters = {
   loginVisible: (state) => { return state.loginVisible },
   isLogin: (state) => { return state.isLogin },
   userToken: (state) => { return state.userToken },
-  userinfo: (state) => { return state.userinfo }
+  userinfo: (state) => { return state.userinfo },
+  registerEndTime: (state) => { return state.registerEndTime }
 }
 
 const actions = {
@@ -94,6 +96,10 @@ const mutations = {
   },
   USER_INFO: (state, data) => {
     state.userinfo = data
+  },
+  SET_REGISTER_END_TIME: (state, time) => {
+    console.log('SET_REGISTER_END_TIME', time)
+    state.registerEndTime = time
   }
 }
 
