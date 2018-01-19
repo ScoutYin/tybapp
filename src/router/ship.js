@@ -14,6 +14,9 @@ export default [
   }, {
     path: '/ship/buy-detail',
     component: ShipBuyDetail,
-    name: 'ShipBuyDetail'
+    name: 'ShipBuyDetail',
+    meta: {
+      nocache: true
+    }
   }
 ]

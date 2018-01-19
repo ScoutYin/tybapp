@@ -11,7 +11,9 @@
       <l-button slot="right"><slot name="header-right"></slot></l-button>
       <h1 slot="center" class="l-header-title" v-text="headerTitle" v-if="!hideTitle"></h1>
     </l-header>
-    <div class="main">
+    <div class="main"
+         v-save-scroll="$route.fullPath"
+         ref="scrollContainer">
       <slot></slot>
     </div>
   </div>
@@ -22,6 +24,7 @@
 import LHeader from 'components/header'
 import LPulldownRefresh from 'components/pulldown-refresh'
 import LSearchBar from 'components/search/search-bar'
+import scrollPosMixin from '@/mixins/scrollPos'
 
 export default {
   name: 'LMainLayout',
@@ -30,6 +33,7 @@ export default {
     LPulldownRefresh,
     LSearchBar
   },
+  mixins: [scrollPosMixin],
   props: {
     back: {
       type: Boolean,

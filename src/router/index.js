@@ -29,28 +29,23 @@ let routes = [
     component: Index,
     name: 'Index',
     redirect: '/home',
-    meta: { keepAlive: true },
     children: [
       {
         path: '/home',
         component: IndexHome,
-        name: 'Home',
-        meta: { keepAlive: true }
+        name: 'Home'
       }, {
         path: '/store',
         component: IndexStore,
-        name: 'Store',
-        meta: { keepAlive: true }
+        name: 'Store'
       }, {
         path: '/message',
         component: IndexMessage,
-        name: 'Message',
-        meta: { keepAlive: true }
+        name: 'Message'
       }, {
         path: '/mine',
         component: IndexMine,
-        name: 'Mine',
-        meta: { keepAlive: true }
+        name: 'Mine'
       }
     ]
   }, {
@@ -71,8 +66,16 @@ let routes = [
 
 let router = new Router({
   // mode history 需要后端服务器作支持，否则可能会白屏
-  // mode: 'history',
-  routes: routes
+  mode: 'history',
+  routes: routes,
+  scrollBehavior (to, from, savedPosition) {
+    // 记录body滚动位置，非body滚动用v-save-scroll指令
+    if (savedPosition && !from.meta.noKeepAlive) {
+      return savedPosition
+    } else {
+      return {x: 0, y: 0}
+    }
+  }
 })
 
 router.beforeEach(async (to, from, next) => {
@@ -85,5 +88,16 @@ router.beforeEach(async (to, from, next) => {
     next()
   }
 })
-
+router.beforeEach((to, from, next) => {
+  let history = store.getters.history
+  if (history.indexOf(to.path) > -1) {
+    store.commit('BACK', to.path)
+    from.meta.noKeepAlive = true
+  } else {
+    store.commit('FORWARD', to.path)
+    // 明确不需要缓存的路由nocache需为true
+    from.meta.noKeepAlive = from.meta.nocache
+  }
+  next()
+})
 export default router
