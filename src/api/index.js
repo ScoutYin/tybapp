@@ -10,6 +10,9 @@ export const login = (params) => axios('/admin/login', params)
  */
 export const logout = () => axios('/admin/logout')
 
+export const register = () => axios.post()
+export const mobileCode = (params) => axios.post('/5a5efc712841b', params)
+
 /**
  * 获取商品列表接口
  * params.type = 0 获取渔船列表接口

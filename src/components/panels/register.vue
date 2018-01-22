@@ -20,6 +20,8 @@
 <script>
 import LForm from 'components/form/form'
 import LFormItem from 'components/form/form-item'
+import { mobileCode } from '@/api'
+
 export default {
   name: 'LPanelsRegister',
   componentName: 'LPanelsRegister',
@@ -77,6 +79,7 @@ export default {
         this.$store.commit('SET_REGISTER_END_TIME', registerEndTime)
       }
 
+      const intervalTime = 1000
       const intervalCal = () => {
         const curTime = new Date().getTime()
         console.log(curTime, registerEndTime)
@@ -84,22 +87,31 @@ export default {
           clearInterval(this.intervalId)
         }
 
-        this.lastTime = Math.ceil((registerEndTime - curTime) / 1000)
+        this.lastTime = Math.ceil((registerEndTime - curTime) / intervalTime)
       }
 
       intervalCal()
 
-      this.intervalId = setInterval(intervalCal, 1000)
+      this.intervalId = setInterval(intervalCal, intervalTime)
     },
     onRegister () {
       this.$emit('commit', this.data)
     },
-    getCode () {
+    async getCode () {
       // 1. 验证手机号码
       // 2. 调用发送接口
       // 3. 成功失败弹框提示
       // 4. 禁止一定时间内再次发送，并设置倒计时
-      this.calLastTime()
+      try {
+        let res = await mobileCode({ mobile: this.data.username })
+        if (res.data.status === 1) {
+          this.calLastTime()
+        }
+        this.$vux.alert.show({
+          title: '提示',
+          content: res.data.info
+        })
+      } catch (err) {}
     },
     resetFields () {
 
