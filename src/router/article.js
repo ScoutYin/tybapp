@@ -9,6 +9,9 @@ export default [
   }, {
     path: '/article/detail',
     component: ArticleDetail,
-    name: 'ArticleDetail'
+    name: 'ArticleDetail',
+    meta: {
+      nocache: true
+    }
   }
 ]

@@ -33,7 +33,8 @@ export const headerTitle = {
   ShipBuyList: 'Ship List',
   ShipBuyDetail: 'Ship Detail',
   StoreDetail: 'Store Detail',
-  StoreCart: 'Cart'
+  StoreCart: 'Cart',
+  ShopIndex: 'Shop Index'
 }
 
 export const ExponentType = {

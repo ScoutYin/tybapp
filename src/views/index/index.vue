@@ -1,8 +1,9 @@
 <template>
   <div class="index-container">
     <keep-alive>
-      <router-view class="tab-views"></router-view>
+      <router-view class="tab-views" v-if="!$route.meta.noKeepAlive"></router-view>
     </keep-alive>
+    <router-view class="tab-views" v-if="$route.meta.noKeepAlive"></router-view>
 
     <l-tabbar v-model="selected" class="tabbar">
       <l-tabbar-item v-for="(item, index) in tabs" :key="index" @click.native="jump(item.componentName)">

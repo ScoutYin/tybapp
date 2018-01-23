@@ -10,6 +10,9 @@ export const login = (params) => axios('/admin/login', params)
  */
 export const logout = () => axios('/admin/logout')
 
+export const register = () => axios.post()
+export const mobileCode = (params) => axios.post('/5a5efc712841b', params)
+
 /**
  * 获取商品列表接口
  * params.type = 0 获取渔船列表接口
@@ -36,6 +39,7 @@ export const getStoreShop = (params) => axios('/store/shop', params)
  */
 export const getAccessToken = (params) => axios.get('/59f15190b135b', params)
 export const userLogin = (params) => axios.post('/59ffc75e7b127', params)
+export const userRegister = (params) => axios.post('/5a5efc9358971', params)
 
 // Artile
 export const getArticleList = (params) => axios.get('/59f175b082680', params)
@@ -95,3 +99,8 @@ export const addShip = (params) => axios.post('/5a14cab13e993', params)
 export const addFish = (params) => axios.post('/5a150c5513514', params)
 export const addRecruiting = (params) => axios.post('/5a12930c732b2', params)
 export const addJobHunting = (params) => axios.post('/5a1292c57b971', params)
+
+// 购物车
+export const addCartItem = (params) => axios.post('/5a6543c6ea24a', params)
+export const deleteCartItem = (params) => axios.post('', params)
+export const getCartList = (params) => axios.get('/5a6559cd72c9d', params)

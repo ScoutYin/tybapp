@@ -21,8 +21,10 @@ export default {
     async getFav () {
       try {
         let res = await getFavorite({modelid: this.modelId, id: this.id})
-        this.isFav = res.data.status
-        console.log(res)
+        if (res.data) {
+          this.isFav = res.data.status
+          console.log(res)
+        }
       } catch (err) {
         throw err
       }
@@ -30,8 +32,10 @@ export default {
     async addFav () {
       try {
         let res = await addFavorite({modelid: this.modelId, id: this.id})
-        this.isFav = res.status
-        this.$vux.toast.text(res.data.msg, 'middle')
+        if (res.data) {
+          this.isFav = res.data.status
+          this.$vux.toast.text(res.data.msg, 'middle')
+        }
         console.log(res)
       } catch (err) {
         throw err

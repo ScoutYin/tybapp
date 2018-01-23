@@ -14,6 +14,9 @@ export default [
   }, {
     path: '/fish/buy-detail',
     component: FishBuyDetail,
-    name: 'FishBuyDetail'
+    name: 'FishBuyDetail',
+    meta: {
+      nocache: true
+    }
   }
 ]

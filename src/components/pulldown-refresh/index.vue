@@ -17,16 +17,20 @@
         <span class="default-text">{{ topText }}</span>
       </slot>
     </div>
-    <div class="scroll-container">
+    <div class="scroll-container"
+         v-save-scroll="$route.fullPath"
+         ref="scrollContainer">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
+import scrollPosMixin from '@/mixins/scrollPos'
 export default {
   name: 'LPulldownRefresh',
   componentName: 'LPulldownRefresh',
+  mixins: [scrollPosMixin],
   props: {
     autoFill: {
       type: Boolean,

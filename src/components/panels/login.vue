@@ -86,7 +86,7 @@ export default {
     letter-spacing: 20px;
     background: $default-color;
     color: #fff;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     span {
       flex: 1;
     }
