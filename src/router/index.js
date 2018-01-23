@@ -90,11 +90,11 @@ router.beforeEach(async (to, from, next) => {
 })
 router.beforeEach((to, from, next) => {
   let history = store.getters.history
-  if (history.indexOf(to.path) > -1) {
-    store.commit('BACK', to.path)
+  if (history.indexOf(to.fullPath) > -1) {
+    store.commit('BACK', {toPath: to.fullPath, fromPath: from.fullPath})
     from.meta.noKeepAlive = true
   } else {
-    store.commit('FORWARD', to.path)
+    store.commit('FORWARD', to.fullPath)
     // 明确不需要缓存的路由nocache需为true
     from.meta.noKeepAlive = from.meta.nocache
   }

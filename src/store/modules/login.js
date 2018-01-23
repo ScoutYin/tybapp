@@ -73,7 +73,9 @@ const mutations = {
   },
   SHOW_LOGIN: (state, cb) => {
     state.loginVisible = true
-    state.loginNextCb = cb
+    if (cb && typeof cb === 'function') {
+      state.loginNextCb = cb
+    }
   },
   HIDE_LOGIN: (state) => {
     state.loginVisible = false

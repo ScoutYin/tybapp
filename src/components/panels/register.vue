@@ -2,14 +2,25 @@
   <div class="login-panel">
     <l-form class="login-form">
       <l-form-item label="手机号" class="form-item">
-        <input v-model="data.username" placeholder="请输入手机">
+        <input v-model="data.mobile" placeholder="请输入手机">
       </l-form-item>
       <l-form-item label="验证码" class="form-item">
         <input v-model="data.code" placeholder="请输入验证码">
         <label class="get-code" @click="getCode">{{this.lastTime > 0 ? lastTime : '获取验证码'}}</label>
       </l-form-item>
       <l-form-item label="密码" class="form-item">
-        <input v-model="data.password" placeholder="请输入密码">
+        <input v-model="data.password" type="password" placeholder="请输入密码">
+      </l-form-item>
+      <l-form-item label="确认密码" class="form-item">
+        <input v-model="data.repassword" type="password" placeholder="请重新输入密码">
+      </l-form-item>
+      <l-form-item label="注册类型" class="form-item">
+        <group>
+          <radio title="title" :options="options" v-model="value" @on-change="typeChange"></radio>
+        </group>
+      </l-form-item>
+      <l-form-item label="公司名称" class="form-item" v-if="value === 4">
+        <input v-model="data.company" placeholder="请输入公司名称">
       </l-form-item>
     </l-form>
     <div @click="onRegister" class="btn-register">点 我 注 册</div>
@@ -21,6 +32,7 @@
 import LForm from 'components/form/form'
 import LFormItem from 'components/form/form-item'
 import { mobileCode } from '@/api'
+import { Group, Radio } from 'vux'
 
 export default {
   name: 'LPanelsRegister',
@@ -32,12 +44,22 @@ export default {
   },
   components: {
     LForm,
-    LFormItem
+    LFormItem,
+    Group,
+    Radio
   },
   data () {
     return {
       intervalId: null,
-      lastTime: null
+      lastTime: null,
+      options: [{
+        key: 3,
+        value: '个人'
+      }, {
+        key: 4,
+        value: '企业'
+      }],
+      value: 3
     }
   },
   created () {
@@ -103,7 +125,7 @@ export default {
       // 3. 成功失败弹框提示
       // 4. 禁止一定时间内再次发送，并设置倒计时
       try {
-        let res = await mobileCode({ mobile: this.data.username })
+        let res = await mobileCode({ mobile: this.data.mobile })
         if (res.data.status === 1) {
           this.calLastTime()
         }
@@ -115,6 +137,10 @@ export default {
     },
     resetFields () {
 
+    },
+    typeChange (value) {
+      console.log('typeChange: ', value)
+      this.data.modelid = value
     }
   }
 }
@@ -148,9 +174,14 @@ export default {
   .btn-register {
     margin: 10px 0;
     padding: 10px;
-    background: rgba(7, 17, 27, 0.1);
+    background: $default-color;
+    color: white;
     text-align: center;
     border-radius: 4px;
+  }
+  .weui-cells_radio {
+    font-size: 12px;
+    font-weight: 400;
   }
 }
 </style>

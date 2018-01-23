@@ -4,6 +4,7 @@ import qs from 'qs'
 import Vue from 'vue'
 import { AlertPlugin, LoadingPlugin } from 'vux'
 import store from '../store'
+import router from '../router'
 Vue.use(AlertPlugin)
 Vue.use(LoadingPlugin)
 
@@ -53,7 +54,9 @@ instance.interceptors.response.use((response) => {
       switch (data.code) {
         // USER-TOKEN 令牌错误需要退出登录
         case -9: {
+          store.commit('CLEAR_HISTORY')
           store.commit('USER_LOGOUT')
+          router.replace('/')
           break
         }
         default: {
@@ -63,7 +66,7 @@ instance.interceptors.response.use((response) => {
     }
   }
 }, (error) => {
-  console.err(error.msg)
+  console.error(error.msg)
   Vue.$vux.loading.hide()
   Vue.$vux.alert.show({
     title: '网络错误',

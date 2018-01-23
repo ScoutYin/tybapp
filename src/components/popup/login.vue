@@ -26,6 +26,7 @@ import LButton from 'components/common/button'
 import LLoginPanel from 'components/panels/login'
 import LRegisterPanel from 'components/panels/register'
 import { USER_NAME_DEFAULT, storage } from '@/utils/storage'
+import { userRegister } from 'api'
 
 export default {
   name: 'LoginView',
@@ -76,6 +77,13 @@ export default {
     },
     async register (params) {
       console.log('register: ', params)
+      if (!params.modelid) { params.modelid = 3 }
+      try {
+        let res = await userRegister(this.registerFormData)
+        console.log('res: ', res)
+      } catch (err) {
+        console.error(err.message)
+      }
     },
     toRegister () {
       this.isLogin = false

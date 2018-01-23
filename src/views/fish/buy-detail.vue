@@ -26,7 +26,7 @@
       <div class="line"></div>
       <l-unit-button-fav :modelId="fetchObj[this.type].modelId" :id="detailData.id"></l-unit-button-fav>
       <div class="line"></div>
-      <l-button class="item-cart" v-permission-click="addGoods" disabled>
+      <l-button class="item-cart" v-permission-click="addGoods">
         <l-icon icon="icon-gouwuche"></l-icon>
         <span class="title">加入购物车</span>
       </l-button>
@@ -40,7 +40,7 @@
 
 <script>
 import LDetailLayout from 'components/layout/detail-layout'
-import { getShopFishDetail, getShopProductDetail } from 'api'
+import { getShopFishDetail, getShopProductDetail, addCartItem } from 'api'
 import LUnitButtonFav from 'components/unit/button-fav'
 export default {
   components: {
@@ -86,13 +86,22 @@ export default {
         throw err
       }
     },
-    addGoods () {
-      let goodInfo = {
+    async addGoods () {
+      let params = {
         // type: this.query.type,
         // goods: this.goodsData,
         // shop: this.shopData
+        modelid: this.fetchObj[this.type].modelId,
+        id: this.$route.query.id
       }
-      this.$store.dispatch('addGoods', goodInfo)
+      console.log('addGoods: ', params)
+      try {
+        await addCartItem(params)
+        this.$vux.toast.text('添加购物车成功', 'middle')
+      } catch (err) {
+
+      }
+      // this.$store.dispatch('addGoods', goodInfo)
     },
     toCart () {
       this.$router.push({ path: '/store/cart' })
