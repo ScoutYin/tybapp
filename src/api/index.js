@@ -102,5 +102,5 @@ export const addJobHunting = (params) => axios.post('/5a1292c57b971', params)
 
 // 购物车
 export const addCartItem = (params) => axios.post('/5a6543c6ea24a', params)
-export const deleteCartItem = (params) => axios.post('', params)
+export const deleteCartItems = (params) => axios.post('/5a66fbb9667f1', params)
 export const getCartList = (params) => axios.get('/5a6559cd72c9d', params)

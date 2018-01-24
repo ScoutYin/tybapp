@@ -3,37 +3,44 @@
     <div v-if="cartList.length === 0" class="cart-empty-tip">
       <l-part-line text="购物车为空"></l-part-line>
     </div>
-    <div class="shop-item-container">
-      <div v-for="(item, index) in cartList" :key="index" class="shop-item">
-        <div class="shop-title">
-          <l-checkbox :id="item.shopid"
-            :checked="item.checked"
-            @change="onChangeAll($event, index)">
-          </l-checkbox>
-          <div class="left" @click="toShop(item.shopid)">
-            <l-icon icon="icon-dianpu"></l-icon>
-            <span class="shopname">{{ item.shopname }}</span>
-          </div>
-        </div>
-        <div class="goods-list">
-          <div class="goods-item" v-for="(goodsItem, goodsIndex) in item._product" :key="goodsIndex">
-            <l-checkbox :id="goodsItem.cartid"
-              :checked="goodsItem.checked"
-              @change="onChange($event, goodsIndex, item)">
+    <template v-else>
+      <div slot="header-right" @click="toEdit()">{{isEdit ? '完成' : '编辑'}}</div>
+      <div class="edit-bar" v-if="isEdit">
+        <span>请勾选你要操作的商品</span>
+        <div class="delete" @click="deleteProduct">删除</div>
+      </div>
+      <div class="shop-item-container" :class="{'has-edit': isEdit}">
+        <div v-for="(item, index) in cartList" :key="index" class="shop-item">
+          <div class="shop-title">
+            <l-checkbox :id="item.shopid"
+              :checked="item.checked"
+              @change="onChangeShop($event, index)">
             </l-checkbox>
-            <div class="content">
-              <div class="thumb">
-                <img :src="goodsItem.thumb" />
-              </div>
-              <div class="text">
-                <div class="title">{{goodsItem.title}}</div>
-                <div class="desc"></div>
-                <div class="bottom">
-                  <div class="price">
-                    ￥{{ goodsItem.price }}
-                  </div>
-                  <div class="cnt">
-                    ×{{ goodsItem.qty }}
+            <div class="left" @click="toShop(item.shopid)">
+              <l-icon icon="icon-dianpu"></l-icon>
+              <span class="shopname">{{ item.shopname }}</span>
+            </div>
+          </div>
+          <div class="goods-list">
+            <div class="goods-item" v-for="(goodsItem, goodsIndex) in item._product" :key="goodsIndex">
+              <l-checkbox :id="goodsItem.cartid"
+                :checked="goodsItem.checked"
+                @change="onChangeProduct($event, index, goodsIndex)">
+              </l-checkbox>
+              <div class="content">
+                <div class="thumb">
+                  <img :src="goodsItem.thumb" />
+                </div>
+                <div class="text">
+                  <div class="title">{{goodsItem.title}}</div>
+                  <div class="desc"></div>
+                  <div class="bottom">
+                    <div class="price">
+                      ￥{{ goodsItem.price }}
+                    </div>
+                    <div class="cnt">
+                      ×{{ goodsItem.qty }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -41,22 +48,23 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="cart-bottom">
-      <l-checkbox id="all"
-        @change="onChangeAll()">
-      </l-checkbox>
-      <div class="select-all">
-        <span>全选</span>
+      <div class="cart-bottom">
+        <l-checkbox id="all"
+          :checked="selectAll.checked"
+          @change="onChangeAll($event)"
+          class="select-all">
+          <template slot="right-text">全选</template>
+        </l-checkbox>
+        
+        <div class="total">
+          <span>合计：</span>
+          <span class="price">￥{{ totalChoosePrice }}</span>
+        </div>
+        <div class="btn">
+          <span>{{ `结算(${totalCnt})` }}</span>
+        </div>
       </div>
-      <div class="total">
-        <span>合计：</span>
-        <span class="price">￥{{ totalChoosePrice }}</span>
-      </div>
-      <div class="btn">
-        <span>结算(0)</span>
-      </div>
-    </div>
+    </template>
   </l-main-layout>
 </template>
 
@@ -64,7 +72,7 @@
 import LMainLayout from 'components/layout/main-layout'
 import LPartLine from 'components/common/part-line'
 // import { mapGetters } from 'vuex'
-import { getCartList } from 'api'
+import { getCartList, deleteCartItems } from 'api'
 
 export default {
   name: 'StoreCart',
@@ -82,17 +90,31 @@ export default {
       for (let index = 0; index < this.cartList.length; ++index) {
         let _product = this.cartList[index]._product
         for (let item of _product) {
-          total += parseInt(item.checked ? item.price : 0)
+          total += (parseInt(item.checked ? item.price * 100 : 0) * item.qty / 100)
         }
       }
 
-      return total
+      return total.toFixed(2)
+    },
+    totalCnt () {
+      let cnt = 0
+      for (let index = 0; index < this.cartList.length; ++index) {
+        let _product = this.cartList[index]._product
+        for (let item of _product) {
+          if (item.checked) {
+            ++cnt
+          }
+        }
+      }
+      return cnt
     }
   },
   data () {
     return {
       cartList: [],
-      checked: {}
+      checked: {},
+      selectAll: { checked: false },
+      isEdit: false
     }
   },
   mounted () {
@@ -113,33 +135,58 @@ export default {
     toShop (shopid) {
       this.$router.push({name: 'ShopIndex', query: { shopid }})
     },
-    onChangeAll (value, index) {
-      this.cartList[index].checked = value
-      for (let productIndex in this.cartList[index]._product) {
-        let item = this.cartList[index]._product[productIndex]
-        item.checked = value
-        this.$set(this.cartList[index]._product, productIndex, item)
+    onChangeAll (value) {
+      this.checkedAll = value
+      for (const index in this.cartList) {
+        this.onChangeShop(value, index)
       }
-      console.log(this.cartList[index])
     },
-    onChange (value, index, shop) {
-      let product = shop._product
-      let item = product[index]
-      item.checked = value
-      this.$set(product, index, item)
+    onChangeShop (value, index) {
+      this.cartList[index].checked = value
+      for (const productIndex in this.cartList[index]._product) {
+        this.onChangeProduct(value, index, productIndex)
+      }
+      this.changeParent(this.selectAll, this.cartList)
+    },
+    onChangeProduct (value, index, productIndex) {
+      let shopItem = this.cartList[index]
+      let productItem = shopItem._product[productIndex]
 
+      productItem.checked = value
+      this.$set(shopItem._product, productIndex, productItem)
+
+      this.changeParent(this.cartList[index], shopItem._product)
+    },
+    changeParent (parent, data) {
       let checkedCnt = 0
-      for (let productItem of product) {
-        checkedCnt += productItem.checked ? 1 : 0
+      for (let item of data) {
+        checkedCnt += item.checked ? 1 : 0
       }
 
-      if (checkedCnt === 0) {
-        shop.checked = false
+      checkedCnt === 0 && (parent.checked = false)
+      checkedCnt === data.length && (parent.checked = true)
+    },
+    toEdit () {
+      console.log('edit!')
+      this.isEdit = !this.isEdit
+    },
+    async deleteProduct () {
+      let deleteIds = []
+      for (const shopItem of this.cartList) {
+        for (const productItem of shopItem._product) {
+          if (productItem.checked) {
+            deleteIds.push(productItem.cartid)
+          }
+        }
       }
 
-      if (checkedCnt === product.length) {
-        shop.checked = true
+      if (deleteIds.length === 0) {
+        return
       }
+
+      let res = await deleteCartItems({id: deleteIds})
+      this.getCartList()
+      console.log('deleteIds:', deleteIds, res)
     }
   }
 }
@@ -149,7 +196,29 @@ export default {
 @import '../../common/style/var.scss';
 
 .cart-container {
+  .edit-bar {
+    position: fixed;
+    height: 40px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .delete {
+      border: 1px solid $default-color;
+      color: $default-color;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+  }
   .shop-item-container {
+    &.has-edit {
+      margin-top: 50px;
+    }
     margin-bottom: 50px;
     .shop-item {
       margin-bottom: 10px;

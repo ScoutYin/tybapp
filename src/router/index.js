@@ -90,6 +90,7 @@ router.beforeEach(async (to, from, next) => {
 })
 router.beforeEach((to, from, next) => {
   let history = store.getters.history
+  console.log('history: ', history)
   if (history.indexOf(to.fullPath) > -1) {
     store.commit('BACK', {toPath: to.fullPath, fromPath: from.fullPath})
     from.meta.noKeepAlive = true

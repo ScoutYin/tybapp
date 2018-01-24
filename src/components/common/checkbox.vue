@@ -1,7 +1,12 @@
 <template>
   <div class="checkbox-container">
-    <input type="checkbox" name="checkbox-name" v-model="value" :id="`checkbox-${id}`" hidden/>
-    <label :for="`checkbox-${id}`" class="checkbox-beauty"></label>
+    <label>
+      <input type="checkbox" name="checkbox-name" v-model="value" :id="`checkbox-${id}`" hidden/>
+      <label :for="`checkbox-${id}`" class="checkbox-beauty">123</label>
+      <span class="checkbox-name">
+        <slot name="right-text"></slot>
+      </span>
+    </label>
   </div>
 </template>
 
@@ -12,12 +17,12 @@ export default {
     checked: {
       type: Boolean,
       default: false
-    }
+    },
+    label: String
   },
   data () {
     return {
-      value: this.checked,
-      noChange: false
+      value: this.checked
     }
   },
   mounted () {
@@ -27,17 +32,10 @@ export default {
   },
   watch: {
     checked (newVal) {
-      // 如果是由外部修改的，则不触发change事件
       this.value = newVal
-      // this.noChange = true
-      console.log('checked change:', newVal)
     },
     value (newVal) {
-      if (this.noChange) {
-        this.noChange = false
-      } else {
-        this.$emit('change', newVal)
-      }
+      this.$emit('change', newVal)
     }
   }
 }
@@ -67,6 +65,11 @@ export default {
     display: inline-block;
     margin: auto 10px auto 3px;
     vertical-align: middle;
+  }
+
+  .checkbox-name {
+    vertical-align: middle;
+    font-size: 14px;
   }
 
   input[type="checkbox"]:checked+.checkbox-beauty::after {
