@@ -71,6 +71,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../common/style/mixins.scss';
 .ship-buy-list-container {
   .list {
     display: flex;
@@ -95,6 +96,9 @@ export default {
           margin: 5px;
           font-size: 14px;
           line-height: 1.5;
+        }
+        .name {
+          @include text-overflow(1);
         }
       }
     }

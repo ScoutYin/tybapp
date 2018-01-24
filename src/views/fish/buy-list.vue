@@ -77,12 +77,13 @@ export default {
       .item {
         margin: 10px auto;
         width: 167.5px;
+        height: 226px;
         background: #fff;
         border-radius: 4px;
         overflow: hidden;
         .image {
           width: 100%;
-          height: 100px;
+          height: 167px;
         }
         .content {
           margin: 5px;

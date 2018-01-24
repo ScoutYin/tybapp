@@ -44,8 +44,8 @@ export default {
   position: relative;
   .content {
     .title {
-      margin: 5px 0;
-      @include text-overflow(2);
+      margin: 5px 0 8px;
+      @include text-overflow(1);
     }
     .bottom {
       display: flex;
