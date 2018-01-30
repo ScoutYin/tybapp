@@ -3,7 +3,7 @@
     :top-load-method="initData"
     ref="topLoad">
     <div class="fav-list"
-      v-infinite-scroll="loadMore"
+      v-infinite-scroll="_loadMore"
       infinite-scroll-disabled="loading"
       infinite-scroll-distance="100">
       <l-shop-ship-item
@@ -50,6 +50,9 @@ export default {
       } catch (err) {
         throw err
       }
+    },
+    _loadMore () {
+      this.loadMore({model: 'ship'})
     },
     toShipDetail (id) {
       this.$router.push({name: 'ShipBuyDetail', query: { id: id }})
