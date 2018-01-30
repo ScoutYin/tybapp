@@ -22,29 +22,18 @@
             </div>
           </div>
           <div class="goods-list">
-            <div class="goods-item" v-for="(goodsItem, goodsIndex) in item._product" :key="goodsIndex">
-              <l-checkbox :id="goodsItem.cartid"
-                :checked="goodsItem.checked"
-                @change="onChangeProduct($event, index, goodsIndex)">
+            <l-cart-goods-item v-for="(goodsItem, goodsIndex) in item._product"
+                              :key="goodsIndex"
+                              :thumb="goodsItem.thumb"
+                              :title="goodsItem.title"
+                              :price="goodsItem.price"
+                              :qty="goodsItem.qty">
+              <l-checkbox slot="left"
+                          :id="goodsItem.cartid"
+                          :checked="goodsItem.checked"
+                          @change="onChangeProduct($event, index, goodsIndex)">
               </l-checkbox>
-              <div class="content">
-                <div class="thumb">
-                  <img :src="goodsItem.thumb" />
-                </div>
-                <div class="text">
-                  <div class="title">{{goodsItem.title}}</div>
-                  <div class="desc"></div>
-                  <div class="bottom">
-                    <div class="price">
-                      ￥{{ goodsItem.price }}
-                    </div>
-                    <div class="cnt">
-                      ×{{ goodsItem.qty }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </l-cart-goods-item>
           </div>
         </div>
       </div>
@@ -60,7 +49,7 @@
           <span>合计：</span>
           <span class="price">￥{{ totalChoosePrice }}</span>
         </div>
-        <div class="btn">
+        <div class="btn" @click="toConfirmOrder">
           <span>{{ `结算(${totalCnt})` }}</span>
         </div>
       </div>
@@ -70,15 +59,16 @@
 
 <script>
 import LMainLayout from 'components/layout/main-layout'
+import LCartGoodsItem from 'components/items/cart-goods-item'
 import LPartLine from 'components/common/part-line'
-// import { mapGetters } from 'vuex'
 import { getCartList, deleteCartItems } from 'api'
 
 export default {
   name: 'StoreCart',
   components: {
     LMainLayout,
-    LPartLine
+    LPartLine,
+    LCartGoodsItem
   },
   computed: {
     totalChoosePrice () {
@@ -107,12 +97,30 @@ export default {
         }
       }
       return cnt
+    },
+    checkedIds () {
+      let arr = []
+      for (const shopItem of this.cartList) {
+        for (const productItem of shopItem._product) {
+          if (productItem.checked) {
+            arr.push(productItem.cartid)
+          }
+        }
+      }
+      return arr
+    },
+    cartList: {
+      get: function () {
+        return this.$store.getters.getCartList
+      },
+      set: function (data) {
+        console.log('set: ', data)
+        this.$store.commit('SET_CART_LIST', data)
+      }
     }
   },
   data () {
     return {
-      cartList: [],
-      checked: {},
       selectAll: { checked: false },
       isEdit: false
     }
@@ -171,14 +179,7 @@ export default {
       this.isEdit = !this.isEdit
     },
     async deleteProduct () {
-      let deleteIds = []
-      for (const shopItem of this.cartList) {
-        for (const productItem of shopItem._product) {
-          if (productItem.checked) {
-            deleteIds.push(productItem.cartid)
-          }
-        }
-      }
+      const deleteIds = this.checkedIds
 
       if (deleteIds.length === 0) {
         return
@@ -187,6 +188,10 @@ export default {
       let res = await deleteCartItems({id: deleteIds})
       this.getCartList()
       console.log('deleteIds:', deleteIds, res)
+    },
+    async toConfirmOrder () {
+      const confirmIds = this.checkedIds
+      this.$router.push({name: 'ConfirmCart', query: {ids: confirmIds}})
     }
   }
 }
@@ -231,54 +236,6 @@ export default {
           display: flex;
           .shopname {
             margin-left: 5px;
-          }
-        }
-      }
-      .goods-list {
-        .goods-item {
-          display: flex;
-          padding: 10px;
-          background: white;
-          align-items: center;
-          .content {
-            display: flex;
-            flex: 1;
-          }
-          &:not(:last-child) {
-            border-bottom: 1px solid #eee;
-          }
-          .thumb {
-            width: 88px;
-            height: 72px;
-            min-width: 88px;
-            img {
-              width: 100%;
-              height: 100%;
-            }
-          }
-          .text {
-            flex-grow: 1;
-            margin-left: 10px;
-            display: flex;
-            flex-direction: column;
-            .title {
-              flex-grow: 2;
-              margin-right: 20px;
-            }
-            .desc {
-              flex-grow: 2;
-            }
-            .bottom {
-              flex-grow: 1;
-              display: flex;
-              .price {
-                flex-grow: 1;
-                color: red;
-              }
-              .cnt {
-                text-align: right;
-              }
-            }
           }
         }
       }

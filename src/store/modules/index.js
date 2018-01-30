@@ -4,6 +4,7 @@ import Goods from './goods'
 import Form from './form'
 import Upload from './upload'
 import History from './history'
+import Cart from './cart'
 
 export default {
   Scroll,
@@ -11,5 +12,6 @@ export default {
   Goods,
   Form,
   Upload,
-  History
+  History,
+  Cart
 }

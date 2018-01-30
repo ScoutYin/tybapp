@@ -1,5 +1,6 @@
 import StoreDetail from 'views/store/detail'
 import StoreCart from 'views/store/cart'
+import ConfirmCart from 'views/store/confirm-cart'
 
 export default [
   {
@@ -10,5 +11,9 @@ export default [
     path: '/store/cart',
     component: StoreCart,
     name: 'StoreCart'
+  }, {
+    path: '/store/confirm-cart',
+    component: ConfirmCart,
+    name: 'ConfirmCart'
   }
 ]
