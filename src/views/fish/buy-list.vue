@@ -51,7 +51,7 @@ export default {
       try {
         await this.loadData()
         console.log(this.list)
-        this.$refs['topLoad'].onTopLoaded()
+        this.$refs.topLoad && this.$refs.topLoad.onTopLoaded()
       } catch (err) {
         throw err
       }

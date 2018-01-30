@@ -7,37 +7,62 @@
         {{item.title}}
       </l-tab-item>
     </l-tab>
-    <router-view class="main-view"></router-view>
+    <keep-alive>
+      <component :is="tabView" class="main-view"></component>
+    </keep-alive>
   </l-main-layout>
 </template>
 
 <script>
 import LMainLayout from 'components/layout/main-layout'
 import { LTab, LTabItem } from 'components/tab'
+
+// 组件异步加载
+const asyncComponents = {
+  MineFavProduct: (resolve) => require(['@/views/mine/fav/product'], resolve),
+  MineFavShip: (resolve) => require(['@/views/mine/fav/ship'], resolve),
+  MineFavFish: (resolve) => require(['@/views/mine/fav/fish'], resolve),
+
+  SellerAll: (resolve) => require(['@/views/mine/order/seller/all'], resolve),
+  SellerDelivered: (resolve) => require(['@/views/mine/order/seller/delivered'], resolve),
+  SellerPreDeliver: (resolve) => require(['@/views/mine/order/seller/pre-deliver'], resolve),
+  SellerPreEvaluate: (resolve) => require(['@/views/mine/order/seller/pre-evaluate'], resolve),
+  SellerPrePayment: (resolve) => require(['@/views/mine/order/seller/pre-payment'], resolve),
+
+  BuyerAll: (resolve) => require(['@/views/mine/order/buyer/all'], resolve),
+  BuyerDelivered: (resolve) => require(['@/views/mine/order/buyer/delivered'], resolve),
+  BuyerPreDeliver: (resolve) => require(['@/views/mine/order/buyer/pre-deliver'], resolve),
+  BuyerPreEvaluate: (resolve) => require(['@/views/mine/order/buyer/pre-evaluate'], resolve),
+  BuyerPrePayment: (resolve) => require(['@/views/mine/order/buyer/pre-payment'], resolve)
+}
+
 export default {
   name: 'MineMyFav',
   components: {
     LMainLayout,
     LTab,
-    LTabItem
+    LTabItem,
+    ...asyncComponents
   },
   props: {
-    items: Array
+    items: {
+      type: Array
+    }
   },
   data () {
     return {
-      selected: -1
+      selected: 0
     }
   },
-  created () {
-    this.selected = 0
-  },
-  methods: {
-  },
-  watch: {
-    selected (val, oldVal) {
-      let componentName = this.items[val].componentName
-      this.$router.replace({name: componentName})
+  computed: {
+    tabViews () {
+      let names = this.items.map(item => {
+        return item.componentName
+      })
+      return names
+    },
+    tabView () {
+      return this.tabViews[this.selected]
     }
   }
 }

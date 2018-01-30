@@ -33,7 +33,7 @@ export default {
     async getFavList () {
       try {
         await this.loadData({model: 'shop'})
-        this.$refs['topLoad'].onTopLoaded()
+        this.$refs.topLoad && this.$refs.topLoad.onTopLoaded()
       } catch (err) {
         throw err
       }

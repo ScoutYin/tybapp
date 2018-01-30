@@ -27,6 +27,7 @@ import LShopShipItem from 'components/items/shop-ship-item'
 import listMixin from '@/mixins/list'
 import { getFavoriteList } from 'api'
 export default {
+  name: 'MineFavShip',
   components: {
     LPulldownRefresh,
     LPartLine,
@@ -45,7 +46,7 @@ export default {
     async getFavList () {
       try {
         await this.loadData({model: 'ship'})
-        this.$refs['topLoad'].onTopLoaded()
+        this.$refs.topLoad && this.$refs.topLoad.onTopLoaded()
       } catch (err) {
         throw err
       }

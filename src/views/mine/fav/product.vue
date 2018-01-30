@@ -3,7 +3,7 @@
     :top-load-method="initData"
     ref="topLoad">
     <div class="fav-list"
-      v-infinite-scroll="loadMore"
+      v-infinite-scroll="_loadMore"
       infinite-scroll-disabled="loading"
       infinite-scroll-distance="100">
       <l-product-item :title="item.title"
@@ -27,6 +27,7 @@ import LProductItem from 'components/items/shop-fish-item'
 import listMixin from '@/mixins/list'
 import { getFavoriteList } from 'api'
 export default {
+  name: 'MineFavProduct',
   components: {
     LPulldownRefresh,
     LPartLine,
@@ -45,10 +46,13 @@ export default {
     async getFavList () {
       try {
         await this.loadData({model: 'product'})
-        this.$refs['topLoad'].onTopLoaded()
+        this.$refs.topLoad && this.$refs.topLoad.onTopLoaded()
       } catch (err) {
         throw err
       }
+    },
+    _loadMore () {
+      this.loadMore({model: 'product'})
     },
     toDetail (id) {
       this.$router.push({name: 'FishBuyDetail', query: { id: id, type: 'product' }})

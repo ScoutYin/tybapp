@@ -26,9 +26,9 @@ export default {
   .content {
     border: 1px solid #eee;
     border-top: none;
-    @include text-overflow(1);
     .title {
       margin: 5px;
+      @include text-overflow(1);
     }
   }
 }
