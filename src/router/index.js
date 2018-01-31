@@ -20,6 +20,7 @@ import Article from './article'
 import Message from './message'
 import Publish from './publish'
 import Shop from './shop'
+import Address from './address'
 
 Vue.use(Router)
 
@@ -61,7 +62,8 @@ let routes = [
   ...Ship,
   ...Article,
   ...Publish,
-  ...Shop
+  ...Shop,
+  ...Address
 ]
 
 let router = new Router({

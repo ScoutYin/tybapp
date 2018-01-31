@@ -1,15 +1,15 @@
 const state = {
-  cartList: []
+  address: {}
 }
 
 const getters = {
-  cartList: (state) => state.cartList
+  address: (state) => state.address
 }
 
 const mutations = {
-  SET_CART_LIST: (state, data) => {
-    state.cartList = data
-    console.log(state.cartList)
+  SET_ADDRESS: (state, data) => {
+    state.address = data
+    console.log(state.address)
   }
 }
 

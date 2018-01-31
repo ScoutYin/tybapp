@@ -62,6 +62,7 @@ import LMainLayout from 'components/layout/main-layout'
 import LCartGoodsItem from 'components/items/cart-goods-item'
 import LPartLine from 'components/common/part-line'
 import { getCartList, deleteCartItems } from 'api'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'StoreCart',
@@ -109,15 +110,9 @@ export default {
       }
       return arr
     },
-    cartList: {
-      get: function () {
-        return this.$store.getters.getCartList
-      },
-      set: function (data) {
-        console.log('set: ', data)
-        this.$store.commit('SET_CART_LIST', data)
-      }
-    }
+    ...mapGetters([
+      'cartList'
+    ])
   },
   data () {
     return {
@@ -132,9 +127,8 @@ export default {
     async getCartList () {
       try {
         let res = await getCartList()
-        console.log('getCartList: 111111', res)
         if ('list' in res.data) {
-          this.cartList = res.data.list
+          this.$store.commit('SET_CART_LIST', res.data.list)
         }
       } catch (err) {
         console.error(err.message)
@@ -190,8 +184,12 @@ export default {
       console.log('deleteIds:', deleteIds, res)
     },
     async toConfirmOrder () {
-      const confirmIds = this.checkedIds
-      this.$router.push({name: 'ConfirmCart', query: {ids: confirmIds}})
+      if (this.totalCnt === 0) {
+        this.$vux.toast.text('请选择商品', 'middle')
+        return
+      }
+      // const confirmIds = this.checkedIds
+      this.$router.push({name: 'ConfirmCart'})
     }
   }
 }

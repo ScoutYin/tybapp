@@ -106,3 +106,7 @@ export const deleteCartItems = (params) => axios.post('/5a66fbb9667f1', params)
 export const getCartList = (params) => axios.get('/5a6559cd72c9d', params)
 
 export const confirmCart = (params) => axios.post('/5a684150b51c6', params)
+
+// 地址
+export const getDefaultAddress = (params) => axios.get('/5a6e7fbe7d9dd', params)
+export const getAddressList = (params) => axios.get('/5a6e7f9cad09f', params)
