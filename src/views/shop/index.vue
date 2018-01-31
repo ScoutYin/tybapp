@@ -7,9 +7,9 @@
       <div class="content">
         <div class="shop-title">{{ shopData.shopname }}</div>
         <div class="shop-evaluate">
-          {{ `服务 ${shopData.service_score}
-              发货 ${shopData.shipping_score}
-              品质 ${shopData.quality_score}` }}
+          {{ `服务 ${shopData.service_score || ''}
+              发货 ${shopData.shipping_score || ''}
+              品质 ${shopData.quality_score || ''}` }}
         </div>
       </div>
     </header>

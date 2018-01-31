@@ -20,6 +20,7 @@ import Article from './article'
 import Message from './message'
 import Publish from './publish'
 import Shop from './shop'
+import Address from './address'
 
 Vue.use(Router)
 
@@ -61,7 +62,8 @@ let routes = [
   ...Ship,
   ...Article,
   ...Publish,
-  ...Shop
+  ...Shop,
+  ...Address
 ]
 
 let router = new Router({
@@ -90,6 +92,7 @@ router.beforeEach(async (to, from, next) => {
 })
 router.beforeEach((to, from, next) => {
   let history = store.getters.history
+  console.log('history: ', history)
   if (history.indexOf(to.fullPath) > -1) {
     store.commit('BACK', {toPath: to.fullPath, fromPath: from.fullPath})
     from.meta.noKeepAlive = true

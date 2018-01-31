@@ -116,7 +116,8 @@ export default {
   },
   post: (url = '', data = {}) => {
     setHeaderUserToken()
-    return instance.post(baseUrl + url, qs.stringify(data, { indices: false }))
+    // return instance.post(baseUrl + url, qs.stringify(data, { indices: false }))
+    return instance.post(baseUrl + url, qs.stringify(data))
   },
   upload: (url = '', data = {}) => {
     Vue.$vux.loading.show({
