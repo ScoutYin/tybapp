@@ -21,7 +21,7 @@ export const headerTitle = {
   MineFavJob: '职位收藏',
   MineFavResume: '简历收藏',
   Order: '我的订单',
-  Userinfo: '用户信息',
+  Userinfo: '我的信息',
   OrderBuyer: '买家订单',
   OrderSeller: '卖家订单',
   PublishFish: '渔获发布',
