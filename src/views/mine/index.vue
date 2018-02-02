@@ -117,6 +117,8 @@ export default {
       height: 80px;
       background: rgba(255, 255, 255, .5);
       // border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
     }
     .right {
       padding-left: 20px;

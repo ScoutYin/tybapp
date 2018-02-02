@@ -55,6 +55,7 @@ export default {
       color: inherit;
       display: inline-block;
       padding: 0;
+      padding-right: 10px;
       font-size: inherit;
       &:after {
         content: none;
@@ -75,7 +76,7 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
     flex: 1;
-    font-size: inherit;
+    font-size: 16px;
     font-weight: normal;
     .l-header-title {
       overflow: hidden;
