@@ -18,7 +18,7 @@
       </slot>
     </div>
     <div class="scroll-container"
-         v-save-scroll="$route.fullPath"
+         v-save-scroll="`${$route.fullPath}${scrollId}`"
          ref="scrollContainer">
       <slot></slot>
     </div>
@@ -66,6 +66,7 @@ export default {
   },
   data () {
     return {
+      scrollId: new Date().getTime(),
       translateY: 0,
       topText: '',
       scrollEventTarget: null,
