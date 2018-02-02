@@ -1,6 +1,8 @@
 import Settings from 'views/mine/settings'
 import Order from 'views/mine/order'
-import Userinfo from 'views/mine/userinfo'
+import Userinfo from 'views/mine/userinfo/index'
+import UserinfoEdit from 'views/mine/userinfo/userinfo-edit'
+import UserAvatarEdit from 'views/mine/userinfo/avatar-edit'
 import OrderBuyer from 'views/mine/order/buyer/index'
 import OrderSeller from 'views/mine/order/seller/index'
 import SellerAll from 'views/mine/order/seller/all'
@@ -76,6 +78,21 @@ export default [
     path: '/mine/userinfo',
     component: Userinfo,
     name: 'Userinfo',
+    meta: {
+      needLogin: true,
+      nocache: true
+    }
+  }, {
+    path: '/mine/userinfo/edit',
+    component: UserinfoEdit,
+    name: 'UserinfoEdit',
+    meta: {
+      needLogin: true
+    }
+  }, {
+    path: '/mine/userinfo/avatar',
+    component: UserAvatarEdit,
+    name: 'UserAvatarEdit',
     meta: {
       needLogin: true
     }

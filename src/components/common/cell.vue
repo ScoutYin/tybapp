@@ -15,7 +15,7 @@
       </div>
       <div class="l-cell-value" :class="{'is-link': isLink}">
         <slot>
-          <span v-text="value"></span>
+          <span class="value" v-text="value"></span>
         </slot>
       </div>
     </div>
@@ -37,6 +37,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../common/style/mixins.scss';
+// @import '../../common/style/var.scss';
 .l-cell {
   position: relative;
   background-color: white;
@@ -45,7 +47,7 @@ export default {
   overflow: hidden;
   .l-cell-wrapper {
     display: flex;
-    padding: 10px 15px;
+    padding: 10px 25px 10px 15px;
     line-height: 1;
     width: 100%;
     align-items: center;
@@ -54,15 +56,23 @@ export default {
       display: flex;
       align-items: center;
       font-size: 16px;
+      color: #111;
       .l-cell-icon {
         margin-right: 5px;
       }
       .l-cell-text {
-        
+        display: inline-block;
+        padding: 5px 0;
       }
     }
     .l-cell-value {
+      max-width: 260px;
       text-align: right;
+      @include text-overflow(1);
+      .value {
+        display: inline-block;
+        padding: 5px 0;
+      }
     }
     .is-link {
       margin-right: 24px;

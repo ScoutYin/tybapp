@@ -3,7 +3,9 @@
     <l-header :fixed="fixed">
       <l-button slot="left" @click.native="goBack" v-if="back || handleBack">
         <l-icon slot="icon" icon="icon-left"></l-icon>
-        <span>返回</span>
+        <slot name="left">
+          <span>返回</span>
+        </slot>
       </l-button>
       <div slot="center" v-if="search" @click="toSearch">
         <l-search-bar placeholder="搜索"></l-search-bar>

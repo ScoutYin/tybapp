@@ -86,7 +86,9 @@ export const getDynamicData = () => axios.get('/59f175b082680', { catid: 11, lim
 export const getUserOrderList = (params) => axios.get('/5a122fe1677cc', params)
 export const getShopOrderList = (params) => axios.get('/5a45ac614a4c1', params)
 
+// 用户信息
 export const getUserIndex = (params) => axios.get('/59ffcc65b3e15', params)
+export const editUserInfo = (params) => axios.post('/5a60569f8bf98', params)
 
 // 收藏
 export const getFavorite = (params) => axios.get('/5a2f8fa052742', params)
