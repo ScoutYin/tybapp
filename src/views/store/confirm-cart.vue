@@ -130,6 +130,8 @@ export default {
         address_id: this.address.id
       }
       let res = await createCart(params)
+      this.$vux.toast.text('订单提交成功！', 'middle')
+      this.$router.push({name: 'Mine'})
       console.log('createCart: ', res.data)
     }
   }
