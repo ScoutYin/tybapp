@@ -2,7 +2,9 @@
   <l-main-layout class="myinfo-wrapper" back>
     <span slot="left">我的</span>
     <cell-list class="myinfo-list">
-      <cell title="头像" v-is-link >
+      <cell title="头像"
+        @click.native="avatarEdit"
+        v-is-link >
         <img class="avatar" :src="avatarThumb || ''">
       </cell>
       <cell title="会员类型"
@@ -95,6 +97,9 @@ export default {
         return
       }
       this.$router.push({name: 'UserinfoEdit', query: {key: fieldKey, field: fieldToEdit, value: nowValue}})
+    },
+    avatarEdit () {
+      this.$router.push({name: 'UserAvatarEdit'})
     }
   }
 }

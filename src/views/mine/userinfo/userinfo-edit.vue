@@ -49,7 +49,6 @@ export default {
       editedInfo[this.fieldKey] = this.nowValue
       let editedUserinfo = Object.assign({}, this.userinfo, editedInfo)
       let res = await editUserInfo(editedUserinfo)
-      console.log(res)
       this.$store.dispatch('getUserInfo')
       this.$router.back()
     }

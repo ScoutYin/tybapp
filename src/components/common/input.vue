@@ -8,7 +8,7 @@
     <span class="close-btn"
       @click="clickClear"
       v-show="getFocus">
-      <i>x</i>
+      <l-icon icon="icon-guanbi"></l-icon>
     </span>
   </div>
 </template>

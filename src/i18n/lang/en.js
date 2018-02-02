@@ -22,6 +22,7 @@ export const headerTitle = {
   MineFavResume: 'Collected Resume',
   Order: 'Order',
   Userinfo: 'About Me',
+  UserAvatarEdit: 'Avatar',
   OrderBuyer: 'Buyer',
   OrderSeller: 'Seller',
   PublishFish: 'Fish Publish',
