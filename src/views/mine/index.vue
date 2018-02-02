@@ -39,6 +39,7 @@
         v-for="(item, index) in list"
         :key="index"
         v-is-link="item.isLink"
+        v-if="!item.isHidden"
         @click.native="toPath(item.path)">
         <l-icon slot="icon" :icon="item.icon"></l-icon>
       </l-cell>
@@ -65,6 +66,14 @@ export default {
   data () {
     return {
       list: [
+        {
+          title: '我要开店',
+          icon: 'icon-dianpu',
+          path: '/mine/open-shop',
+          isLink: true,
+          isHidden: !this.$store.getters.userinfo.shopid
+        },
+        // { title: '商品管理', icon: 'icon-jibenxinxi', path: '/mine/goods-manager', isLink: true },
         { title: '我的收藏', icon: 'icon-shoucang', path: '/mine/fav', isLink: true },
         { title: '设置', icon: 'icon-shezhi', path: '/mine/settings', isLink: true }
       ],

@@ -14,7 +14,8 @@
             <div class="add-button" @click="multipleAddOne(item, formDataskeys[index])">
               {{`添加${item.label}`}}</div>
             <div class="delete-button" @click="multipleDeleteOne(item, formDataskeys[index])">
-              删除最后一项</div>
+              删除最后一项
+            </div>
           </div>
         </template>
        
@@ -43,10 +44,10 @@
              v-if="item.type === 'select-city'"
              @click="selectCity(item, index)"
              v-is-link>
-          {{ formObj['district'] ?
-          `${selectObj[formDataskeys[index]]['province'].value}/
-           ${selectObj[formDataskeys[index]]['city'].value}/
-           ${selectObj[formDataskeys[index]]['area'].value}` :
+          {{ formObj['district'] !== undefined ?
+          `${formObj['province'].value}/
+           ${formObj['city'].value}/
+           ${formObj['district'].value}` :
           `${item.required ? '*' : ''}${item.label}` }}
         </div>
         <div class="l-input-core"
@@ -55,14 +56,16 @@
              :class="{'placeholder': !formObj[formDataskeys[index]]}"
              v-is-link>
           {{ formObj[formDataskeys[index]] ?
-          `${selectObj[formDataskeys[index]].label}` :
+          `${formObj[formDataskeys[index]].value}` :
           `${item.required ? '*' : ''}${item.label}` }}
         </div>
 
         <l-upload-picture-item v-if="item.type === 'picture'"
           :placeholder="`${item.required ? '*' : ''}${item.label}`"
           :id="formDataskeys[index]"
-          @success="pictureUploadSuccess">
+          :path="formObj[formDataskeys[index]] && formObj[formDataskeys[index]].path"
+          @upload="pictureUploadSuccess"
+          @delete="pictureDelete">
         </l-upload-picture-item>
 
         <div class="icon" v-if="item.icon">
@@ -144,14 +147,12 @@ export default {
     },
     ...mapGetters([
       'formObj',
-      'selectObj',
       'multipleObj'
     ])
   },
   data () {
     return {
       // formObj: {},
-      // selectObj: {},
       selectList: [],
       selectTitle: '',
       cityVisible: false,
@@ -201,17 +202,13 @@ export default {
       this.cityVisible = true
     },
     selected (item) {
-      this.$store.commit('SET_SELECTOBJ_ITEM', { key: this.key, value: item })
-      this.$store.commit('SET_FORMOBJ_ITEM', { key: this.key, value: item.value })
+      this.$store.commit('SET_FORMOBJ_ITEM', { key: this.key, value: item })
       this.selectVisible = false
-      console.log('selected: ', this.selectObj)
     },
-    selectedCity (item) {
-      this.$store.commit('SET_SELECTOBJ_ITEM', { key: this.key, value: item })
-      this.$store.commit('SET_FORMOBJ_ITEM', { key: 'province', value: item['province'].code })
-      this.$store.commit('SET_FORMOBJ_ITEM', { key: 'city', value: item['city'].code })
-      this.$store.commit('SET_FORMOBJ_ITEM', { key: 'district', value: item['area'].code })
-      console.log('selectedCity: ', item, this.key)
+    selectedCity (item, index) {
+      this.$store.commit('SET_FORMOBJ_ITEM', { key: 'province', value: item['province'] })
+      this.$store.commit('SET_FORMOBJ_ITEM', { key: 'city', value: item['city'] })
+      this.$store.commit('SET_FORMOBJ_ITEM', { key: 'district', value: item['area'] })
       console.log('this.formObj: ', this.formObj)
       this.cityVisible = false
     },
@@ -231,9 +228,11 @@ export default {
       })
     },
     pictureUploadSuccess (id, data) {
-      this.$store.commit('SET_SELECTOBJ_ITEM', { key: id, value: data })
-      this.$store.commit('SET_FORMOBJ_ITEM', { key: id, value: data && data.id })
+      this.$store.commit('SET_FORMOBJ_ITEM', { key: id, value: data })
       console.log('pictureUploadSuccess', this.formObj)
+    },
+    pictureDelete (id) {
+      this.$store.commit('SET_FORMOBJ_ITEM', { key: id, value: undefined })
     },
     initMultipleData () {
       this.formDatas.forEach((value, key) => {

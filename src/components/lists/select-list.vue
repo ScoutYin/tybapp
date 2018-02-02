@@ -5,7 +5,7 @@
         :key="index">
       <div v-if="!item.children"
             @click="selected(item, index)">
-        {{ item.label }}
+        {{ item.value }}
       </div>
       <select-list v-else-if="item.expand" :list="item.children" @selected="selected(item)"></select-list>
     </div>

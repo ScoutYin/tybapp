@@ -24,14 +24,12 @@ const jsonToMap = (obj) => {
 
 const state = {
   formObj: {},
-  selectObj: {},
   defaultObj: {},
   multipleObj: {}
 }
 
 const getters = {
   formObj: (state) => { return state.formObj },
-  selectObj: (state) => { return state.selectObj },
   defaultObj: (state) => { return state.defaultObj },
   multipleObj: (state) => { return state.multipleObj }
 }
@@ -41,8 +39,8 @@ const mutations = {
     console.log('params: ', params)
     Vue.set(state.formObj, params.key, params.value)
   },
-  SET_SELECTOBJ_ITEM: (state, params) => {
-    Vue.set(state.selectObj, params.key, params.value)
+  SET_FORMOBJ: (state, obj) => {
+    state.formObj = obj
   },
   SET_MULTIPLEOBJ_ITEM: (state, params) => {
     Vue.set(state.multipleObj, params.key, params.value)
@@ -57,14 +55,12 @@ const mutations = {
   },
   CLEAR_FORMOBJ: (state) => {
     state.formObj = {}
-    state.selectObj = {}
     state.defaultObj = {}
     state.multipleObj = {}
   },
   SAVE_FORM_DATA: (stata, type) => {
     const obj = {
       formObj: state.formObj,
-      selectObj: state.selectObj,
       multipleObj: state.multipleObj
     }
     storage.setObj(`TYBFORM_${type}`, obj)
@@ -74,8 +70,9 @@ const mutations = {
     let data = storage.getObj(`TYBFORM_${type}`)
     if (data) {
       state.formObj = data.formObj
-      state.selectObj = data.selectObj
       state.multipleObj = jsonToMap(data.multipleObj)
+    } else {
+      state.formObj = {}
     }
   },
   CLEAR_FORM_DATA: (state, type) => {

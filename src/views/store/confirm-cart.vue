@@ -42,7 +42,7 @@
 import LMainLayout from 'components/layout/main-layout'
 import LCartGoodsItem from 'components/items/cart-goods-item'
 import LAddressSelectItem from 'components/items/address-select-item'
-import { getDefaultAddress } from 'api'
+import { getDefaultAddress, createCart } from 'api'
 import { mapGetters } from 'vuex'
 export default {
   components: {
@@ -97,7 +97,16 @@ export default {
     },
     ...mapGetters([
       'address'
-    ])
+    ]),
+    checkedIds () {
+      let arr = []
+      for (const shopItem of this.cartList) {
+        for (const productItem of shopItem._product) {
+          arr.push(productItem.cartid)
+        }
+      }
+      return arr
+    }
   },
   data () {
     return {
@@ -115,8 +124,13 @@ export default {
     toAddressList () {
       this.$router.push({name: 'AddressList'})
     },
-    confirm () {
-
+    async confirm () {
+      let params = {
+        id: this.checkedIds,
+        address_id: this.address.id
+      }
+      let res = await createCart(params)
+      console.log('createCart: ', res.data)
     }
   }
 }

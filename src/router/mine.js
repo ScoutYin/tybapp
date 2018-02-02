@@ -23,6 +23,9 @@ import MineFavFish from 'views/mine/fav/fish'
 import MineFavJob from 'views/mine/fav/job'
 import MineFavResume from 'views/mine/fav/resume'
 
+import MineGoodsManager from 'views/mine/goods-manager'
+import MineOpenShop from 'views/mine/open-shop'
+
 export default [
   {
     path: '/mine/settings',
@@ -137,5 +140,19 @@ export default [
         name: 'SellerPrePayment'
       }
     ]
+  }, {
+    path: '/mine/open-shop',
+    component: MineOpenShop,
+    name: 'MineOpenShop',
+    meta: {
+      needLogin: true
+    }
+  }, {
+    path: '/mine/goods-manager',
+    component: MineGoodsManager,
+    name: 'MineGoodsManager',
+    meta: {
+      needLogin: true
+    }
   }
 ]

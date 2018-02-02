@@ -1,13 +1,13 @@
 <template>
   <div class="l-upload-picture-item">
-    <template v-if="!uploadPictureCache[id]">
+    <template v-if="!path">
       <div class="picture-icon">
         <l-icon icon="icon-zhaoxiangji"></l-icon>
       </div>
       <div class="placeholder">{{ placeholder }}</div>
     </template>
     <template v-else>
-      <img :src="uploadPictureCache[id].path" class="picture-img">
+      <img :src="path" class="picture-img">
       <div class="icon-guanbi" @click="deletePicture">
         <l-icon icon="icon-guanbi"></l-icon>
       </div>
@@ -30,7 +30,8 @@ export default {
   props: {
     placeholder: String,
     multiple: Boolean,
-    id: String
+    id: String,
+    path: String
   },
   computed: {
     ...mapGetters([
@@ -49,16 +50,13 @@ export default {
       this.file = files && files.length > 0 && files[0]
       try {
         let res = await uploadPictures({file: this.file})
-        this.$store.commit('SET_UPLOAD_PICTURE_ITEM', {key: this.id, value: res.data})
-        console.log('this.imgPath: ', this.uploadPictureCache)
-        this.$emit('success', this.id, res.data)
+        this.$emit('upload', this.id, res.data)
       } catch (err) {
         throw err
       }
     },
     deletePicture () {
-      this.$store.commit('DEL_UPLOAD_PICTURE_ITEM', this.id)
-      this.$emit('success', this.id, undefined)
+      this.$emit('delete', this.id)
     }
   }
 }

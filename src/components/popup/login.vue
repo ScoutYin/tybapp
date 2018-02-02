@@ -80,6 +80,16 @@ export default {
       if (!params.modelid) { params.modelid = 3 }
       try {
         let res = await userRegister(this.registerFormData)
+        if (res.data.status === 1) {
+          await this.login({username: params.mobile, password: params.password})
+          this.$vux.toast.text('注册成功', 'middle')
+          this.close()
+        } else {
+          this.$vux.alert.show({
+            title: '注册失败',
+            content: res.data.info
+          })
+        }
         console.log('res: ', res)
       } catch (err) {
         console.error(err.message)
