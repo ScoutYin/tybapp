@@ -119,7 +119,9 @@ export default {
   methods: {
     async getDefaultAddress () {
       let res = await getDefaultAddress()
-      this.$store.commit('SET_ADDRESS', res.data)
+      if (res.data) {
+        this.$store.commit('SET_ADDRESS', res.data)
+      }
     },
     toAddressList () {
       this.$router.push({name: 'AddressList'})
