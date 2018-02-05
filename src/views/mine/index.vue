@@ -71,7 +71,7 @@ export default {
           icon: 'icon-dianpu',
           path: '/mine/open-shop',
           isLink: true,
-          isHidden: !this.$store.getters.userinfo.shopid
+          isHidden: this.$store.getters.userinfo.shopid
         },
         // { title: '商品管理', icon: 'icon-jibenxinxi', path: '/mine/goods-manager', isLink: true },
         { title: '我的收藏', icon: 'icon-shoucang', path: '/mine/fav', isLink: true },
