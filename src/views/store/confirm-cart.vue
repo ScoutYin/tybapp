@@ -180,6 +180,8 @@ export default {
       line-height: 40px;
       width: 100px;
       text-align: center;
+      background: $default-color;
+      background: -webkit-gradien(left, #46c2ff, $default-color);
       background: linear-gradient(left, #46c2ff, $default-color);
       color: #fff;
     }

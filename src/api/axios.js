@@ -97,7 +97,9 @@ const loadingList = [
   '/5a0e9b0c5b922', // FishList
   '/5a0e9e1478595', // ProductList
   '/5a0e9d2bda581', // ShopFishDetail
-  '/5a0ea01aad1a0' // ShopProductDetail
+  '/5a0ea01aad1a0', // ShopProductDetail
+  '/5a122fe1677cc', // GetUserOrderList
+  '/5a45ac614a4c1' // GetShopOrderList
 ]
 
 const checkLoadingList = (url) => {

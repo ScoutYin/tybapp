@@ -2,6 +2,9 @@
   <div class="store-container">
     <l-main-layout class="main"
       ref="main">
+      <div slot="header-right" v-permission-click="toCart">
+        <l-icon icon="icon-gouwuche"></l-icon>
+      </div>
       <swiper :aspect-ratio="100/320" auto class="swipe" ref="swipe">
         <swiper-item class="swiper-img" style="width: 100%;" v-for="(item, index) in ad" :key="index">
           <img :src="item.thumb" width="100%" height="100%">
@@ -72,6 +75,9 @@ export default {
     },
     toGoodsDetail (id) {
       this.$router.push({ path: `/store/detail?type=${this.tabIndex}&id=${id}` })
+    },
+    toCart () {
+      this.$router.push({ path: '/store/cart' })
     }
   }
 }
